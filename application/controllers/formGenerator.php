@@ -201,59 +201,72 @@ class FormGenerator extends CI_Controller {
     function formProcessor() {
 
         if ($this->input->post('submit')) {
-            $datas = array();
-            foreach ($_POST as $key => $value) {
 
-                ///strip the selected values from dropdown
-                if (strstr($key, "field_")) {
+            ///validate if the section has  been selected
 
-                    ///check if the sections has subsections
+            $this->form_validation->set_rules('section', 'section', 'required');
+            if ($this->form_validation->run() == FALSE) {
 
-                    if (!empty($_POST['cat'])&&count($_POST['cat']) > 0) {
+                $this->load->view('formCreator');
+            } else {
 
-                        foreach ($_POST['cat'] as $category) {
-                            
+                //form processing goes here
+                $datas = array();
+                foreach ($_POST as $key => $value) {
+
+                    ///strip the selected values from dropdown
+                    if (strstr($key, "field_")) {
+
+                        ///check if the sections has subsections
+
+                        if (!empty($_POST['cat']) && count($_POST['cat']) > 0) {
+
+                            foreach ($_POST['cat'] as $category) {
+
+                                $arr = explode('_', $key);
+                                $checkboxId = $arr[1];
+                                $selectedCheckboxValue = $_POST['count_' . $checkboxId];
+                                $selectedLabel = $_POST['label_' . $checkboxId];
+                                $data['no_input'] = $selectedCheckboxValue;
+                                $data['input_type_id'] = $checkboxId;
+                                $data['category_id'] = $category;
+                                $data['form_label'] = $selectedLabel;
+                                $data['input_tip'] = $_POST['tip_' . $checkboxId];
+
+                                $datas[] = $data;
+                            }
+                        } else {
+
+                            ///sections with no subsections
                             $arr = explode('_', $key);
                             $checkboxId = $arr[1];
                             $selectedCheckboxValue = $_POST['count_' . $checkboxId];
                             $selectedLabel = $_POST['label_' . $checkboxId];
                             $data['no_input'] = $selectedCheckboxValue;
                             $data['input_type_id'] = $checkboxId;
-                            $data['category_id'] = $category;
+                            $data['category_id'] = '';
                             $data['form_label'] = $selectedLabel;
+                            $data['sections_without_subsections'] = $this->input->post('section');
                             $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
                             $datas[] = $data;
                         }
-                    } else {
-                        
-                        ///sections with no subsections
-                            $arr = explode('_', $key);
-                            $checkboxId = $arr[1];
-                            $selectedCheckboxValue = $_POST['count_' . $checkboxId];
-                            $selectedLabel = $_POST['label_' . $checkboxId];
-                            $data['no_input'] = $selectedCheckboxValue;
-                            $data['input_type_id'] = $checkboxId;
-                            $data['category_id'] ='';
-                            $data['form_label'] = $selectedLabel;
-                            $data['sections_without_subsections']=$this->input->post('section');
-                            $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
-                            $datas[] = $data;
-                        
+
+
+                        //end
                     }
-
-
-
-                    //end
                 }
-            }
 
-            $results = $this->db->insert_batch('form_tbl', $datas);
-            if ($results) {
-                $this->listOfCategoriesforms();
-            } else {
-                $this->load->view('formCreator');
+                $results = $this->db->insert_batch('form_tbl', $datas);
+                if ($results) {
+                    $this->listOfCategoriesforms();
+                } else {
+                    $this->load->view('formCreator');
+                }
+
+
+                //end the proccessing   
             }
         } else {
 
@@ -265,30 +278,26 @@ class FormGenerator extends CI_Controller {
 
     public function generateform() {
         $id = $this->uri->segment(4);
-        $sectionfilter=  strtolower($this->uri->segment(3));
-        
+        $sectionfilter = strtolower($this->uri->segment(3));
+
         //checking if the section or subsection
-        
-           switch ($sectionfilter) {
+
+        switch ($sectionfilter) {
             case "sec":
-            
-                  $data = $this->dataFetcher->subcategoryDetails($id);
-                  $this->load->view('categoryForm', $data);
+
+                $data = $this->dataFetcher->subcategoryDetails($id);
+                $this->load->view('categoryForm', $data);
 
                 break;
             case "subsec":
-                
-                  $data = $this->dataFetcher->categoryDetails($id);
-                  $this->load->view('categoryForm', $data);
+
+                $data = $this->dataFetcher->categoryDetails($id);
+                $this->load->view('categoryForm', $data);
                 break;
 
             default:
                 break;
         }
-        
-        
-        
-        
     }
 
     /* list all the categories which already have generated forms* */
