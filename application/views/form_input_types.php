@@ -34,7 +34,7 @@ if ($results && $results->num_rows() > 0) {
                 $value['input_name'] . nbs(8) . $start_select . $dropdowns . $end_select . nbs(4) .
                 form_input(array('name' => 'label_' . $value['input_id'], 'value' => 'write the name of a label', 'size' => '30')) .
                 form_input(array('name' => 'tip_' . $value['input_id'], 'value' => 'tip for the input goes here', 'size' => '30')) .
-                '<br>';
+                '</br></br>';
     }
     echo $checkboxoutput;
 } else {
