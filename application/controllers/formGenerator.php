@@ -54,9 +54,6 @@ class FormGenerator extends CI_Controller {
                         }
 
                         $subsectioncategory_output = '<select name="sectioncategory">' . $selectoptions_sub . '</select>';
-                    } else {
-
-                        echo 'error in loading subsection';
                     }
 
                     $data = array('name' => 'cat[]', 'value' => $value['subsections_id'], 'class' => 'categories');
