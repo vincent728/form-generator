@@ -37,10 +37,53 @@ class FormGenerator extends CI_Controller {
                 $checkboxoutput = '';
                 foreach ($results->result_array() as $value) {
 
-                    $data = array('name' => 'cat[]', 'value' => $value['subsections_id'], 'class' => 'categories');
 
-                    $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['subsections'] . '<br>';
+                    //check if section has subsections and have got ids
+
+                    $resultssubsections = $this->dataFetcher->categoriesLoader($this->input->post('id'), $value['subsections_id']);
+
+                    $subsectioncategory_output = '';
+                    $category_output = '';
+
+                    if ($resultssubsections->num_rows() > 0) {
+
+                        $selectoptions_sub = '';
+                        foreach ($resultssubsections->result_array() as $subsectionscategorires) {
+
+                            $selectoptions_sub.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
+                        }
+
+                        $subsectioncategory_output = '<select name="sectioncategory">' . $selectoptions_sub . '</select>';
+                    } else {
+
+                        echo 'error in loading subsection';
+                    }
+
+                    $data = array('name' => 'cat[]', 'value' => $value['subsections_id'], 'class' => 'categories');
+                    $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['subsections'] . nbs(4) . $subsectioncategory_output . '<br>';
                 }echo form_label('Subsection(s)') . '</br>' . $checkboxoutput;
+            } else {
+                ////////////
+                //for sections with no subsections
+                $checkboxoutput = '';
+                $resultwithnosubsections = $this->dataFetcher->categoriesLoaderwithoutsubsections($this->input->post('id'));
+                if ($resultwithnosubsections->num_rows() > 0) {
+
+                    $selectopt_sub = '';
+                    foreach ($resultwithnosubsections->result_array() as $subsectionscategorires) {
+                        $selectopt_sub.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
+                        $data = array('name' => 'cat[]', 'value' => $subsectionscategorires['cat_id'], 'class' => 'categories');
+                        $checkboxoutput.=form_checkbox($data) . nbs(3) . $subsectionscategorires['cat_name'] . nbs(4) . '<br>';
+                    }
+
+
+                    echo form_label('Categorie(s)') . '</br>' . $checkboxoutput;
+
+
+                    //load sections which does not have some categories
+                }
+
+                /////////////
             }
 
             ///////////////////////////////////////////////////////////////////
@@ -202,11 +245,10 @@ class FormGenerator extends CI_Controller {
 
         if ($this->input->post('submit')) {
 
-            ///validate if the section has  been selected
+            ///validate form select field if the section has  been selected
 
             $this->form_validation->set_rules('section', 'section', 'required');
             if ($this->form_validation->run() == FALSE) {
-
                 $this->load->view('formCreator');
             } else {
 
