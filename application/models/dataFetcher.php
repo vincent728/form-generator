@@ -86,7 +86,7 @@ class DataFetcher extends CI_Model {
         $id = $this->db->insert_id();
         return $id;
     }
-
+  ////////////////////////////////////////the discarded algorithm//////////////////////////////////////////////////////////////
     /**
      * @method :Insertion of pre-generated form settings
      * @param: variables
@@ -134,7 +134,7 @@ class DataFetcher extends CI_Model {
         return $data;
     }
     
-    
+   /////////////////////////////////////////end////////////////////////////////////////////// 
     /**
      * @method :get last inserted form
      * @param : Variables
@@ -160,10 +160,6 @@ class DataFetcher extends CI_Model {
      $results=$this->db->query($sql);
      
      return $results;
-     
-//     $sql_join="";
-//     $results=$this->db->query($sql_join);
-//     return $results;
      
  }
  
@@ -203,6 +199,58 @@ public function getfomdetails() {
     
 }
 
+
+/**
+ * @method :load subsections
+ * @param: none
+ * @return results
+ * 
+ */
+
+public function loadSubsection($id) {
+    
+    $sql="select distinct subsections,subsections_id from subsections,form_tbl where 
+        subsections.subsections_id=form_tbl.category_id and
+        subsections.subsections_id='$id'
+       
+        ";
+    $results=$this->db->query($sql);
+    return $results;
+   
+}
+
+/**load section name and id for sections with no subsections*/
+
+public function loadsection($id) {
+    
+    $sql="select distinct section_name,section_id from section_tbl,form_tbl where 
+        section_tbl.section_id=form_tbl.sections_without_subsections and
+        section_tbl.section_id='$id'
+       
+        ";
+    $results=$this->db->query($sql);
+    return $results;
+   
+}
+
+
+/**
+ * @method :load sections with no subsections
+ * @param :none
+ * @return results
+ * 
+ */
+public function loadSectionWithNoSubsections($id) {
+    
+     $sql="select distinct section_name,section_id from section_tbl,form_tbl where 
+        section_tbl.section_id=form_tbl.sections_without_subsections and
+        section_tbl.section_id='$id'
+         ";
+    $results=$this->db->query($sql);
+    return $results;
+    
+}
+
 /**
  * @method: get specific form category information
  * @param:  category id
@@ -216,17 +264,49 @@ public function categoryDetails($id) {
         input_type_tbl.input_id=form_tbl.input_type_id and
         form_tbl.category_id='$id'
         ";
-    $results=$this->db->query($sql);
+    $sql_j="select * from subsections,form_tbl,input_type_tbl where 
+        subsections.subsections_id=form_tbl.category_id and
+        input_type_tbl.input_id=form_tbl.input_type_id and
+        form_tbl.category_id='$id'";
+    
+    $results=$this->db->query($sql_j);
     
     foreach ($results->result_array() as $value) {
         
-            $category_name=$value['cat_name'];
+            $category_name=$value['subsections'];
         
     }
     $data['results']=$results;
     $data['category']=$category_name;
     return $data;
 }
+
+/**
+ * @method: get specific form category information
+ * @param:  category id
+ * @return results
+ * 
+ */
+public function subcategoryDetails($id) {
+    $data=array();
+    $sql="select * from section_tbl,form_tbl,input_type_tbl where 
+        section_tbl.section_id=form_tbl.sections_without_subsections and
+        input_type_tbl.input_id=form_tbl.input_type_id and
+        form_tbl.sections_without_subsections='$id'
+        ";
+    $results=$this->db->query($sql);
+    
+    foreach ($results->result_array() as $value) {
+        
+            $category_name=$value['section_name'];
+        
+    }
+    $data['results']=$results;
+    $data['category']=$category_name;
+    return $data;
+}
+
+
 
 
 /**
@@ -251,6 +331,21 @@ public function getrepeats($id) {
 public function getAllrepeats() {
     $results=$this->db->get('repeatevents');
     return $results;
+    
+}
+
+
+public function generatedformsInformations() {
+    
+    $sql="select distinct form_tbl.sections_without_subsections,category_id
+          from form_tbl
+          left join section_tbl
+          on form_tbl.sections_without_subsections=section_tbl.section_id
+          ";
+   $results=$this->db->query($sql);
+   return $results;
+    
+    
     
 }
     

@@ -42,13 +42,11 @@
         
     </li>
     <li>
-       <?php
-         
-        echo form_label('Category');
-        ?>
+       
 
         <div class="categories">
             <!--.here the goes the ajax triggered selection.--> 
+           
 
         </div>
         

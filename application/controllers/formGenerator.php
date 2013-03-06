@@ -9,9 +9,9 @@
 <?php
 
 /*
-* To change this template, choose Tools | Templates
-* and open the template in the editor.
-*/
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 class FormGenerator extends CI_Controller {
 
@@ -21,7 +21,7 @@ class FormGenerator extends CI_Controller {
         $this->load->view('formCreator');
     }
 
-    /* * controller function to load the subsections */
+    /*     * controller function to load the subsections */
 
     public function setSectionId() {
 
@@ -29,98 +29,93 @@ class FormGenerator extends CI_Controller {
 
         if ($results) {
 
-            
+
             //check if the returned results is greater than one
-            
-            if($results->num_rows()>0){
-                
-               $checkboxoutput = '';
-             foreach ($results->result_array() as $value) {
 
-                $data = array('name' => 'cat[]', 'value' => $value['subsections_id'], 'class' => 'categories');
+            if ($results->num_rows() > 0) {
 
-              $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['subsections'] . '<br>';
-          
-            }echo $checkboxoutput;  
-                
+                $checkboxoutput = '';
+                foreach ($results->result_array() as $value) {
+
+                    $data = array('name' => 'cat[]', 'value' => $value['subsections_id'], 'class' => 'categories');
+
+                    $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['subsections'] . '<br>';
+                }echo form_label('Subsection(s)') . '</br>' . $checkboxoutput;
             }
-           
+
             ///////////////////////////////////////////////////////////////////
         }
     }
-    
-   public function selectEventsRepeat() {
+
+    public function selectEventsRepeat() {
 
 
         $results = $this->dataFetcher->getrepeats($this->input->post('e_id'));
         if ($results) {
-            
+
             $checkboxoutput = '';
 
             foreach ($results->result_array() as $value) {
 
-
-
                 if ($results) {
-                    
-                    
+
+
                     switch ($value['repeat_id']) {
                         case "1":
                             //if repeated weekly selected
-                             $checkboxoutput.=form_checkbox(array('name' => 'event[]', 'value' => '1')) . 'monday' . '</br>' .
-                            form_checkbox(array('name' => 'event[]', 'value' => '2')) . 'tuesday' . '</br>' .
-                            form_checkbox(array('name' => 'event[]', 'value' => '3')) . 'Wedsnesdayday' . '</br>' .
-                            form_checkbox(array('name' => 'event[]', 'value' => '4')) . 'Thursday' . '</br>'.
-                            form_checkbox(array('name' => 'event[]', 'value' => '5')) . 'Friday' . '</br>' ;
+                            $checkboxoutput.=form_checkbox(array('name' => 'event[]', 'value' => '1')) . 'monday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '2')) . 'tuesday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '3')) . 'Wedsnesdayday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '4')) . 'Thursday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '5')) . 'Friday' . '</br>';
 //                            echo $checkboxoutput;
 
 
                             break;
-                        
-                         case "2":
-                             //if repeated bi-weekly selected
-                             $checkboxoutput.=form_checkbox(array('name' => 'event[]', 'value' => '1')) . 'monday' . '</br>' .
-                            form_checkbox(array('name' => 'event[]', 'value' => '2')) . 'tuesday' . '</br>' .
-                            form_checkbox(array('name' => 'event[]', 'value' => '3')) . 'Wedsnesdayday' . '</br>' .
-                            form_checkbox(array('name' => 'event[]', 'value' => '4')) . 'Thursday' . '</br>'.
-                            form_checkbox(array('name' => 'event[]', 'value' => '5')) . 'Friday' . '</br>' ;
+
+                        case "2":
+                            //if repeated bi-weekly selected
+                            $checkboxoutput.=form_checkbox(array('name' => 'event[]', 'value' => '1')) . 'monday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '2')) . 'tuesday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '3')) . 'Wedsnesdayday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '4')) . 'Thursday' . '</br>' .
+                                    form_checkbox(array('name' => 'event[]', 'value' => '5')) . 'Friday' . '</br>';
 
 
                             break;
-                        
-                         case "3":
-                             //if repeated monthly selected
-                             
-                             $months='';
-                             for($a=0; $a<30; $a++){
-                               
-                                 switch ($a+1) {
-                                     case "1":
-                                        
-                                          $supercript='st';
 
-                                         break;
-                                     case "2":
-                                         $supercript='nd';
+                        case "3":
+                            //if repeated monthly selected
 
-                                         break;
-                                      case "3":
-                                         $supercript='rd';
+                            $months = '';
+                            for ($a = 0; $a < 30; $a++) {
 
-                                         break;
+                                switch ($a + 1) {
+                                    case "1":
 
-                                     default:
-                                         $supercript='th';
-                                         break;
-                                 }
-                                 $months.='<option value="'.($a+1).'" >'.($a+1).$supercript.'</option>';
-                             
-                             }
-                             $checkboxoutput.='<table>
+                                        $supercript = 'st';
+
+                                        break;
+                                    case "2":
+                                        $supercript = 'nd';
+
+                                        break;
+                                    case "3":
+                                        $supercript = 'rd';
+
+                                        break;
+
+                                    default:
+                                        $supercript = 'th';
+                                        break;
+                                }
+                                $months.='<option value="' . ($a + 1) . '" >' . ($a + 1) . $supercript . '</option>';
+                            }
+                            $checkboxoutput.='<table>
 				<tr>
 					<td>				
 						<input type="radio" name="RepeatsMonthly" value="1" > Repeats the 
-						<select name="RecurrenceMonthID">'.$months.'</select> day of each month
+						<select name="RecurrenceMonthID">' . $months . '</select> day of each month
 					</td>
 				</tr>
 				<tr>	
@@ -150,11 +145,11 @@ class FormGenerator extends CI_Controller {
 
 
                             break;
-                        
+
                         case "4":
-                        //epeats Weekly or Bi-weekly on
-                            
-                        $checkboxoutput = '<table><tr>
+                            //epeats Weekly or Bi-weekly on
+
+                            $checkboxoutput = '<table><tr>
 			
 				<td>				
 					<input type="checkbox" name="RecurrenceDayID[]" value="1" > Monday
@@ -187,18 +182,15 @@ class FormGenerator extends CI_Controller {
 				</td>
 				
 			</tr></table>';
-                            
-                            
-                            
-                        break;
+
+
+
+                            break;
 
                         default:
                             break;
                     }
-
-                           
-                } 
-                
+                }
             }
             echo $checkboxoutput;
             ///////////////////////////////////////////////////////////////////
@@ -209,95 +201,103 @@ class FormGenerator extends CI_Controller {
     function formProcessor() {
 
         if ($this->input->post('submit')) {
+            $datas = array();
+            foreach ($_POST as $key => $value) {
 
-       
-                $datas = array();
-                
+                ///strip the selected values from dropdown
+                if (strstr($key, "field_")) {
 
-                
-                
-                foreach ($_POST as $key => $value) {
-                    
-                    ///strip the selected values from dropdown
-                 
+                    ///check if the sections has subsections
 
-                        if(strstr($key,"field_")){
-                            
-                            
-                            ///check if the sections has subsections
-                            
-                             foreach($_POST['cat'] as $category)
-                            {
-                                $arr= explode('_', $key);
-                                $checkboxId = $arr[1];
-                                $selectedCheckboxValue= $_POST['count_' . $checkboxId];
-                                $selectedLabel= $_POST['label_' . $checkboxId];
-                                $data['no_input'] = $selectedCheckboxValue;
-                                $data['input_type_id'] = $checkboxId;
-                                $data['category_id'] = $category;
-                                $data['form_label']=$selectedLabel;
-                                $data['input_tip']=$_POST['tip_'.$checkboxId];
-                                
-                                $datas[] = $data;
-                            }
-                            
-//                            if(count($_POST['cat'])>0){
-//                                
-//                           
-//                                
-//                                
-//                                
-//                                
-//                            }
-//                            else{
-//                                
-//                                
-//                                
-//                            }
-                            
-                            
-                           
+                    if (!empty($_POST['cat'])&&count($_POST['cat']) > 0) {
 
+                        foreach ($_POST['cat'] as $category) {
+                            
+                            $arr = explode('_', $key);
+                            $checkboxId = $arr[1];
+                            $selectedCheckboxValue = $_POST['count_' . $checkboxId];
+                            $selectedLabel = $_POST['label_' . $checkboxId];
+                            $data['no_input'] = $selectedCheckboxValue;
+                            $data['input_type_id'] = $checkboxId;
+                            $data['category_id'] = $category;
+                            $data['form_label'] = $selectedLabel;
+                            $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
+                            $datas[] = $data;
                         }
+                    } else {
+                        
+                        ///sections with no subsections
+                            $arr = explode('_', $key);
+                            $checkboxId = $arr[1];
+                            $selectedCheckboxValue = $_POST['count_' . $checkboxId];
+                            $selectedLabel = $_POST['label_' . $checkboxId];
+                            $data['no_input'] = $selectedCheckboxValue;
+                            $data['input_type_id'] = $checkboxId;
+                            $data['category_id'] ='';
+                            $data['form_label'] = $selectedLabel;
+                            $data['sections_without_subsections']=$this->input->post('section');
+                            $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
+                            $datas[] = $data;
+                        
                     }
 
-                     $results=$this->db->insert_batch('form_tbl',$datas);
-                     if($results){
-                       $this->listOfCategoriesforms();
-                     }
-                     else{
-                        $this->load->view('formCreator');
-                     }
-                   
 
-                    
+
+                    //end
+                }
+            }
+
+            $results = $this->db->insert_batch('form_tbl', $datas);
+            if ($results) {
+                $this->listOfCategoriesforms();
+            } else {
+                $this->load->view('formCreator');
+            }
         } else {
 
             $this->load->view('formCreator');
         }
     }
-    
-    
-    
-    /**controller function for the pop up form anchor*/
-    
+
+    /*     * controller function for the pop up form anchor */
+
     public function generateform() {
-        $id=$this->uri->segment(3);
-        $data=$this->dataFetcher->categoryDetails($id);
-        $this->load->view('categoryForm',$data);
+        $id = $this->uri->segment(4);
+        $sectionfilter=  strtolower($this->uri->segment(3));
+        
+        //checking if the section or subsection
+        
+           switch ($sectionfilter) {
+            case "sec":
+            
+                  $data = $this->dataFetcher->subcategoryDetails($id);
+                  $this->load->view('categoryForm', $data);
+
+                break;
+            case "subsec":
+                
+                  $data = $this->dataFetcher->categoryDetails($id);
+                  $this->load->view('categoryForm', $data);
+                break;
+
+            default:
+                break;
+        }
+        
+        
+        
         
     }
-    /*list all the categories which already have generated forms**/
-    
+
+    /* list all the categories which already have generated forms* */
+
     public function listOfCategoriesforms() {
-       $this->load->view('generatedForms');
-        
+        $this->load->view('generatedForms');
     }
 
 }
-
 ?>
 
 
