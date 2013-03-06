@@ -19,8 +19,6 @@ if ($results && $results->num_rows() > 0) {
         //the  loop for initiating the max number of input fixed number of selection as they are in db
 
         for ($a = 0; $a < $value['max_no_inputs']; $a++) {
-            //'_' . $value['input_id'] .    . ($a + 1) .'_' '/' . $value['input_id'] 
-//            $dropdowns.='<option value="' . ($a + 1) . set_value('') . '">' . ($a + 1) . '</option>';
 
             $dropdowns.='<option   value="' . ($a + 1) . set_value('') . '">' . ($a + 1) . '</option>';
         }
