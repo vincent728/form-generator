@@ -28,10 +28,10 @@ class DataFetcher extends CI_Model {
      */
     public function subsectionLoader($id) {
 
-        $sql = "select cat_name,cat_id from categories,section_tbl
+        $sql = "select subsections_id,subsections,subsections.section_id from subsections,section_tbl
           where 
-          categories.section_id=section_tbl.section_id and
-          section_tbl.section_id='$id'  ";
+           subsections.section_id=section_tbl.section_id and
+           section_tbl.section_id='$id'";
         $results = $this->db->query($sql);
         return $results;
     }
