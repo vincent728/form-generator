@@ -49,7 +49,7 @@
                         cache: false,
                         success: function(html)
                         {
-                            $(".events").html(html);
+                            $(".events_display").html(html);
                         }
                     });
 
