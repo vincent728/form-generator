@@ -35,6 +35,44 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
+    
+    /**
+ * 
+ * @Method : load all the categories
+ * @param section Id
+ * @return results
+ */
+public function categoriesLoaderwithoutsubsections($id) {
+  
+   $sql="select cat_name,categories.cat_id,section_tbl.section_id 
+        from categories
+        inner join section_tbl 
+        on categories.section_id=section_tbl.section_id
+        where section_tbl.section_id='$id'"; 
+   
+   $results=$this->db->query($sql);
+   return $results;
+}
+
+
+    /**
+ * 
+ * @Method : Load all the categories
+ * @param section Id
+ * @return results
+ */
+public function categoriesLoader($id,$subcatid) {
+    
+   $sql="select cat_name,categories.cat_id,section_tbl.section_id 
+        from categories
+        inner join section_tbl 
+        on categories.section_id=section_tbl.section_id
+        where section_tbl.section_id='$id' and
+              categories.subsections_id='$subcatid'"; 
+   
+   $results=$this->db->query($sql);
+   return $results;
+}
 
     /**
      * @method load the input types
@@ -259,11 +297,6 @@ public function loadSectionWithNoSubsections($id) {
  */
 public function categoryDetails($id) {
     $data=array();
-    $sql="select * from categories,form_tbl,input_type_tbl where 
-        categories.cat_id=form_tbl.category_id and
-        input_type_tbl.input_id=form_tbl.input_type_id and
-        form_tbl.category_id='$id'
-        ";
     $sql_j="select * from subsections,form_tbl,input_type_tbl where 
         subsections.subsections_id=form_tbl.category_id and
         input_type_tbl.input_id=form_tbl.input_type_id and
@@ -344,10 +377,11 @@ public function generatedformsInformations() {
           ";
    $results=$this->db->query($sql);
    return $results;
-    
-    
-    
+
 }
+
+
+
     
 
 }
