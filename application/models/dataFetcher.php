@@ -74,6 +74,26 @@ public function categoriesLoader($id,$subcatid) {
    return $results;
 }
 
+
+   /**
+ * 
+ * @Method : Load all the categories
+ * @param section Id
+ * @return results
+ */
+////////////////////////////////////////////////////////////////////////////////////////
+public function categoriesautoLoader($subsectionid) {
+    
+   $sql="select cat_name,categories.cat_id,section_tbl.section_id 
+        from categories
+        inner join section_tbl 
+        on categories.section_id=section_tbl.section_id
+        where  categories.subsections_id='$subsectionid'"; 
+   
+   $results=$this->db->query($sql);
+   return $results;
+}
+////////////////////////////////////////////////////////////////////////////////////////
     /**
      * @method load the input types
      * @param none
