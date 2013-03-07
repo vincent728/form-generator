@@ -31,7 +31,7 @@ class FormGenerator extends CI_Controller {
                 $checkboxoutput = '';
                 foreach ($results->result_array() as $value) {
                     $checkboxoutput.='<option value="' . $value['subsections_id'] . '">' . $value['subsections'] . '</option>';
-                }echo form_label('sub-section(s)') . '</br>' . '<select name="subcat" class="autoloadcat" >' . $checkboxoutput . '</select>' . '</br></br>';
+                }echo form_label('sub-section(s)') . '</br>' . '<select name="subcat[]" class="autoloadcat" >' . $checkboxoutput . '</select>' . '</br></br>';
             } else {
                 ////////////
                 //for sections with no subsections

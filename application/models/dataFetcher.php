@@ -342,6 +342,7 @@ public function categoryDetails($id) {
  */
 public function subcategoryDetails($id) {
     $data=array();
+    $category_name='';
     $sql="select * from section_tbl,form_tbl,categories,input_type_tbl where 
         section_tbl.section_id=categories.section_id and
         categories.subsections_id=form_tbl.sections_without_subsections and
@@ -393,7 +394,7 @@ public function getAllrepeats() {
 
 public function generatedformsInformations() {
 
-    $sql_new="select distinct sections_without_subsections,cat_name,category_id,cat_id,section_id from categories,form_tbl 
+    $sql_new="select distinct sections_without_subsections,cat_name,category_id,cat_id from categories,form_tbl 
               where 
               categories.cat_id=form_tbl.category_id
             
