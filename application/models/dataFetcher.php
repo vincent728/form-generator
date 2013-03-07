@@ -422,6 +422,16 @@ public function loadsectionFromcategory($cat_id) {
     $results=$this->db->query($sql);
     return $results;
 }
+/**
+ *
+ * @method :get form informations from category id
+ * @param :category id
+ * @return results
+ *  
+**/
+public function getforminformationfromId($catid) {
+       
+}
 
 
     
