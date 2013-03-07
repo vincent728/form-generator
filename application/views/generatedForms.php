@@ -27,7 +27,7 @@ if ($results->num_rows() > 0) {
             foreach ($sectionswithsubsectionsresults->result_array() as $rowsvalue) {
 
                 $out_sub.=$rowsvalue['cat_name'];
-                $formid='sec/' . $rowsvalue['cat_id'];
+                $formid='sec/';
             }
         }
         else{
@@ -35,13 +35,13 @@ if ($results->num_rows() > 0) {
             $sectionwithoutsubsectionsresults = $this->dataFetcher->loadsection($value['sections_without_subsections']);
             foreach ($sectionwithoutsubsectionsresults->result_array() as $rows) {
                 $out_sub.=$rows['cat_name'];
-                $formid='subsec/' . $rows['cat_id'];
+                $formid='subsec/';
             }
          
         }
 
         //the final row output printed 
-        $output.='<tr><td>' . $value['cat_name'] . '</td><td>' . anchor_popup('formGenerator/generateform/' . $formid, $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . '</td></tr>';
+        $output.='<tr><td>' . $value['cat_name'] . '</td><td>' . anchor_popup('formGenerator/generateform/' .$formid. $value['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . '</td></tr>';
     } echo $output;
     ?>
     </table> 
