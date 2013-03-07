@@ -26,30 +26,12 @@ class FormGenerator extends CI_Controller {
             //check if the returned results is greater than one
 
             if ($results->num_rows() > 0) {
+                //load subsections and their repective categories
 
                 $checkboxoutput = '';
                 foreach ($results->result_array() as $value) {
-
-//
-//                    //check if section has subsections and have got ids
-//                    $resultssubsections = $this->dataFetcher->categoriesLoader($this->input->post('id'), $value['subsections_id']);
-//
-//                    $subsectioncategory_output = '';
-//               
-//                    if ($resultssubsections->num_rows() > 0) {
-//
-//                        $selectoptions_sub = '';
-//                        foreach ($resultssubsections->result_array() as $subsectionscategorires) {
-//
-//                            $selectoptions_sub.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
-//                        }
-//
-//                        $subsectioncategory_output = '<select name="subsectioncategory">' . $selectoptions_sub . '</select>';
-//                    }
-//                     $data = array('name' => 'cat[]', 'value' => $value['subsections_id'], 'class' => 'categories');
-//                    $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['subsections'] . nbs(4) . $subsectioncategory_output . '</br></br>';
                     $checkboxoutput.='<option value="' . $value['subsections_id'] . '">' . $value['subsections'] . '</option>';
-                }echo form_label('sub-section(s)') . '</br>' . '<select name="subcat" class="autoloadcat" >' . $checkboxoutput . '</select>'.'</br></br>';
+                }echo form_label('sub-section(s)') . '</br>' . '<select name="subcat" class="autoloadcat" >' . $checkboxoutput . '</select>' . '</br></br>';
             } else {
                 ////////////
                 //for sections with no subsections
@@ -59,19 +41,11 @@ class FormGenerator extends CI_Controller {
 
                     $selectopt_sub = '';
                     foreach ($resultwithnosubsections->result_array() as $subsectionscategorires) {
-                        //$selectopt_sub.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
-                        //$data = array('name' => 'cat[]', 'value' => $subsectionscategorires['cat_id'], 'class' => '');
-                       // $checkboxoutput.=form_checkbox($data) . nbs(3) . $subsectionscategorires['cat_name'] . nbs(4) . '</br></br>';
                         $checkboxoutput.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
                     }
-
-
-                    echo form_label('Categorie(s)') . '</br>' .'<select name="cat[]" class="autoloadcat" multiple="multiple" size="4">' . $checkboxoutput . '</select>'.'</br></br>';
-
-
+                    echo form_label('Categorie(s)') . '</br>' . '<select name="cat[]" class="autoloadcat" multiple="multiple" size="4" >' . $checkboxoutput . '</select>' . '</br></br>';
                     //load sections which does not have some categories
                 }
-
                 /////////////
             }
 
@@ -87,11 +61,13 @@ class FormGenerator extends CI_Controller {
 
         if ($results) {
 
-            $concatenator = '';
-            foreach ($results->result_array() as $value) {
-                $concatenator.='<option value="' . $value['cat_id'] . '">' . $value['cat_name'] . '</option>';
+            if ($results->num_rows() > 0) {
+                $concatenator = '';
+                foreach ($results->result_array() as $value) {
+                    $concatenator.='<option value="' . $value['cat_id'] . '">' . $value['cat_name'] . '</option>';
+                }
+                echo form_label('categories') . nbs(5) . '<select name="cat[]" multiple="multiple" size="4">' . $concatenator . '</select>' . '</br></br>';
             }
-            echo form_label('categories').nbs(5).'<select name="cat[]" multiple="multiple" size="4">' . $concatenator . '</select>'.'</br></br>';
         }
     }
 
@@ -267,41 +243,36 @@ class FormGenerator extends CI_Controller {
 
                         ///check if the sections has subsections
 
-                        if (!empty($_POST['cat']) && count($_POST['cat']) > 0) {
+                        if (!empty($_POST['cat']) && count($_POST['cat'])) {
 
                             foreach ($_POST['cat'] as $category) {
 
+                                
+                                //check if the submitted data has subsection
+                                if(!empty($_POST['subcat'])){
+                                    
+                                  $subsection=$_POST['subcat'];  
+                                    
+                                }
+                                else{
+                                    
+                                  $subsection='';  
+                                }
+                                
                                 $arr = explode('_', $key);
                                 $checkboxId = $arr[1];
                                 $selectedCheckboxValue = $_POST['count_' . $checkboxId];
                                 $selectedLabel = $_POST['label_' . $checkboxId];
                                 $data['no_input'] = $selectedCheckboxValue;
                                 $data['input_type_id'] = $checkboxId;
+                                $data['sections_without_subsections']=$subsection;
                                 $data['category_id'] = $category;
                                 $data['form_label'] = $selectedLabel;
                                 $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
                                 $datas[] = $data;
                             }
-                        } else {
-
-                            ///sections with no subsections
-                            $arr = explode('_', $key);
-                            $checkboxId = $arr[1];
-                            $selectedCheckboxValue = $_POST['count_' . $checkboxId];
-                            $selectedLabel = $_POST['label_' . $checkboxId];
-                            $data['no_input'] = $selectedCheckboxValue;
-                            $data['input_type_id'] = $checkboxId;
-                            $data['category_id'] = '';
-                            $data['form_label'] = $selectedLabel;
-                            $data['sections_without_subsections'] = $this->input->post('section');
-                            $data['input_tip'] = $_POST['tip_' . $checkboxId];
-
-                            $datas[] = $data;
-                        }
-
-
-
+                        } 
                         //end
                     }
                 }
@@ -331,13 +302,13 @@ class FormGenerator extends CI_Controller {
         //checking if the section or subsection
 
         switch ($sectionfilter) {
-            case "sec":
+            case "subsec":
 
                 $data = $this->dataFetcher->subcategoryDetails($id);
                 $this->load->view('categoryForm', $data);
 
                 break;
-            case "subsec":
+            case "sec":
 
                 $data = $this->dataFetcher->categoryDetails($id);
                 $this->load->view('categoryForm', $data);

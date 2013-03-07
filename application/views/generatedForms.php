@@ -20,26 +20,25 @@ if ($results->num_rows() > 0) {
         $out_sub = '';
         $formid = '';
 
-        if (empty($value['sections_without_subsections']) && is_null($value['sections_without_subsections'])) {
-            //if it is empty means its section with subsections 
+        if (empty($value['sections_without_subsections']) || is_null($value['sections_without_subsections'])) {
+            //if it is empty means its section without subsections 
             $sectionswithsubsectionsresults = $this->dataFetcher->loadSubsection($value['category_id']);
             foreach ($sectionswithsubsectionsresults->result_array() as $rowsvalue) {
 
-                $out_sub.=$rowsvalue['subsections'];
-                $formid.='subsec/' . $rowsvalue['subsections_id'];
+                $out_sub.=$rowsvalue['cat_name'];
+                $formid.='sec/' . $rowsvalue['cat_id'];
             }
         }
-
-        if (empty($value['category_id']) || is_null($value['category_id'])) {
-            //if category is  empty means  section without subsections
+        else{
+              //if category is  not empty means  section with subsections
             $sectionwithoutsubsectionsresults = $this->dataFetcher->loadsection($value['sections_without_subsections']);
-
             foreach ($sectionwithoutsubsectionsresults->result_array() as $rows) {
-
-                $out_sub.=$rows['section_name'];
-                $formid.='sec/' . $rows['section_id'];
+                $out_sub.=$rows['cat_name'];
+                $formid.='subsec/' . $rows['cat_id'];
             }
+         
         }
+
         //the final row output printed 
         $output.='<tr><td>' . $out_sub . '</td><td>' . anchor_popup('formGenerator/generateform/' . $formid, $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . '</td></tr>';
     } echo $output;

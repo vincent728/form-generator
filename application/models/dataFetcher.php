@@ -267,12 +267,10 @@ public function getfomdetails() {
 
 public function loadSubsection($id) {
     
-    $sql="select distinct subsections,subsections_id from subsections,form_tbl where 
-        subsections.subsections_id=form_tbl.category_id and
-        subsections.subsections_id='$id'
-       
-        ";
-    $results=$this->db->query($sql);
+    $sql_new="select distinct cat_name,cat_id,category_id from form_tbl,categories
+        where categories.cat_id=form_tbl.category_id and
+        categories.cat_id='$id'";
+    $results=$this->db->query($sql_new);
     return $results;
    
 }
@@ -280,12 +278,13 @@ public function loadSubsection($id) {
 /**load section name and id for sections with no subsections*/
 
 public function loadsection($id) {
+
+    $sql="select distinct cat_name,cat_id from form_tbl,categories where
+          form_tbl.sections_without_subsections=categories.subsections_id and
+          form_tbl.category_id=categories.cat_id and
+          form_tbl.sections_without_subsections='$id'
+           ";
     
-    $sql="select distinct section_name,section_id from section_tbl,form_tbl where 
-        section_tbl.section_id=form_tbl.sections_without_subsections and
-        section_tbl.section_id='$id'
-       
-        ";
     $results=$this->db->query($sql);
     return $results;
    
@@ -317,16 +316,17 @@ public function loadSectionWithNoSubsections($id) {
  */
 public function categoryDetails($id) {
     $data=array();
-    $sql_j="select * from subsections,form_tbl,input_type_tbl where 
-        subsections.subsections_id=form_tbl.category_id and
+   
+    $sql="select * from categories,form_tbl,input_type_tbl where 
+         form_tbl.category_id=categories.cat_id and
         input_type_tbl.input_id=form_tbl.input_type_id and
         form_tbl.category_id='$id'";
     
-    $results=$this->db->query($sql_j);
+    $results=$this->db->query($sql);
     
     foreach ($results->result_array() as $value) {
         
-            $category_name=$value['subsections'];
+            $category_name=$value['cat_name'];
         
     }
     $data['results']=$results;
@@ -342,16 +342,19 @@ public function categoryDetails($id) {
  */
 public function subcategoryDetails($id) {
     $data=array();
-    $sql="select * from section_tbl,form_tbl,input_type_tbl where 
-        section_tbl.section_id=form_tbl.sections_without_subsections and
+    $sql="select * from section_tbl,form_tbl,categories,input_type_tbl where 
+        section_tbl.section_id=categories.section_id and
+        categories.subsections_id=form_tbl.sections_without_subsections and
+        form_tbl.sections_without_subsections=categories.subsections_id and
         input_type_tbl.input_id=form_tbl.input_type_id and
-        form_tbl.sections_without_subsections='$id'
+        form_tbl.category_id=categories.cat_id and
+        form_tbl.category_id='$id'
         ";
     $results=$this->db->query($sql);
     
     foreach ($results->result_array() as $value) {
         
-            $category_name=$value['section_name'];
+            $category_name=$value['cat_name'];
         
     }
     $data['results']=$results;
@@ -389,13 +392,14 @@ public function getAllrepeats() {
 
 
 public function generatedformsInformations() {
+
+    $sql_new="select distinct sections_without_subsections,cat_name,category_id,cat_id,section_id from categories,form_tbl 
+              where 
+              categories.cat_id=form_tbl.category_id
+            
+              ";
     
-    $sql="select distinct form_tbl.sections_without_subsections,category_id
-          from form_tbl
-          left join section_tbl
-          on form_tbl.sections_without_subsections=section_tbl.section_id
-          ";
-   $results=$this->db->query($sql);
+   $results=$this->db->query($sql_new);
    return $results;
 
 }
