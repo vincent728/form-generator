@@ -291,22 +291,6 @@ public function loadsection($id) {
 }
 
 
-/**
- * @method :load sections with no subsections
- * @param :none
- * @return results
- * 
- */
-public function loadSectionWithNoSubsections($id) {
-    
-     $sql="select distinct section_name,section_id from section_tbl,form_tbl where 
-        section_tbl.section_id=form_tbl.sections_without_subsections and
-        section_tbl.section_id='$id'
-         ";
-    $results=$this->db->query($sql);
-    return $results;
-    
-}
 
 /**
  * @method: get specific form category information
@@ -413,6 +397,7 @@ public function generatedformsInformations() {
  * 
  */
 public function loadsectionFromcategory($cat_id) {
+   
     $sql="select distinct section_tbl.section_id,section_name from form_tbl,section_tbl,categories
           where 
           section_tbl.section_id=categories.section_id and
@@ -429,8 +414,29 @@ public function loadsectionFromcategory($cat_id) {
  * @return results
  *  
 **/
-public function getforminformationfromId($catid) {
+public function getSectionSubsections($sectionid,$catid) {
+    $sql="select distinct categories.section_id,subsections,cat_name,categories.cat_id,subsections.subsections_id from subsections,categories where
+                categories.section_id='$sectionid' and
+                subsections.subsections_id=categories.subsections_id and    
+                categories.cat_id='$catid'
+          ";
+    $results=$this->db->query($sql);
+    return $results;
        
+}
+
+/**
+ * @method :delete the category
+ * @param :category id
+ * @return boolen
+ * 
+ */
+public function deletecateggory($id){
+    
+    $sql="delete from form_tbl where category_id='$id'";
+    $results=$this->db->query($sql);
+    return $results;
+    
 }
 
 

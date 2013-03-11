@@ -37,8 +37,5 @@ if ($results && $results->num_rows() > 0) {
                 '</br></br>';
     }
     echo $checkboxoutput;
-} else {
-
-    ///no checkboxes to generate
 }
 ?>
