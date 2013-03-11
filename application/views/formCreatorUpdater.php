@@ -27,7 +27,7 @@ if (form_error()) {
     $sectionid = $this->session->userdata('sectionid');
     $subsectionname = $this->session->userdata('subsectionname');
     $subsectionid = $this->session->userdata('subsectionid');
-    $catid=$this->session->userdata('categoryid');
+   // $catid=$this->session->userdata('categoryid');
     
 if(!empty($catname)){
    $category=$catname;
@@ -46,7 +46,7 @@ echo form_hidden('cat[]', $catid);
 if (!empty($subsectionname)) {
 
     echo 'subsection name :' . $subsectionname . '</br>';
-    echo form_hidden('subsection_id', $subsectionid);
+    echo form_hidden('subsection_id', $subsection_id);
 }
 
 echo 'Category :' .$category. '</br>';

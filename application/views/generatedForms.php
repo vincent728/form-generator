@@ -21,6 +21,7 @@ if ($results->num_rows() > 0) {
     foreach ($results->result_array() as $value) {
 
             $formid = '';
+            
         if (empty($value['sections_without_subsections'])) {
             //if it is empty means its section without subsections 
             $sectionswithsubsectionsresults = $this->dataFetcher->loadSubsection($value['category_id']);
@@ -41,7 +42,7 @@ if ($results->num_rows() > 0) {
         }
 
         //the final row output printed 
-        $output.='<tr><td>' . $value['cat_name'] . '</td><td>' . anchor_popup('formGenerator/generateform/' .$formid. $value['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . '</td><td>'. anchor_popup('formGenerator/editform/' .$formid. $value['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) .'</td></tr>';
+        $output.='<tr><td>' . $value['cat_name'] . '</td><td>'. anchor('formGenerator/editform/' .$formid. $value['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) .'</td><td>'.anchor_popup('formGenerator/generateform/' .$formid. $value['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . '</td><td>'. anchor('formGenerator/formdelete/' .$formid. $value['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')).'</td></tr>';
     } echo $output;
     ?>
     </table> 

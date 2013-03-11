@@ -381,12 +381,29 @@ public function generatedformsInformations() {
     $sql_new="select distinct sections_without_subsections,cat_name,category_id,cat_id from categories,form_tbl 
               where 
               categories.cat_id=form_tbl.category_id
-            
-              ";
-    
+              ";   
    $results=$this->db->query($sql_new);
    return $results;
 
+}
+/**
+ * @method :
+ * @param :
+ * @return results
+ * 
+ * 
+ */
+
+public function sectionCategory($sectionid) {
+    
+    $sql_new="select distinct sections_without_subsections,cat_name,category_id,cat_id from categories,form_tbl 
+              where 
+              categories.cat_id=form_tbl.category_id and
+              categories.section_id='$sectionid'
+              ";   
+   $results=$this->db->query($sql_new);
+   return $results;
+    
 }
 /*** editig functions*/
 
@@ -437,6 +454,20 @@ public function deletecateggory($id){
     $results=$this->db->query($sql);
     return $results;
     
+}
+/**
+ * @method : load section from for forms created
+ * @param none
+ * @return results
+ * 
+ */
+public function formsCreatedSections() {
+    $sql="select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,form_tbl,categories
+        where 
+        categories.cat_id=form_tbl.category_id and
+        categories.section_id=section_tbl.section_id";
+    $results=$this->db->query($sql);
+    return $results;  
 }
 
 

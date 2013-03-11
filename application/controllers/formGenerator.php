@@ -293,6 +293,7 @@ class FormGenerator extends CI_Controller {
     /*     * ** form update processor */
 
     public function editorprocessor() {
+        
         if ($this->input->post('edit')) {
 
             $this->form_validation->set_rules('cat', 'input types', 'required');
@@ -303,26 +304,38 @@ class FormGenerator extends CI_Controller {
                 //form processing goes here
                 $datas = array();
                 $subsectionsession = $this->session->userdata('subsectionid');
-                $catid = $this->session->userdata('categoryid');
-                $deleteresults = $this->dataFetcher->deletecateggory($catid);
+                $catid = $this->session->userdata('cat');
+                $category=$this->input->post('cat');
+              
+                $sub=$this->input->post('subsection_id');
+             
+                $deleteresults = $this->dataFetcher->deletecateggory($category[0]);
                 
                 if($deleteresults){
-                            foreach ($_POST as $key => $value) {
 
+                    
+                   foreach ($_POST as $key => $value) {
+                   
                     ///strip the selected values from dropdown
                     if (strstr($key, "field_")) {
-
+                        
+                        
+                     
                         ///check if the sections has subsections
-
-                        if (!empty($_POST['cat']) && count($_POST['cat'])) {
-
-//                                foreach ($_POST['cat'] as $category) {
-
+                        if (!empty($_POST['cat'])) {
+                            
+                            
+                            
+ 
+                                foreach ($_POST['cat'] as $category) {
+                                  
+                               
                                     $data = array();
                                     //check if the submitted data has subsection
                                     if (!empty($subsectionsession)) {
 
-                                        $subsection = $this->session->userdata('subsectionid');
+//                                        $subsection = $this->session->userdata('subsectionid');
+                                          $subsection=$sub;
                                     } else {
 
                                         $subsection = '';
@@ -335,12 +348,12 @@ class FormGenerator extends CI_Controller {
                                     $data['no_input'] = $selectedCheckboxValue;
                                     $data['input_type_id'] = $checkboxId;
                                     $data['sections_without_subsections'] = $subsection;
-                                    $data['category_id'] = $catid;
+                                    $data['category_id'] = $category;
                                     $data['form_label'] = $selectedLabel;
                                     $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
                                     $datas[] = $data;
-//                                }
+                                }
 
                                 $results = $this->db->insert_batch('form_tbl', $datas);
                                 if ($results) {
@@ -363,6 +376,27 @@ class FormGenerator extends CI_Controller {
                 ///////
             }
         }
+    }
+    
+    /**
+     * @controller function to delete the form
+     */
+    public function formdelete() {
+        
+         $id = $this->uri->segment(4);
+         $deleteresults = $this->dataFetcher->deletecateggory($id);
+         //check if category has been deleted
+         if($deleteresults){
+           
+          $this->listOfCategoriesforms();   
+             
+         }
+         else{
+           
+             echo 'an error occured during deletion';
+         }
+         
+        
     }
 
     /*     * controller function for the pop up form anchor */
@@ -429,15 +463,17 @@ class FormGenerator extends CI_Controller {
                     $subsectionid = $rows['subsections_id'];
                     $subsectionname = $rows['subsections'];
                     $catname = $rows['cat_name'];
+                    $catid=$rows['cat_id'];
                 }
 
 
                 $data['subsection_id'] = $subsectionid;
                 //store id into session in case an error occure then we would get advantage of session to retrieve id
-                $this->session->set_userdata('subsectionid', $subsectionid);
+               // $this->session->set_userdata('subsectionid', $subsectionid);
                 $this->session->set_userdata('subsectionname', $subsectionname);
                 $this->session->set_userdata('categoryname', $catname);
                 $this->session->set_userdata('categoryid', $id);
+                $data['catid']=$catid;
                 $data['subsectionname'] = $subsectionname;
                 //$data['category']=$catname;
 
@@ -456,6 +492,15 @@ class FormGenerator extends CI_Controller {
                 break;
         }
     }
+    
+    
+    /**controller function for loading sections ,subsections if any and categories*/
+    public function listOfCreatedForms() {
+        
+        $this->load->view('listofforms');
+        
+    }
+    
 
 }
 ?>

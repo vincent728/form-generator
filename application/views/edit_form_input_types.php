@@ -47,7 +47,7 @@ if ($allresults && $allresults->num_rows() > 0) {
 
                     $select.="selected";
                 } else {
-                    $select.="selected";
+                    $select.="";
                 }
             } else {
                 $checked.= '';
@@ -69,7 +69,7 @@ if ($allresults && $allresults->num_rows() > 0) {
             }
 
 
-            $dropdowns.='<option  ' . $select . ' value="' . ($a + 1) . set_value() . '">' . ($a + 1) . '</option>';
+            $dropdowns.='<option  ' . ' value="' . ($a + 1) . set_value() . '">' . ($a + 1) . '</option>';
         }
         //end of the loop 
 
