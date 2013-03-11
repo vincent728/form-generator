@@ -318,18 +318,11 @@ class FormGenerator extends CI_Controller {
                    
                     ///strip the selected values from dropdown
                     if (strstr($key, "field_")) {
-                        
-                        
-                     
-                        ///check if the sections has subsections
+                  ///check if the sections has subsections
                         if (!empty($_POST['cat'])) {
-                            
-                            
-                            
- 
-                                foreach ($_POST['cat'] as $category) {
-                                  
-                               
+                  
+//                                foreach ($_POST['cat'] as $category) {
+
                                     $data = array();
                                     //check if the submitted data has subsection
                                     if (!empty($subsectionsession)) {
@@ -348,12 +341,12 @@ class FormGenerator extends CI_Controller {
                                     $data['no_input'] = $selectedCheckboxValue;
                                     $data['input_type_id'] = $checkboxId;
                                     $data['sections_without_subsections'] = $subsection;
-                                    $data['category_id'] = $category;
+                                    $data['category_id'] = $this->input->post('cat');
                                     $data['form_label'] = $selectedLabel;
                                     $data['input_tip'] = $_POST['tip_' . $checkboxId];
 
                                     $datas[] = $data;
-                                }
+//                                }
 
                                 $results = $this->db->insert_batch('form_tbl', $datas);
                                 if ($results) {

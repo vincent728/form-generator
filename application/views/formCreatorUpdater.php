@@ -41,7 +41,7 @@ echo form_open_multipart('formGenerator/editorprocessor/', $data);
 echo form_fieldset('');
 echo 'section name :' . $sectionname . '</br>';
 echo form_hidden('section_id', $section_id);
-echo form_hidden('cat[]', $catid);
+echo form_hidden('cat', $catid);
 
 if (!empty($subsectionname)) {
 
