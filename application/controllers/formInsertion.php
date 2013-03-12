@@ -22,28 +22,26 @@ class FormInsertion extends CI_Controller {
             
             if(is_array($name)){
             
-             
+             $form_name='';
             }
             else{
-
+             $form_name='';
             } if(is_array($shortpromo)){
-            
-             
+              $shortpromodescriptions='';             
             }
             else{
-
+             $shortpromodescriptions='';  
             }if(is_array($phone)){
-            
+              $phonenumbers='';
              
             }
             else{
-
+            $phonenumbers='';
             }if(is_array($email)){
-            
-             
+             $formemail='';
             }
             else{
-
+             $formemail='';
             }
             
             
