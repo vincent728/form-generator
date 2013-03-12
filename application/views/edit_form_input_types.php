@@ -83,7 +83,7 @@ if ($allresults && $allresults->num_rows() > 0) {
         $data = array('name' => 'field_' . $value['input_id'], 'value' => 'field_' . set_value('inputs') . $value['input_id'], 'checked' => $checked);
         $checkboxoutput.=nbs(3) . form_checkbox($data) . nbs(3) .
                 $value['input_name'] . nbs(8) . $start_select . $dropdowns . $end_select . nbs(4) .
-                form_input(array('name' => 'label_' . $value['input_id'], 'value' => 'write the name of a label', 'size' => '30')) .
+                form_input(array('name' => 'label_' . $value['input_id'], 'value' => 'write the name of a label', 'size' => '30')).
                 form_input(array('name' => 'tip_' . $value['input_id'], 'value' =>'a tip', 'size' => '30')) .
                 '</br></br>';
     }

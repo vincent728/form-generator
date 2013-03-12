@@ -103,11 +103,11 @@ if ($results->num_rows() > 0) {
     var frmvalidator = new Validator("myform");
     frmvalidator.addValidation("name[]","req","Please enter the name");
     frmvalidator.addValidation("phone[]","req","please enter an email address");
-    frmvalidator.addValidation("phone[]","maxlen=50");
     frmvalidator.addValidation("phone[]","numeric");
     frmvalidator.addValidation("contact_email[]","maxlen=50");
     frmvalidator.addValidation("contact_email[]","req","please enter an email address");
-    frmvalidator.addValidation("contact_email[]","email");
+    frmvalidator.addValidation("txtarea[]","req","please enter details");
+    frmvalidator.addValidation("images[]","req","please attach an image ");
  
     
 

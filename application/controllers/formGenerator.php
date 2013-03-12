@@ -276,7 +276,7 @@ class FormGenerator extends CI_Controller {
 
                 $results = $this->db->insert_batch('form_tbl', $datas);
                 if ($results) {
-                   $this->listOfCreatedForms();
+                    $this->listOfCreatedForms();
                 } else {
                     $this->load->view('formCreator');
                 }
@@ -303,17 +303,17 @@ class FormGenerator extends CI_Controller {
                 //update the database information
                 //form processing goes here
                 $datas = array();
-                
+
 //                $subsectionsession = $this->session->userdata('subsectionid');
 //                $catid = $this->session->userdata('cat');
-                
+
                 $category = $this->input->post('cat');
                 $subsectionid = $this->input->post('subsection_id');
 
                 $deleteresults = $this->dataFetcher->deletecateggory($category[0]);
 
                 if ($deleteresults) {
-                      
+
 
                     foreach ($_POST as $key => $value) {
 
@@ -321,16 +321,16 @@ class FormGenerator extends CI_Controller {
                         if (strstr($key, "field_")) {
                             ///check if the sections has subsections
                             if (!empty($_POST['cat'])) {
-                                
+
                                 foreach ($_POST['cat'] as $category) {
-                                //check if the submitted data has subsection
+                                    //check if the submitted data has subsection
                                     if (!empty($subsectionid)) {
 //                                        $subsection = $this->session->userdata('subsectionid');
                                         $subsection = $_POST['subsection_id'];
                                     } else {
                                         $subsection = '';
                                     }
-                                    
+
                                     $arr = explode('_', $key);
                                     $checkboxId = $arr[1];
                                     $selectedCheckboxValue = $_POST['count_' . $checkboxId];
@@ -341,21 +341,17 @@ class FormGenerator extends CI_Controller {
                                     $data['category_id'] = $category;
                                     $data['form_label'] = $selectedLabel;
                                     $data['input_tip'] = $_POST['tip_' . $checkboxId];
-                                    $datas[]=$data;
-                                   
-                                    
+                                    $datas[] = $data;
                                 }
-
-                                
                             }
                             //end
                         }
                     } $results = $this->db->insert_batch('form_tbl', $datas);
-                                if ($results) {
-                                    $this->listOfCreatedForms();
-                                } else {
-                                    $this->load->view('formCreator');
-                                }
+                    if ($results) {
+                        $this->listOfCreatedForms();
+                    } else {
+                        $this->load->view('formCreator');
+                    }
                 }
                 //end the proccessing   
                 ///////
@@ -455,7 +451,7 @@ class FormGenerator extends CI_Controller {
                 $this->session->set_userdata('categoryname', $catname);
                 $this->session->set_userdata('categoryid', $id);
                 $data['catid'] = $catid;
-                $data['category']=$catname;
+                $data['category'] = $catname;
                 $data['subsectionname'] = $subsectionname;
                 //$data['category']=$catname;
 
@@ -465,11 +461,11 @@ class FormGenerator extends CI_Controller {
             case "sec":
 
 
-                $results =$this->dataFetcher->categoryDetails($id);
-                $data['catid']=$results['catid'];
+                $results = $this->dataFetcher->categoryDetails($id);
+                $data['catid'] = $results['catid'];
                 $data['subsection_id'] = '';
-                $data['subsectionname'] ='';
-                $data['category']=$results['category'];
+                $data['subsectionname'] = '';
+                $data['category'] = $results['category'];
                 $data['result'] = $results['results'];
                 $this->load->view('formCreatorUpdater', $data);
                 break;
