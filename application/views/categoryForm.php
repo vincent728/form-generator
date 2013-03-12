@@ -35,34 +35,36 @@ if ($results->num_rows() > 0) {
 
 
                 case "fullname_input":
-
-                    $fieldTobegenerated = form_label($value['input_name']) . form_input(array('name' => 'name[]', 'value' => '', 'size' => '30'));
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'name[]', 'value' => '', 'size' => '30'));
                     break;
                 case "input_phone":
-
-                    $fieldTobegenerated = form_label($value['input_name']) . form_input(array('name' => 'phone[]', 'value' => '', 'size' => '30'));
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'phone[]', 'value' => '', 'size' => '30'));
                     break;
                 
                 case "contact_email":
-
-                    $fieldTobegenerated = form_label($value['input_name']) . form_input(array('name' => 'contact_email[]', 'value' => '', 'size' => '30'));
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email[]', 'value' => '', 'size' => '30'));
                     break;
                 
                 case "textarea":
-
-                    $fieldTobegenerated = form_label($value['input_name']) . form_textarea(array('name' => 'txtarea[]', 'cols' => '25', 'rows' => '3'));
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea[]', 'cols' => '25', 'rows' => '3'));
                     break;
 
                 case "images":
-                    $fieldTobegenerated = form_label($value['input_name']) . '<input type="file" name="images[]"/>';
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . '<input type="file" name="images[]" class="images"/>';
                     break;
 
                 case "file":
-                    $fieldTobegenerated = form_label($value['input_name']) . '<input type="file" name="file[]"/>';
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . '<input type="file" name="file[]" class"file"/>';
                     break;
 
                 case "select":
-
                     $out = '';
                     $repeatselectrtesults = $this->dataFetcher->getAllrepeats();
 
@@ -70,8 +72,9 @@ if ($results->num_rows() > 0) {
 
                         $out.='<option value="' . $rows['repeat_id'] . '">' . $rows['events'] . '</option>';
                     }
-
-                    $fieldTobegenerated = form_label($value['input_name']) . '<select name="" class="events">' . $out . '</select><div class="events_display"></div>';
+                    
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . '<select name="" class="events">' . $out . '</select><div class="events_display"></div>';
 
                     break;
 
@@ -92,7 +95,7 @@ if ($results->num_rows() > 0) {
 
 
         $input_output.=form_fieldset() . '<ul>' . $inputfield . '' . '</ul>' . form_fieldset_close();
-    } echo form_open_multipart('formGenerator/insertFormData/', $data = array('id' => '', 'class' => '')) . '<h1>' . $category . '</h1>' . $input_output . form_submit(array('name' => 'submit', 'value' => 'submit')) . form_close();
+    } echo form_open_multipart('formGenerator/insertFormData/', $data = array('id' => '', 'class' => 'myform')) . '<h1>' . $category . '</h1>' . $input_output . form_submit(array('name' => 'submit', 'value' => 'submit')) . form_close();
 } else {
     
 }

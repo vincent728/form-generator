@@ -3,7 +3,7 @@ $this->load->view('header');
 $this->load->view('content');
 ?>
 <?php
-$data = array('id' => '');
+$data = array('id' => '','class'=>'');
 echo form_open_multipart('formGenerator/formProcessor/', $data);
 echo form_fieldset('');
 ?>

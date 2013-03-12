@@ -1,0 +1,57 @@
+/* 
+    Document   : form
+    Created on : Mar 12, 2013, 12:58:54 PM
+    Author     : Vincent David
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+form.myform{
+
+}
+form.myform fieldset{
+   border:1px solid #ffffff;  
+   margin: 20px;
+}
+form.myform fieldset ul{
+    
+}
+form.myform fieldset ul li{
+    
+    list-style:  none;
+    display: block;
+}
+form.myform fieldset ul li label{
+    width:300px;
+    margin-left: 120px;
+    margin-right: 20px;
+}
+form.myform fieldset ul li input{
+    width: 300px;
+    border:1px solid #007C00;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+form.myform fieldset ul li select{
+    
+    width: 300px;
+    border:1px solid #F0F0F0;
+    
+}
+form.myform fieldset ul li textarea{
+    
+    width: 300px;
+    height: 200px;
+    padding-left: 20px;
+    border:1px solid #F0F0F0;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+form.myform fieldset ul li input.images{
+    border:1px solid #007C00;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    }

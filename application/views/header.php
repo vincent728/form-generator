@@ -11,8 +11,9 @@
     <head>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link></link>
         <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
-<!--        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+        <link href="<?php echo base_url(); ?>css/form.css" rel="stylesheet"/>
 
         <script type="text/javascript">
             
