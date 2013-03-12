@@ -10,21 +10,24 @@ form.myform{
 
 }
 form.myform fieldset{
-   border:1px solid #ffffff;  
-   margin: 20px;
+    border:1px solid #ffffff;  
+    margin: 20px;
 }
 form.myform fieldset ul{
-    
+
 }
 form.myform fieldset ul li{
-    
+
     list-style:  none;
     display: block;
+    margin-bottom: 10px;
 }
 form.myform fieldset ul li label{
     width:300px;
     margin-left: 120px;
     margin-right: 20px;
+    font-family:inherit;
+    font-size: 14px;
 }
 form.myform fieldset ul li input{
     width: 300px;
@@ -32,19 +35,21 @@ form.myform fieldset ul li input{
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+    margin-bottom:10px;
 }
-form.myform fieldset ul li select{
-    
+form.myform fieldset ul li select.events{
+
     width: 300px;
     border:1px solid #F0F0F0;
-    
+    margin:10px;
+
 }
 form.myform fieldset ul li textarea{
-    
+
     width: 300px;
     height: 200px;
-    padding-left: 20px;
-    border:1px solid #F0F0F0;
+    margin:10px;
+    border:1px solid #007C00;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -54,4 +59,13 @@ form.myform fieldset ul li input.images{
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    }
+    margin:10px;
+    width: 280px;
+}
+form.myform fieldset ul liinput.submit{
+    width: 300px;
+    border:1px solid #007C00;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
