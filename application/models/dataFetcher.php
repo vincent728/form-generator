@@ -311,9 +311,11 @@ public function categoryDetails($id) {
     foreach ($results->result_array() as $value) {
         
             $category_name=$value['cat_name'];
+            $category_id=$value['cat_id'];
         
     }
     $data['results']=$results;
+    $data['catid']=$category_id;
     $data['category']=$category_name;
     return $data;
 }

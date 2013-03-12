@@ -455,6 +455,7 @@ class FormGenerator extends CI_Controller {
                 $this->session->set_userdata('categoryname', $catname);
                 $this->session->set_userdata('categoryid', $id);
                 $data['catid'] = $catid;
+                $data['category']=$catname;
                 $data['subsectionname'] = $subsectionname;
                 //$data['category']=$catname;
 
@@ -464,7 +465,11 @@ class FormGenerator extends CI_Controller {
             case "sec":
 
 
-                $results = $this->dataFetcher->categoryDetails($id);
+                $results =$this->dataFetcher->categoryDetails($id);
+                $data['catid']=$results['catid'];
+                $data['subsection_id'] = '';
+                $data['subsectionname'] ='';
+                $data['category']=$results['category'];
                 $data['result'] = $results['results'];
                 $this->load->view('formCreatorUpdater', $data);
                 break;

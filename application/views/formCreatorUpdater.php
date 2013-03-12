@@ -13,20 +13,9 @@ if (form_error()) {
 
     //set section id and name and subsection of any in session
 } else {
-    $section = '';
-    $sectionid = '';
-    $subsectionid = '';
-    $subsectionname = '';
-    $cat = '';
+
 }
 
-//retrieving from session
-$catname = $this->session->userdata('categoryname');
-$section = $this->session->userdata('sectionname');
-$sectionid = $this->session->userdata('sectionid');
-$subsectionname = $this->session->userdata('subsectionname');
-$subsectionid = $this->session->userdata('subsectionid');
-// $catid=$this->session->userdata('categoryid');
 
 if (!empty($catname)) {
     $category = $catname;
