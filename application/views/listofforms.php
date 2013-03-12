@@ -12,7 +12,7 @@ $results = $this->dataFetcher->formsCreatedSections();
 
 if ($results->num_rows() > 0) {
     ?>
-    <table width="100%" border="1">
+    <table width="100%" border="0" class="mytable">
 
         <thead>
 
@@ -85,7 +85,7 @@ if ($results->num_rows() > 0) {
                        
 </tr>';
                 }
-                $table_output.='<tr><td>' . $sn . '</td><td>' . $value['section_name'] . '</td><td><table width="100%" border="1">' . $forms_output . '</table></td></tr>';
+                $table_output.='<tr><td>' . $sn . '</td><td>' . $value['section_name'] . '</td><td><table width="100%" border="0" class="myinnertable">' . $forms_output . '</table></td></tr>';
             }
             echo $table_output;
             ?>

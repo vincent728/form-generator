@@ -95,7 +95,7 @@ if ($results->num_rows() > 0) {
 
 
         $input_output.=form_fieldset() . '<ul>' . $inputfield . '' . '</ul>' . form_fieldset_close();
-    } echo form_open_multipart('formGenerator/insertFormData/', $data = array('id' => '', 'class' => 'myform')) . '<h1>' . $category . '</h1>' . $input_output . form_submit(array('name' => 'submit', 'value' => 'submit')) . form_close();
+    } echo form_open_multipart('formGenerator/insertFormData/', $data = array('id' => '', 'class' => 'myform')) . '<h1>' . $category . '</h1>' .form_fieldset().'<ul>'. $input_output . '<li>'.form_label().form_submit(array('name' => 'submit', 'value' => 'submit','class'=>'submit')) . '</li>'.form_fieldset_close().form_close().'</ul>';
 } else {
     
 }

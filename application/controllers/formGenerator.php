@@ -276,7 +276,7 @@ class FormGenerator extends CI_Controller {
 
                 $results = $this->db->insert_batch('form_tbl', $datas);
                 if ($results) {
-                    $this->listOfCategoriesforms();
+                   $this->listOfCreatedForms();
                 } else {
                     $this->load->view('formCreator');
                 }
@@ -352,7 +352,7 @@ class FormGenerator extends CI_Controller {
                         }
                     } $results = $this->db->insert_batch('form_tbl', $datas);
                                 if ($results) {
-                                    $this->listOfCategoriesforms();
+                                    $this->listOfCreatedForms();
                                 } else {
                                     $this->load->view('formCreator');
                                 }

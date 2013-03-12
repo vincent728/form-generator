@@ -12,7 +12,7 @@ $results = $this->dataFetcher->generatedformsInformations();
 
 if ($results->num_rows() > 0) {
     ?>
-    <table width="0" border="1">    
+    <table width="0" border="" class="mytable">    
     <?php
     
         $out_sub = '';

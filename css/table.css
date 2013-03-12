@@ -1,0 +1,46 @@
+/* 
+    Document   : newCascadeStyleSheet
+    Created on : Mar 12, 2013, 3:34:23 PM
+    Author     : Vincent David
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+h1{
+    font-size: 24px;
+    font-family: inherit;
+    text-align: center;
+    text-decoration: none;
+}
+table.mytable{
+    width: 98%;
+    border-collapse: collapse;
+    border:0px;
+}
+table.mytable thead {
+    border:1px solid activecaption;
+}
+table.mytable thead tr th{
+    text-decoration: none;
+    background-color:#CEDBE9;
+}
+table.mytable tbody tr {
+ 
+border-bottom: 1px solid #4EA6EA;
+    
+}
+table.myinnertable{
+     border-collapse: collapse;
+    border:0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+table.myinnertable tr {
+    
+    border:1px solid #CEDBE9;
+}
+table.myinnertable tr td{
+    
+    border-left: 1px solid  #CEDBE9;
+}

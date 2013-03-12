@@ -13,7 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link></link>
         <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
-        <link href="<?php echo base_url(); ?>css/form.css" rel="stylesheet"/>
+        <link href="<?php echo base_url(); ?>css/default.css" rel="stylesheet"/>
 
         <script type="text/javascript">
             
