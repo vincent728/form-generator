@@ -29,30 +29,30 @@ if ($allresults && $allresults->num_rows() > 0) {
 
         $dropdown_values = array();
         $dropdowns = '';
-
-
         $checked = '';
         $editno_input = '';
         $select = '';
+        $chkd='';
+
 ////////////the values user set last time in db
         for ($i = 0; $i < count($checked_arr); $i++) {
 
             if ($value['input_id'] == $checked_arr[$i]) {
 
                 $checked.= 'TRUE';
-               
+                
                 $editno_input.=$checked_select_value[$i];
                 //check if the select input value matches if then set select selected
                 if ($value['max_no_inputs'] == $checked_select_maxval[$i]) {
-
-                    $select.="selected";
+          
+                    $chkd.=$checked_select_value[$i];
                 } else {
-                    $select.="";
+
+                    $chkd.='';
                 }
             } else {
                 $checked.= '';
                 $editno_input.='';
-                
             }
         }
 ////////////////////////////////////////////////////
@@ -61,15 +61,18 @@ if ($allresults && $allresults->num_rows() > 0) {
 
 
             //check if the set number in the db matches is not empty
-            if (!empty($editno_input)) {
+            $dropdownVal = ($a + 1);
 
-                $selectVal = $editno_input;
-            } else {
-                $selectVal = '';
+            if ($dropdownVal==$chkd) {
+                
+                 $select="selected";
+            }
+            else{
+                $select="";
             }
 
 
-            $dropdowns.='<option  ' . ' value="' . ($a + 1) . set_value() . '">' . ($a + 1) . '</option>';
+            $dropdowns.='<option  ' . $select . ' value="' . $dropdownVal . set_value() . '">' . $dropdownVal . '</option>';
         }
         //end of the loop 
 
