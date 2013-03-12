@@ -35,20 +35,30 @@ form.myform fieldset ul li input{
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
+
     margin-bottom:10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 80px;
 }
 form.myform fieldset ul li select.events{
 
     width: 300px;
     border:1px solid #F0F0F0;
-    margin:10px;
+     margin-bottom:10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 80px;
 
 }
 form.myform fieldset ul li textarea{
 
-    width: 300px;
-    height: 200px;
-    margin:10px;
+    width: 290px;
+    height: 300px;
+    margin-bottom:10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 40px;
     border:1px solid #007C00;
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -59,7 +69,10 @@ form.myform fieldset ul li input.images{
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
-    margin:10px;
+     margin-bottom:10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 80px;
     width: 280px;
 }
 form.myform fieldset ul li input.submit{
@@ -67,7 +80,30 @@ form.myform fieldset ul li input.submit{
     border:1px solid #007C00;
     border-radius: 5px;
     margin-left: 100px;
-     margin:10px;
+     margin-bottom:10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 80px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
+}
+/**css for form creator interface*/
+form.myformcreator{
+    width: 100%;
+    
+}
+form.myformcreator fieldset{
+    
+}
+form.myformcreator fieldset ul li{
+    list-style: none;
+    display: block;
+}
+form.myformcreator fieldset ul li label{
+    
+    width: 200px;
+}
+form.myformcreator fieldset ul li select{
+    
+    width: 250px;
 }
