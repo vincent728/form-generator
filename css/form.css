@@ -92,18 +92,63 @@ form.myformcreator{
     width: 100%;
     
 }
-form.myformcreator fieldset{
-    
+form.myformcreator fieldset {
+  border:0px;
 }
 form.myformcreator fieldset ul li{
     list-style: none;
-    display: block;
+
 }
 form.myformcreator fieldset ul li label{
     
     width: 200px;
+    display: inline-block;
+/*    border: 1px solid #000;*/
+    margin-left: 60px;
+  
+    
 }
 form.myformcreator fieldset ul li select{
     
-    width: 250px;
-}
+    width: 220px;
+    display: inline-block;
+    border: 1px solid  #007C00;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left:40px;
+    
+/*      padding:10px;*/
+   }
+   form.myformcreator fieldset ul li  select.autoload{
+    
+    width: 220px;
+    display: inline-block;
+    border: 1px solid  #007C00;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    margin-left:50px;
+    
+/*      padding:10px;*/
+   }
+   
+   form.myformcreator fieldset ul li select option{
+     border-bottom: 1px solid  #007C00;  
+   }
+   form.myformcreator fieldset ul li ul fieldset{
+       border:1px solid #007C00;
+   }
+   form.myformcreator fieldset ul li ul fieldset li input.checkbox{
+       border:1px solid #4EA6EA;
+       margin-left: 20px;
+       display: inline-block;
+       border-bottom: 1px solid #4EA6EA;
+       margin-right: 40px;
+   }
+   form.myformcreator fieldset ul li ul fieldset li  select{
+       position: relative;
+       left: 10px;
+       display: inline-block;
+   }form.myformcreator fieldset ul li ul fieldset li input{
+      
+      width: 200px;
+   }

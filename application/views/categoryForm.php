@@ -21,6 +21,8 @@ if ($results->num_rows() > 0) {
 
         //check if input is more than one
 
+
+
         $inputfield = '';
 
         if ($value['no_input'] > 0) {
@@ -33,36 +35,79 @@ if ($results->num_rows() > 0) {
 
 
                 case "fullname_input":
-                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
 
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'name[]', 'value' => '', 'size' => '30'));
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel =$value['input_tip'];
+                    } else {
+                        $tipsOnlabel ='';
+                    }
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+//                    $$tipsOnlabel = (isset($value['input_tip']) ? $value['input_tip'] : $value['input_name']);
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'name[]', 'value' => '', 'size' => '30')) .'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
                     break;
                 case "input_phone":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'phone[]', 'value' => '', 'size' => '30'));
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'phone[]', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
                     break;
 
                 case "contact_email":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email[]', 'value' => '', 'size' => '30'));
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email[]', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
                     break;
 
                 case "textarea":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea[]', 'cols' => '25', 'rows' => '3'));
+                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea[]', 'cols' => '25', 'rows' => '3')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
                     break;
 
                 case "images":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . '<input type="file" name="images[]" class="images"/>';
                     break;
 
                 case "file":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . '<input type="file" name="file[]" class"file"/>';
                     break;
 
                 case "select":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
                     $out = '';
                     $repeatselectrtesults = $this->dataFetcher->getAllrepeats();
 
