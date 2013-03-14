@@ -25,7 +25,7 @@ if ($results->num_rows() > 0) {
                     Section name
                 </th>
                 <th>
-                    Categories
+                    Categories & Subsection(s)
                 </th>
 
             </tr>
