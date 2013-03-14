@@ -104,6 +104,10 @@ if ($results->num_rows() > 0) {
     </table>    
     <?php
 }
+else{
+    
+    echo 'no data found';
+}
 ?>
 
 

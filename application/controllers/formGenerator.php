@@ -371,7 +371,7 @@ class FormGenerator extends CI_Controller {
         //check if category has been deleted
         if ($deleteresults) {
 
-            $this->listOfCategoriesforms();
+            $this->listOfCreatedForms();
         } else {
 
             echo 'an error occured during deletion';

@@ -11,23 +11,21 @@ form.myform{
 }
 form.myform fieldset{
     border:1px solid #ffffff;  
-    margin: 20px;
-}
+  }
 form.myform fieldset ul{
 
 }
 form.myform fieldset ul li{
 
     list-style:  none;
-    display: block;
-    margin-bottom: 10px;
-}
+  }
 form.myform fieldset ul li label{
     width:300px;
-    margin-left: 120px;
-    margin-right: 20px;
+    margin-left:5px;
+/*    margin-right: 20px;*/
     font-family:inherit;
-    font-size: 14px;
+    font-size: 13px;
+    display: inline-block;
 }
 form.myform fieldset ul li input{
     width: 300px;
@@ -36,20 +34,22 @@ form.myform fieldset ul li input{
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
 
-    margin-bottom:10px;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 80px;
+    margin-bottom:5px;
+    margin-top: 3px;
+/*    margin-left: 80px;*/
 }
 form.myform fieldset ul li select.events{
 
     width: 300px;
-    border:1px solid #F0F0F0;
+    border:1px solid #007C00;
      margin-bottom:10px;
     margin-top: 10px;
     margin-right: 10px;
-    margin-left: 80px;
+    margin-left: 5px;
 
+}
+form.myform fieldset ul li select{
+    display: inline-block;
 }
 form.myform fieldset ul li textarea{
 
@@ -58,7 +58,6 @@ form.myform fieldset ul li textarea{
     margin-bottom:10px;
     margin-top: 10px;
     margin-right: 10px;
-    margin-left: 40px;
     border:1px solid #007C00;
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -71,10 +70,8 @@ form.myform fieldset ul li input.images{
     -webkit-border-radius: 5px;
      margin-bottom:10px;
     margin-top: 10px;
-    margin-right: 10px;
-    margin-left: 80px;
-    width: 280px;
-}
+    margin-left: 2px;
+    }
 form.myform fieldset ul li input.submit{
     width: 300px;
     border:1px solid #007C00;
@@ -83,7 +80,7 @@ form.myform fieldset ul li input.submit{
      margin-bottom:10px;
     margin-top: 10px;
     margin-right: 10px;
-    margin-left: 80px;
+    margin-left: 10px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
@@ -91,10 +88,10 @@ form.myform fieldset ul li label.tips{
     
     max-width:120px;
     min-height:20px;
-    margin-left: 120px;
+    margin-left:20px;
     margin-top: 5px;
     font-size: 12px;
-   
+    display: inline-block;
 }
 /**css for form creator interface*/
 form.myformcreator{
@@ -113,14 +110,14 @@ form.myformcreator fieldset ul li label{
     width: 200px;
     display: inline-block;
 /*    border: 1px solid #000;*/
-    margin-left:60px;
+    margin-left:2px;
   
     
 }
 form.myformcreator fieldset ul li select{
     
     width: 220px;
-    display: inline-block;
+/*    display: inline-block;*/
     border: 1px solid  #007C00;
     margin-bottom: 5px;
     margin-top: 5px;
@@ -141,7 +138,7 @@ form.myformcreator fieldset ul li select{
    }
    
    form.myformcreator fieldset ul li select option{
-     border-bottom: 1px solid  #007C00;  
+/*     border-bottom: 1px solid  #007C00;  */
    }
    form.myformcreator fieldset ul li ul fieldset{
        border:1px solid #007C00;
