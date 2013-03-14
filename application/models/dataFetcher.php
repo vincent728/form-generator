@@ -342,10 +342,12 @@ public function subcategoryDetails($id) {
     foreach ($results->result_array() as $value) {
         
             $category_name=$value['cat_name'];
+            $category_id=$value['cat_id'];
         
     }
     $data['results']=$results;
     $data['category']=$category_name;
+    $data['catid']=$category_id;
     return $data;
 }
 
@@ -470,6 +472,18 @@ public function formsCreatedSections() {
         categories.section_id=section_tbl.section_id";
     $results=$this->db->query($sql);
     return $results;  
+}
+/**
+ * @method: load areas
+ * @param :none
+ * @return results
+ * 
+ */
+public function loadareas() {
+    
+    $sql="select*from area_tbl";
+    $results=$this->db->query($sql);
+    return $results;
 }
 
 

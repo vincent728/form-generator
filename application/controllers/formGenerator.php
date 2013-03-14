@@ -274,6 +274,8 @@ class FormGenerator extends CI_Controller {
                     }
                 }
 
+
+                
                 $results = $this->db->insert_batch('form_tbl', $datas);
                 if ($results) {
                     $this->listOfCreatedForms();

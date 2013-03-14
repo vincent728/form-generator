@@ -26,9 +26,14 @@ if ($results->num_rows() > 0) {
         $inputfield = '';
 
         if ($value['no_input'] > 0) {
+             
 
-
-            ///check if it is textarea, select dropdown etc
+            
+            /**
+             *  check if it is textarea, select dropdown etc
+             *  this is the place where all input types configured on a db and you want to appear in a generated form are configured
+             * 
+             */
             $fieldTobegenerated = '';
 
             switch (strtolower($value['input_type'])) {
@@ -42,19 +47,53 @@ if ($results->num_rows() > 0) {
                         $tipsOnlabel ='';
                     }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-//                    $$tipsOnlabel = (isset($value['input_tip']) ? $value['input_tip'] : $value['input_name']);
-
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'name[]', 'value' => '', 'size' => '30')) .'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'name', 'value' => '', 'size' => '30')) .'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
                     break;
-                case "input_phone":
+                    
+                      case "lastname":
 
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel =$value['input_tip'];
+                    } else {
+                        $tipsOnlabel ='';
+                    }
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'lastname', 'value' => '', 'size' => '30')) .'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
+                    break;
+                    
+                case "input_phone":
+                   
                     if (empty($value['input_tip'])) {
                         $tipsOnlabel = '';
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'phone[]', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'phone', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
+                    break;
+                    
+                    
+                      case "otherphone":
+                   
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'otherphone', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
+                    break;
+                    
+                    
+                     case "fax":
+                   
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'fax', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
                     break;
 
                 case "contact_email":
@@ -65,7 +104,7 @@ if ($results->num_rows() > 0) {
                         $tipsOnlabel = $value['input_tip'];
                     }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email[]', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email', 'value' => '', 'size' => '30')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
                     break;
 
                 case "textarea":
@@ -76,11 +115,11 @@ if ($results->num_rows() > 0) {
                         $tipsOnlabel = $value['input_tip'];
                     }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea[]', 'cols' => '25', 'rows' => '3')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel).'</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea', 'cols' => '25', 'rows' => '3')).'</br><i><font color="#1A9B50">'.form_label($tipsOnlabel,$name="tips",$attributes=array('class'=>'tips')).'</font></i>';
                     break;
 
                 case "images":
-
+                     
                     if (empty($value['input_tip'])) {
                         $tipsOnlabel = '';
                     } else {
@@ -120,6 +159,25 @@ if ($results->num_rows() > 0) {
                     $fieldTobegenerated = form_label($label) . '<select name="" class="events">' . $out . '</select><div class="events_display"></div>';
 
                     break;
+                       case "area":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    $out = '';
+                    $area = $this->dataFetcher->loadareas();
+
+                    foreach ($area->result_array()as $rows) {
+
+                        $out.='<option value="' . $rows['area_id'] . '">' . $rows['area_name'] . '</option>';
+                    }
+
+                    $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
+                    $fieldTobegenerated = form_label($label) . '<select name="" class="events">' . $out . '</select>';
+
+                    break;
 
                 default:
                     break;
@@ -138,7 +196,7 @@ if ($results->num_rows() > 0) {
 
 
         $input_output.=form_fieldset() . '<ul>' . $inputfield . '' . '</ul>' . form_fieldset_close();
-    } echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('id' => 'myform', 'class' => 'myform')) . '<h1>' . $category . '</h1>' . form_fieldset() . '<ul>' . $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li>' . form_fieldset_close() . form_close() . '</ul>';
+    } echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('id' => 'myform', 'class' => 'myform')) . '<h1>' . $category . '</h1>' . form_fieldset() . '<ul>' .form_hidden($name="cat",$id=$catid). $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li>' . form_fieldset_close() . form_close() . '</ul>';
 } else {
     
 }
@@ -147,7 +205,7 @@ if ($results->num_rows() > 0) {
 <script  type="text/javascript">
     var frmvalidator = new Validator("myform");
     frmvalidator.addValidation("name[]","req","Please enter the name");
-    frmvalidator.addValidation("phone[]","req","please enter an email address");
+    frmvalidator.addValidation("phone[]","req","please enter a phone number");
     frmvalidator.addValidation("phone[]","numeric");
     frmvalidator.addValidation("contact_email[]","maxlen=50");
     frmvalidator.addValidation("contact_email[]","req","please enter an email address");

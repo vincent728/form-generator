@@ -19,30 +19,50 @@ class FormInsertion extends CI_Controller {
             $email=$this->input->post('contact_email');
             $events=$this->input->post('events');
             
+            $arrayOfinputssubmitted=array();
+            $data=array();
             
-            if(is_array($name)){
+               if($name){
             
-             $form_name='';
+             $form_name=$name;
             }
             else{
              $form_name='';
-            } if(is_array($shortpromo)){
-              $shortpromodescriptions='';             
+            } if($shortpromo){
+              $shortpromodescriptions=$shortpromo;             
             }
             else{
              $shortpromodescriptions='';  
-            }if(is_array($phone)){
-              $phonenumbers='';
-             
+            }if($phone){
+              $phonenumbers=$phone;
             }
             else{
             $phonenumbers='';
-            }if(is_array($email)){
-             $formemail='';
+            }if($email){
+             $formemail=$email;
             }
             else{
              $formemail='';
             }
+            
+            if($this->input->post('cat')){
+                
+                $data['name']=$form_name;
+                $data['email']=$formemail;
+                $data['phone']=$phonenumbers;
+                $data['shortpromo']=$shortpromodescriptions;
+                
+            }
+            $arrayOfinputssubmitted[]=$data;
+            $results=$this->db->insert_batch('datatest',$arrayOfinputssubmitted);
+            if($results){
+                
+                echo 'inserted';
+            }
+            else{
+                echo 'error in insertion';
+            }
+            //array_push($arrayOfinputssubmitted);
             
             
             

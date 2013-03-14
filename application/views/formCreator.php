@@ -19,10 +19,8 @@ echo form_fieldset('');
             echo '</div>';
         }
 
-
-
-
         echo form_label('section');
+        
         ?>
         <select name="section" class="section">
 

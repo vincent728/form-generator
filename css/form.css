@@ -87,6 +87,15 @@ form.myform fieldset ul li input.submit{
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
 }
+form.myform fieldset ul li label.tips{
+    
+    max-width:120px;
+    min-height:20px;
+    margin-left: 120px;
+    margin-top: 5px;
+    font-size: 12px;
+   
+}
 /**css for form creator interface*/
 form.myformcreator{
     width: 100%;
@@ -152,3 +161,4 @@ form.myformcreator fieldset ul li select{
       
       width: 200px;
    }
+  
