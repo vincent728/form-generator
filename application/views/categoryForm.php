@@ -1,4 +1,5 @@
 <?php
+
 /*
  * @Author :VincenT David 
  * @Email  :vincentdaudi@gmail.com
@@ -6,6 +7,7 @@
  */
 ?>
 <?php
+
 /*
  * @Author :VincenT David
  * @Email :vincentdaudi@gmail.com
@@ -47,7 +49,13 @@ if ($results->num_rows() > 0) {
                         $tipsOnlabel = '';
                     }
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'name', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    if (form_error('name')) {
+                        $error = form_error('name');
+                    } else {
+                        $error = '';
+                    }
+
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'name', 'value' => '' . set_value('name'), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
 
                 case "lastname":
@@ -198,7 +206,7 @@ if ($results->num_rows() > 0) {
                     }
 
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
-                    $fieldTobegenerated = form_label($label, $name = "area", $attributes = array('class' => 'area')) . '<select name="area[]" class="events" multiple>' . $out . '</select>'.'</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label, $name = "area", $attributes = array('class' => 'area')) . '<select name="area[]" class="events" multiple>' . $out . '</select>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
 
@@ -218,42 +226,20 @@ if ($results->num_rows() > 0) {
         }
 
 
-        $input_output.=form_fieldset().''.$inputfield.''. form_fieldset_close();
-    } echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('id' => 'myform', 'class' => 'myform')) . '<h1>' . $category . '</h1>' . form_fieldset() . '<ul>' . form_hidden($name = "cat", $id = $catid) . $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li>' . form_fieldset_close() . form_close() . '</ul>';
+        $input_output.=form_fieldset() . '' . $inputfield . '' . form_fieldset_close();
+        //return validate()
+        // 
+    } echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('name' => 'myForm', 'id' => 'myform', 'class' => 'myform', 'onsubmit' => "")) . '<h1>' . $category . '</h1>' . '<!--.javascript form validation.-->
+<div class="error_box" id ="error_box"></div>' . form_fieldset() . '<ul>' . form_hidden($name = "cat", $id = $catid) . $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li></ul>' . form_fieldset_close() . form_close();
 } else {
     
 }
 ?>
-<!--..submitted forms javascript validations-->
-<script  type="text/javascript">
-    var frmvalidator = new Validator("myform");
-    frmvalidator.addValidation("name","req","Please enter the name");
-    frmvalidator.addValidation("lastname","req","please enter a last name");
-    frmvalidator.addValidation("public_phone","req","please enter a public phone #");
-    frmvalidator.addValidation("primaryphone","req","please enter a primary phone #");
-    frmvalidator.addValidation("fax","req","please enter a fax number");
-    frmvalidator.addValidation("otherphone","req","please enter other public phone #");
-      frmvalidator.addValidation("contact_email","req","please enter a public email ");
-    frmvalidator.addValidation("txtarea","req","please enter details");
-    frmvalidator.addValidation("area","req","please select an area ");
-   
-    
-    frmvalidator.addValidation("location","req","please enter a location directions");
-    frmvalidator.addValidation("websites","req","please enter a websites");
-  
-    
-    frmvalidator.addValidation("images[]","req","please attach an image ");
-    frmvalidator.addValidation("file[]","req","please attach a file ");
-    frmvalidator.addValidation("phone","numeric");
-    frmvalidator.addValidation("contact_email","maxlen=50");
- 
-    
-
-</script>    
 
 
 
 
 <?php
+
 $this->load->view('footer');
 ?>

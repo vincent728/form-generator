@@ -54,6 +54,8 @@ class FormInsertion extends CI_Controller {
                 
             }
             $arrayOfinputssubmitted[]=$data;
+            //some insertion algorithm goes here
+            exit;
             $results=$this->db->insert_batch('datatest',$arrayOfinputssubmitted);
             if($results){
                 
