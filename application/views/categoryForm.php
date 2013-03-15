@@ -36,6 +36,7 @@ $val=array();
             /**
              *  check if it is textarea, select dropdown etc
              *  this is the place where all input types configured on a db and you want to appear in a generated form are configured
+             * form validation has done according to rickharrison library(for javascript Ci form validation)
              * 
              */
             $fieldTobegenerated = '';
@@ -93,8 +94,8 @@ $val=array();
                     
                        /****an array to feed the validation rules for this input**/
                     $val['name']='primaryphone';
-                    $val['display']='primary phone #';
-                    $val['rules']='required';
+                    $val['display']='primary public phone #';
+                    $val['rules']='required|is_natural';
                     
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'primaryphone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
@@ -111,7 +112,7 @@ $val=array();
                        /****an array to feed the validation rules for this input**/
                     $val['name']='public_phone';
                     $val['display']='public phone #';
-                    $val['rules']='required';
+                    $val['rules']='required|is_natural';
                     
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'public_phone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
@@ -128,7 +129,7 @@ $val=array();
                        /****an array to feed the validation rules for this input**/
                     $val['name']='otherphone';
                     $val['display']='Other public phone #';
-                    $val['rules']='required';
+                    $val['rules']='required|is_natural';
                     
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'otherphone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
@@ -145,7 +146,8 @@ $val=array();
                        /****an array to feed the validation rules for this input**/
                     $val['name']='fax';
                     $val['display']='Fax # ';
-                    $val['rules']='required';
+                    $val['rules']='required|is_natural';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'fax', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -160,8 +162,8 @@ $val=array();
                     
                        /****an array to feed the validation rules for this input**/
                     $val['name']='contact_email';
-                    $val['display']='publiemail';
-                    $val['rules']='valid_email';
+                    $val['display']='public email';
+                    $val['rules']='required|valid_email';
                     
                     
                     
