@@ -210,6 +210,12 @@ $val=array();
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                    
+                     /****an array to feed the validation rules for this input**/
+                    $val['name']='images[]';
+                    $val['display']='picture ';
+                    $val['rules']='is_file_type[jpg,jpeg,png,gif]';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . '<input type="file" name="images[]" class="images"/>';
                     break;
@@ -221,6 +227,15 @@ $val=array();
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                    
+                    /****an array to feed the validation rules for this input**/
+                    $val['name']='file[]';
+                    $val['display']='file ';
+                    $val['rules']='required|is_file_type[doc,docx,pdf]';
+                    
+                    
+                    
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . '<input type="file" name="file[]" class="images"/>';
                     break;
@@ -308,6 +323,7 @@ $val=array();
     
    
 ?>
+<!--.form validation script goes here.-->
 <script type="text/javascript">
 
 
