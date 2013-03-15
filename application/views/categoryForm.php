@@ -19,10 +19,12 @@ $this->load->view('content');
 if ($results->num_rows() > 0) {
 
     $input_output = '';
+    $validation_arr=array();
+    
     foreach ($results->result_array() as $value) {
 
         //check if input is more than one
-
+$val=array();
 
 
         $inputfield = '';
@@ -54,6 +56,11 @@ if ($results->num_rows() > 0) {
                     } else {
                         $error = '';
                     }
+                    
+                    /****an array to feed the validation rules for this input**/
+                    $val['name']='name';
+                    $val['display']='name';
+                    $val['rules']='required';
 
                     $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'name', 'value' => '' . set_value('name'), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -65,6 +72,13 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = '';
                     }
+                    
+                      /****an array to feed the validation rules for this input**/
+                    $val['name']='lastname';
+                    $val['display']='last name';
+                    $val['rules']='required';
+                    
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'lastname', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -76,6 +90,12 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                    
+                       /****an array to feed the validation rules for this input**/
+                    $val['name']='primaryphone';
+                    $val['display']='primary phone #';
+                    $val['rules']='required';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'primaryphone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -87,6 +107,12 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                    
+                       /****an array to feed the validation rules for this input**/
+                    $val['name']='public_phone';
+                    $val['display']='public phone #';
+                    $val['rules']='required';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'public_phone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -99,6 +125,11 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                       /****an array to feed the validation rules for this input**/
+                    $val['name']='otherphone';
+                    $val['display']='Other public phone #';
+                    $val['rules']='required';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'otherphone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -111,6 +142,10 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                       /****an array to feed the validation rules for this input**/
+                    $val['name']='fax';
+                    $val['display']='Fax # ';
+                    $val['rules']='required';
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'fax', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -122,6 +157,14 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                    
+                       /****an array to feed the validation rules for this input**/
+                    $val['name']='contact_email';
+                    $val['display']='publiemail';
+                    $val['rules']='valid_email';
+                    
+                    
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -133,6 +176,10 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                     /****an array to feed the validation rules for this input**/
+                    $val['name']='txtarea';
+                    $val['display']='Description(s)';
+                    $val['rules']='required';
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea', 'cols' => '25', 'rows' => '3')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -145,6 +192,11 @@ if ($results->num_rows() > 0) {
                     } else {
                         $tipsOnlabel = $value['input_tip'];
                     }
+                     /****an array to feed the validation rules for this input**/
+                    $val['name']='location';
+                    $val['display']='location';
+                    $val['rules']='required';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'location', 'cols' => '25', 'rows' => '3')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
                     break;
@@ -205,6 +257,11 @@ if ($results->num_rows() > 0) {
                         $out.='<option value="' . $rows['area_id'] . '">' . $rows['area_name'] . '</option>';
                     }
 
+                     /****an array to feed the validation rules for this input**/
+                    $val['name']='area[]';
+                    $val['display']='area';
+                    $val['rules']='required';
+                    
                     $label = (isset($value['form_label']) ? $value['form_label'] : $value['input_name']);
                     $fieldTobegenerated = form_label($label, $name = "area", $attributes = array('class' => 'area')) . '<select name="area[]" class="events" multiple>' . $out . '</select>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
@@ -227,18 +284,51 @@ if ($results->num_rows() > 0) {
 
 
         $input_output.=form_fieldset() . '' . $inputfield . '' . form_fieldset_close();
+      
+          
+          $validation_arr[]=$val;
+        
+       
         //return validate()
         // 
-    } echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('name' => 'myForm', 'id' => 'myform', 'class' => 'myform', 'onsubmit' => "")) . '<h1>' . $category . '</h1>' . '<!--.javascript form validation.-->
+    }//echo var_dump($validation_arr); 
+        
+    echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('name' => 'myForm', 'id' => 'myform', 'class' => 'myform', 'onsubmit' => "")) . '<h1>' . $category . '</h1>' . '<!--.javascript form validation.-->
 <div class="error_box" id ="error_box"></div>' . form_fieldset() . '<ul>' . form_hidden($name = "cat", $id = $catid) . $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li></ul>' . form_fieldset_close() . form_close();
 } else {
     
 }
 ?>
+<?php //json encoding for the form validations attributes;
+
+    $array_final = json_encode($validation_arr);
+    $array_final = preg_replace('/"([a-zA-Z]+[a-zA-Z0-9]*)":/','$1:',$array_final);
+    
+   
+?>
+<script type="text/javascript">
 
 
-
-
+        var validator = new FormValidator('myForm',<?php print_r($array_final);?>, function(errors, event) {
+        
+        if (errors.length > 0) {
+                       
+            // Show the errors
+            var errorString = '';
+        
+            for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                errorString += errors[i].message + '<br />';
+            }
+        
+            error_box.innerHTML = errorString;
+            
+        
+        }
+          
+    });
+    
+  
+</script>
 <?php
 
 $this->load->view('footer');

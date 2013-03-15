@@ -12,16 +12,18 @@
         <base href ="<?php echo base_url(); ?>" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link></link>
-        <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery-1.7.1.min.js"></script>
-<!--        <script type="text/javascript" src="<?php echo base_url(); ?>js/validate.min.js"></script>-->
-        <script type="text/javascript" src="<?php echo base_url(); ?>js/validate.js"></script>
-        <link href="<?php echo base_url(); ?>css/default.css" rel="stylesheet"/>
+        <script type='text/javascript' src="js/jquery-1.7.1min.js"></script>
+<!--        <script src="js/jquery.scrollTo-min.js" type="text/javascript">
+//        <script type="text/javascript" src="js/validate.min.js"></script>-->
+        <script type="text/javascript" src="js/validate.js"></script>
+        <link href="css/default.css" rel="stylesheet"/>
 
         <script type="text/javascript">
             
                    
             $(document).ready(function()
             {
+                
                 $(".section").change(function()
                 {
                     var id=$(this).val();
