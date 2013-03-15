@@ -81,7 +81,7 @@ if ($results->num_rows() > 0) {
 
                     $forms_output.='<tr><td>' . $forms['cat_name'] . '</td><td>' . $name . '</td>
                        
-                    <td>' . anchor('formGenerator/editform/' . $formid . $forms['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . nbs(3) . anchor_popup('formGenerator/generateform/' . $formid . $forms['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . nbs(3) . anchor('formGenerator/formdelete/' . $formid . $forms['cat_id'], $title = 'click', $attrib = array('title' => 'click', 'class' => '')) . '</td>
+                    <td>' . anchor('formGenerator/editform/' . $formid . $forms['cat_id'], $title = 'edit', $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('formGenerator/generateform/' . $formid . $forms['cat_id'], $title = 'view', $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('formGenerator/formdelete/' . $formid . $forms['cat_id'], $title = 'edit', $attrib = array('title' => 'delete', 'class' => '')) . '</td>
                        
 </tr>';
                 }
