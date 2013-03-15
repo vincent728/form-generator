@@ -13,6 +13,7 @@ class FormGenerator extends CI_Controller {
 
         $this->load->view('formCreator');
     }
+   
 
     /*     * controller function to load the subsections */
 
@@ -483,6 +484,48 @@ class FormGenerator extends CI_Controller {
 
         $this->load->view('listofforms');
     }
+    /*
+     * controller function for adding form inputs
+     */
+    public function addInputsTypes() {
+        
+        if($this->input->post('submit')){
+            
+            $this->form_validation->set_rules('inputname','input name','required');
+            $this->form_validation->set_rules('inputtypes','input types','required');
+            $this->form_validation->set_rules('max_no_inputs','Maximum number of inputs','required');
+            if($this->form_validation->run==FALSE){
+                
+            $inputname=$this->input->post('inputname');    
+            $inputtypes=$this->input->post('inputtypes');  
+            $max_no_inputs=$this->input->post('max_no_inputs'); 
+            $results=$this->dataFetcher->addFormInputsTypes($inputname,$inputtypes,$max_no_inputs);
+            
+            if($results){
+              //load the  list of tables
+                
+            }
+            else{
+                
+            }
+            }
+            else{
+                
+            }
+        }
+        else{
+            $this->load->view('addFormInputsTypes');
+        }
+        
+    }
+    
+    /*
+     * controller function to list all input types  from the db**/
+   public function loadInputs() {
+       $data['results']=$this->dataFetcher->listAllInputstypes();
+       $this->load->view('listOfinputs',$data);
+       
+   }
 
 }
 ?>

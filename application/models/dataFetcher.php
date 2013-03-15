@@ -486,6 +486,32 @@ public function loadareas() {
     return $results;
 }
 
+/**
+ * 
+ * @method :add form inputs types
+ * @param :none
+ * @return  boolean
+ * 
+ * 
+ */
+public function addFormInputsTypes($inputname,$inputtypes,$max_no_inputs) {
+    $sql="insert into input_type_tbl(input_name,input_type,max_no_inputs) values('$inputname','$inputtypes','$max_no_inputs')";
+    $results=$this->db->query($sql);
+    return $results;
+    
+}
+/**
+ * @method :list all input ty;pes present
+ * @param :none
+ * @return results
+ * 
+ */
+public function listAllInputstypes() {
+    $sql="select * from input_type_tbl";
+    $results=$this->db->query($sql);
+    return $results;
+    
+}
 
     
 
