@@ -32,6 +32,9 @@ table.mytable tbody tr {
 border:1px solid #4EA6EA;
     
 }
+table.mytable tbody tr td textarea{
+    
+}
 table.myinnertable{
      border-collapse: collapse;
     border:0px;
@@ -39,11 +42,55 @@ table.myinnertable{
     margin-top: 20px;
     margin-bottom: 20px;
 }
+table.myinnertable thead tr th{
+    
+    background-color: #73BA5C;
+    border-left:1px solid #ffffff;
+    color: #ffffff;
+    font-family: inherit;
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: normal;
+    text-align: left;
+    border-radius: 5px;
+    margin: 15px;
+    height: 40px;
+    
+}
 table.myinnertable tr {
     
-    border:1px solid #4EA6EA;
+    border-bottom:1px solid #4EA6EA;
+    border-bottom-style:  dashed;
+}
+table.myinnertable tr:hover{
+    background-color: #B1D8A4;
+    height: 45px;
+    color: #0000FF;
+    border-left: 1px solid  #ffffff;
+}
+table.myinnertable tr td:hover{ 
+    background-color: #ffffff; 
+    
+    border:1px solid #F51A15;
+    border-radius: 5px; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
 }
 table.myinnertable tr td{
-    
-    border-left: 1px solid  #4EA6EA;
+
 }
+table.myinputtable{
+    border-collapse: collapse;
+    border:0px;
+}
+/* 
+    Document   : table
+    Created on : Feb 20, 2013, 1:18:31 PM
+    Author     : Vincent David
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+

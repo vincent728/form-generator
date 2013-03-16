@@ -58,7 +58,7 @@ form.myform fieldset ul li select.events{
 form.myform fieldset ul li select{
     display: inline-block;
 }
-form.myform fieldset ul li textarea{
+form.myform fieldset ul li textArea{
 
     width: 290px;
     height: 300px;
@@ -154,7 +154,7 @@ form.myformcreator fieldset ul li select{
        border:1px solid #4EA6EA;
        margin-left: 10px;
        display: inline-block;
-       border-bottom: 1px solid #4EA6EA;
+       
        margin-right:0px;
    }
    form.myformcreator fieldset ul li ul fieldset li  select{
@@ -164,6 +164,19 @@ form.myformcreator fieldset ul li select{
    }form.myformcreator fieldset ul li ul fieldset li input{
       
       width: 200px;
+   }
+   form.myformcreator fieldset ul  li textarea{
+      
+      width: 200px;
+      border: 1px solid #4EA6EA;
+   }
+   form.myformcreator fieldset ul  li textArea{
+      
+      width: 200px;
+      border: 1px solid #007C00;
+      border-radius: 5px;
+      -moz-border-radius: 5px;
+      -webkit-border-radius: 5px;
    }
    
   /*..daniel styling.*/

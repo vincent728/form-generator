@@ -507,7 +507,41 @@ public function addFormInputsTypes($inputname,$inputtypes,$max_no_inputs) {
  * 
  */
 public function listAllInputstypes() {
-    $sql="select * from input_type_tbl";
+    $sql="select * from input_type_tbl order by  input_id desc";
+    $results=$this->db->query($sql);
+    return $results;
+    
+}
+/**
+ * @method : load input types details
+ * @param  : id
+ * @return results
+ */
+public function loadInputTypesDetails($id) {
+    $sql="select * from input_type_tbl where input_id='$id'";
+    $results=$this->db->query($sql);
+    return $results;
+    
+}
+/**
+ * @method: Update input types details
+ * @param :variable
+ * @return boolean
+ * 
+ */
+public function updateInputsTypesDetails($inputname,$inputtypes,$max_no_inputs,$id) {
+    
+    $sql="update input_type_tbl set input_name='$inputname',input_type='$inputtypes',max_no_inputs='$max_no_inputs' where input_id='$id'";
+    $results=$this->db->query($sql);
+    return $results;
+}
+/**
+ * @method : remove input type
+ * @param :id
+ * @return Id
+ */
+public function deleteInput($id) {
+    $sql="delete from input_type_tbl where input_id='$id'";
     $results=$this->db->query($sql);
     return $results;
     

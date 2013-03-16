@@ -20,7 +20,6 @@ echo form_fieldset('');
         }
 
         echo form_label('section');
-        
         ?>
         <select name="section" class="section">
 
@@ -39,23 +38,34 @@ echo form_fieldset('');
     </li>
     <li>
 
+        <table class="mytable" width="100%" border="0">
+            <tr>
 
-        <div class="categories">
-            <!--.here the goes the ajax triggered selection.--> 
+            <div class="categories">
+                <!--.here the goes the ajax triggered selection.--> 
 
 
-        </div>
+            </div>
+
+            </tr>
+            <tr>
+            <li>
+
+                <div class="subcat">
+
+                </div>
+
+            </li>
+
+            </tr>
+
+        </table>
+
 
 
 
     </li>
-    <li>
 
-        <div class="subcat">
-
-        </div>
-
-    </li>
     <li>
 
         <?php

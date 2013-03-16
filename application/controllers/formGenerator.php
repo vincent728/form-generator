@@ -492,24 +492,27 @@ class FormGenerator extends CI_Controller {
         if($this->input->post('submit')){
             
             $this->form_validation->set_rules('inputname','input name','required');
-            $this->form_validation->set_rules('inputtypes','input types','required');
+            $this->form_validation->set_rules('inputtype','input types','required');
             $this->form_validation->set_rules('max_no_inputs','Maximum number of inputs','required');
-            if($this->form_validation->run==FALSE){
+            if($this->form_validation->run()==FALSE){
                 
-            $inputname=$this->input->post('inputname');    
-            $inputtypes=$this->input->post('inputtypes');  
+               $this->load->view('addFormInputsTypes');
+            }
+            else{
+                
+                
+                 $inputname=$this->input->post('inputname');    
+            $inputtypes=$this->input->post('inputtype');  
             $max_no_inputs=$this->input->post('max_no_inputs'); 
             $results=$this->dataFetcher->addFormInputsTypes($inputname,$inputtypes,$max_no_inputs);
             
             if($results){
               //load the  list of tables
-                
+                $this->loadInputs();
             }
             else{
                 
             }
-            }
-            else{
                 
             }
         }
@@ -525,6 +528,55 @@ class FormGenerator extends CI_Controller {
        $data['results']=$this->dataFetcher->listAllInputstypes();
        $this->load->view('listOfinputs',$data);
        
+   }
+   /**controller function for fetching inputs details*/
+   public function editinputs() {
+       $id=$this->uri->segment(3);
+       $this->session->set_userdata('update_id',$id);
+       $data['results']=$this->dataFetcher->loadInputTypesDetails($id);
+       $this->load->view('editFormInputs',$data);
+       
+   }
+   public function updateInputTypesDetails() {
+       if($this->input->post('update')){
+            
+            $this->form_validation->set_rules('inputname','input name','required');
+            $this->form_validation->set_rules('inputtype','input types','required');
+            $this->form_validation->set_rules('max_no_inputs','Maximum number of inputs','required');
+            if($this->form_validation->run()==FALSE){
+                
+               $this->load->view('editFormInputs');
+            }
+            else{
+                
+                
+             $inputname=$this->input->post('inputname');    
+            $inputtypes=$this->input->post('inputtype');  
+            $max_no_inputs=$this->input->post('max_no_inputs'); 
+            $results=$this->dataFetcher->updateInputsTypesDetails($inputname,$inputtypes,$max_no_inputs,$this->session->userdata('update_id'));
+            
+            if($results){
+              //load the  list of tables
+                $this->loadInputs();
+            
+            }
+            else{
+                
+            }
+                
+            }
+        }
+   
+       
+       
+   }
+   /**delete input type*/
+   public function deleteInput() {
+       $results=$this->dataFetcher->deleteInput($this->uri->segment(3));
+       if($results){
+         $this->loadInputs();  
+           
+       }
    }
 
 }

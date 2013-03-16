@@ -30,12 +30,29 @@ if ($results && $results->num_rows() > 0) {
 
         $data = array('name' => 'field_' . $value['input_id'], 'value' => 'field_' . set_value('inputs') . $value['input_id'],'class'=>'checkbox');
 
-        $checkboxoutput.='<li>' . form_checkbox($data) . nbs(3) .
-                $value['input_name'] . nbs(8) . $start_select . $dropdowns . $end_select . nbs(4) .
-                form_input(array('name' => 'label_' . $value['input_id'], 'value' => 'label', 'size' => '30')) .
-                form_textarea(array('name' => 'tip_' . $value['input_id'], 'cols' => '25', 'rows' => '3','value' =>'tip')).
-                '</li>';
+        $checkboxoutput.='<tr><td><li>' . form_checkbox($data) . '</td><td>' .
+                $value['input_name'] . '</td><td>' . $start_select . $dropdowns . $end_select . '</td><td>'.
+                form_input(array('name' => 'label_' . $value['input_id'], 'value' => '', 'size' => '30')) .'</td><td>'.
+                form_input(array('name' => 'order_' . $value['input_id'], 'value' => '', 'size' => '30')).'</td><td>'.
+                form_textarea(array('name' => 'tip_' . $value['input_id'], 'cols' => '25', 'rows' => '3','value' =>'')).
+                '</li></td></tr>';
     }
-    echo $checkboxoutput;
+    
+  ?>
+<table width="100%" class="myinputtable" cellpadding="2">
+    <tbody>
+    <thead>
+        <tr>
+            <th>select input</th><th>Type</th><th>No of inputs</th><th>Label name</th><th>Order format</th><th>Tip(s)</th>
+            
+        </tr>
+    </thead>
+        <?php echo $checkboxoutput; ?>
+        
+    </tbody>
+
+</table>    
+  <?php  
+
 }
 ?>
