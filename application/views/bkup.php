@@ -1,161 +1,573 @@
-//     $(document).ready(function(){
-//            $("#events").change(function(){
-//            var y = $(this).val()
-//            var data='';
-//            if(y>0){
-//            var dataz='<?php echo $optionValues; ?>';
-//            var statuses='<?php echo $status_1.$status_2; ?>';
-//            
-//            if(y==1){
-//                
-//                 data +='<li><input type="checkbox" name="day[]" value="monday"></li>';
-//                 data +='<li><input type="checkbox" name="day[]" value="tuesday"></li>';
-//                 data +='<li><input type="checkbox" name="day[]" value="Wednesday"></li>';
-//                 data +='<li><input type="checkbox" name="day[]" value="Thursday"></li>';
-//                
-//                
-//            }
-//            elseif(y==2){
-//                
-//                
-//            }
-//     
-////       data +='</ul></fieldset>';
-//           }
-//            $('#display').html(data);
-//            });
-//            });
+  case "secondcontactaltenatephone":
 
-
-
-
-
-
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-class FormGenerator extends CI_Controller {
-
-    public function index() {
-        //load the first phase form generator
-
-        $this->load->view('formCreator');
-    }
-
-    /*     * controller function to load the subsections */
-
-    public function setSectionId() {
-
-        $results = $this->dataFetcher->subsectionLoader($this->input->post('id'));
-     
-        if ($results) {
-            
-                 $checkboxoutput = '';
-            foreach ($results->result_array() as $value) {
-                $data = array('name' => 'cat[]', 'value' => $value['cat_id'],'class' => 'categories');
-                $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['cat_name'] . '<br>';
-            }
-            echo $checkboxoutput;
-            ///////////////////////////////////////////////////////////////////
-        }
-    }
-
-    /*     * controller function for the ajax autoselect */
-
-//    public function selectEventsRepeat() {
-//
-//
-//        $results = $this->dataFetcher->getrepeats($this->input->post('e_id'));
-//        if ($results) {
-//            $checkboxoutput = '';
-//
-//            foreach ($results->result_array() as $value) {
-//
-//
-//
-//                if ($value['repeat_id'] == 1) {
-//
-//                    $checkboxoutput.=form_checkbox(array('name' => 'event[]', 'value' => '1')) . 'monday' . '</br>' .
-//                            form_checkbox(array('name' => 'event[]', 'value' => '2')) . 'tuesday' . '</br>' .
-//                            form_checkbox(array('name' => 'event[]', 'value' => '3')) . 'wednesday' . '</br>';
-//                    echo $checkboxoutput;
-//                } elseif ($value['repeat_id'] == 2) {
-//
-//                    $checkboxoutput = form_checkbox(array('name' => 'event[]', 'value' => '1')) . 'monday' . '</br>' .
-//                            form_checkbox(array('name' => 'event[]', 'value' => '2')) . 'tuesday' . '</br>' .
-//                            form_checkbox(array('name' => 'event[]', 'value' => '3')) . 'wednesday' . '</br>';
-//
-//                    echo $checkboxoutput;
-//                }
-//
-////                $data = array('name' => 'event[]', 'value' => $value['repeat_id'], 'class' => 'repeat');
-////                $checkboxoutput.=form_checkbox($data) . nbs(3) . $value['events'] . '<br>';
-//            }
-//            echo $checkboxoutput;
-//            ///////////////////////////////////////////////////////////////////
-//        }
-//    }
-
-    /** controller function for pre-process the form generation */
-    public function formProcessor() {
-
-        if ($this->input->post('submit')) {
-
-            $datas = array();
-
-            foreach ($_POST as $key => $value) {
-
-                ///strip the selected values from dropdown
-
-
-                if (strstr($key, "field_")) {
-                    foreach ($_POST['cat'] as $category) {
-                        $arr = explode('_', $key);
-                        $checkboxId = $arr[1];
-                        $selectedCheckboxValue = $_POST['count_' . $checkboxId];
-                        $selectedLabel = $_POST['label_' . $checkboxId];
-                        $data['no_input'] = $selectedCheckboxValue;
-                        $data['input_type_id'] = $checkboxId;
-                        $data['category_id'] = $category;
-                        $data['form_label'] = $selectedLabel;
-                        $data['input_tip'] = $_POST['tip_' . $checkboxId];
-
-                        $datas[] = $data;
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
                     }
-                }
-            }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
 
-            $results = $this->db->insert_batch('form_tbl', $datas);
 
-            if ($results) {
-                $this->listOfCategoriesforms();
-            } else {
-                $this->load->view('formCreator');
-            }
-        } else {
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'secondcontactaltenatephone';
+                    $val['display'] = 'second contact altenate phone';
+                    $val['rules'] = 'required';
 
-            $this->load->view('formCreator');
-        }
-    }
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'secondcontactaltenatephone', 'value' => '' . set_value(''), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    
+                    
+                    break;
+                
+                
+                
+                
+                case "contactaltenatephone":
 
-    /*     * controller function for the pop up form anchor */
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
 
-    public function generateform() {
-        $id = $this->uri->segment(3);
-        $data = $this->dataFetcher->categoryDetails($id);
-        $this->load->view('categoryForm', $data);
-    }
 
-    /* list all the categories which already have generated forms* */
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'contactaltenatephone';
+                    $val['display'] = 'contact altenate phone';
+                    $val['rules'] = 'required';
 
-    public function listOfCategoriesforms() {
-        $this->load->view('generatedForms');
-    }
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'contactaltenatephone', 'value' => '' . set_value(''), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+                
+                
+                
+                
+                case "contactphone":
 
-}
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
 
-?>
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'contactphone';
+                    $val['display'] = 'contact phone';
+                    $val['rules'] = 'required';
+
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'contactphone', 'value' => '' . set_value('contactphone'), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+                case "secondcontactlastname":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'secondcontactlastname';
+                    $val['display'] = 'second contact lastname';
+                    $val['rules'] = 'required';
+
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'secondcontactlastname', 'value' => '' . set_value('secondcontactlastname'), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+                
+                case "secondcontactfirstname":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'secondcontactfirstname';
+                    $val['display'] = 'second contact first name';
+                    $val['rules'] = 'required';
+
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'secondcontactfirstname', 'value' => '' . set_value('name'), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "fullname_input":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'name';
+                    $val['display'] = 'name';
+                    $val['rules'] = 'required';
+
+                    $fieldTobegenerated = $error . form_label($label) . form_input(array('name' => 'name', 'value' => '' . set_value('name'), 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "lastname":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'lastname';
+                    $val['display'] = 'last name';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'lastname', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+
+                case "confirmemail":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'confirmemail';
+                    $val['display'] = 'confirm an email';
+                    $val['rules'] = 'required|matches[confirmemail]';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'confirmemail', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+
+                case "listingtitle":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'listingtitle';
+                    $val['display'] = 'Listing Title';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'listingtitle', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "listingtitle":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'listingcopy';
+                    $val['display'] = 'Listing Copy';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'listingcopy', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "listingtitle":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'eventname';
+                    $val['display'] = 'Event name';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'eventname', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+
+                case "eventsenddate":
+
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'eventsenddate';
+                    $val['display'] = 'Event end date';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'eventsenddate', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "primaryphone":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'primaryphone';
+                    $val['display'] = 'primary public phone #';
+                    $val['rules'] = 'required|is_natural';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'primaryphone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "public_phone":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'public_phone';
+                    $val['display'] = 'public phone #';
+                    $val['rules'] = 'required|is_natural';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'public_phone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+
+                case "otherphone":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'otherphone';
+                    $val['display'] = 'Other public phone #';
+                    $val['rules'] = 'required|is_natural';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'otherphone', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+
+                case "fax":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'fax';
+                    $val['display'] = 'Fax # ';
+                    $val['rules'] = 'required|is_natural';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'fax', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "contact_email":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'contact_email';
+                    $val['display'] = 'public email';
+                    $val['rules'] = 'required|valid_email';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contact_email', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+                    
+                     case "contactemail":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'contactemail';
+                    $val['display'] = 'contact email';
+                    $val['rules'] = 'required|valid_email';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'contactemail', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+                case "website":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+//                    $val['name']='website';
+//                    $val['display']='a link to the webiste';
+//                    $val['rules']='required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'website', 'value' => '', 'size' => '30')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "textarea":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'txtarea';
+                    $val['display'] = 'Description(s)';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'txtarea', 'cols' => '25', 'rows' => '3')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+
+                case "location":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'location';
+                    $val['display'] = 'location';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . form_textarea(array('name' => 'location', 'cols' => '25', 'rows' => '3')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    break;
+
+                case "images":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'images[]';
+                    $val['display'] = 'picture ';
+                    $val['rules'] = 'is_file_type[jpg,jpeg,png,gif]';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . '<input type="file" name="images[]" class="images"/>';
+                    break;
+
+                case "file":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'file[]';
+                    $val['display'] = 'file ';
+                    $val['rules'] = 'required|is_file_type[doc,docx,pdf]';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . '<input type="file" name="file[]" class="images"/>';
+                    break;
+
+                case "select":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    $out = '';
+                    $repeatselectrtesults = $this->dataFetcher->getAllrepeats();
+
+                    foreach ($repeatselectrtesults->result_array()as $rows) {
+
+                        $out.='<option value="' . $rows['repeat_id'] . '">' . $rows['events'] . '</option>';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . '<select name="" class="events">' . $out . '</select><div class="events_display"></div>';
+
+                    break;
+                case "area":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    $out = '';
+                    $area = $this->dataFetcher->loadareas();
+
+                    foreach ($area->result_array()as $rows) {
+
+                        $out.='<option value="' . $rows['area_id'] . '">' . $rows['area_name'] . '</option>';
+                    }
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    $val['name'] = 'area[]';
+                    $val['display'] = 'area';
+                    $val['rules'] = 'required';
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label, $name = "area", $attributes = array('class' => 'area')) . '<select name="area[]" class="events" multiple>' . $out . '</select>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+                    break;

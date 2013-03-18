@@ -44,7 +44,7 @@ class FormGenerator extends CI_Controller {
                     foreach ($resultwithnosubsections->result_array() as $subsectionscategorires) {
                         $checkboxoutput.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
                     }
-                    echo form_label('Categorie(s)') . '</br>' . '<select name="cat[]" class="autoloadcat" multiple="multiple" size="4" >' . $checkboxoutput . '</select>' . '</br></br>';
+                    echo form_label('Categorie(s)') . '<select name="cat[]" class="autoloadcat" multiple="multiple" size="4" >' . $checkboxoutput . '</select>' . '</br></br>';
                     //load sections which does not have some categories
                 }
                 /////////////
@@ -67,7 +67,7 @@ class FormGenerator extends CI_Controller {
                 foreach ($results->result_array() as $value) {
                     $concatenator.='<option value="' . $value['cat_id'] . '">' . $value['cat_name'] . '</option>';
                 }
-                echo form_label('categories') . nbs(5) . '<select name="cat[]" multiple="multiple" size="4">' . $concatenator . '</select>' . '</br></br>';
+                echo form_label('categories') . '<select name="cat[]" multiple="multiple" size="4">' . $concatenator . '</select>' . '</br></br>';
             }
         }
     }
@@ -262,6 +262,7 @@ class FormGenerator extends CI_Controller {
                                 $selectedCheckboxValue = $_POST['count_' . $checkboxId];
                                 $selectedLabel = $_POST['label_' . $checkboxId];
                                 $data['no_input'] = $selectedCheckboxValue;
+                                $data['displayOrder'] = $_POST['order_'.$checkboxId];
                                 $data['input_type_id'] = $checkboxId;
                                 $data['sections_without_subsections'] = $subsection;
                                 $data['category_id'] = $category;
@@ -492,7 +493,8 @@ class FormGenerator extends CI_Controller {
         if($this->input->post('submit')){
             
             $this->form_validation->set_rules('inputname','input name','required');
-            $this->form_validation->set_rules('inputtype','input types','required');
+            //$this->form_validation->set_rules('inputtype','input types','required');
+            $this->form_validation->set_rules('formfieldtype','input type','required');
             $this->form_validation->set_rules('max_no_inputs','Maximum number of inputs','required');
             if($this->form_validation->run()==FALSE){
                 
@@ -501,10 +503,18 @@ class FormGenerator extends CI_Controller {
             else{
                 
                 
-                 $inputname=$this->input->post('inputname');    
-            $inputtypes=$this->input->post('inputtype');  
+            $inputname=$this->input->post('inputname');    
+            //$inputtypes=$this->input->post('inputtype');  
+            $formfieldtype=$this->input->post('formfieldtype');
+                  
+            $fieldtypename = str_replace(' ', '', $inputname);
+           
             $max_no_inputs=$this->input->post('max_no_inputs'); 
-            $results=$this->dataFetcher->addFormInputsTypes($inputname,$inputtypes,$max_no_inputs);
+            
+            $validation_chkboxes=$this->input->post('validation_chck');
+                
+            
+            $results=$this->dataFetcher->addFormInputsTypes($inputname,$formfieldtype,$max_no_inputs,$fieldtypename,$validation_chkboxes);
             
             if($results){
               //load the  list of tables
@@ -577,6 +587,24 @@ class FormGenerator extends CI_Controller {
          $this->loadInputs();  
            
        }
+   }
+   
+   /**load the select table*/
+   public function addSelectFieldsInput() {
+       $value=$this->input->post('select');
+       $out='';
+       if(strcasecmp($value,"select")==0){
+           $Tablename=form_input(array('name'=>'tablename','value'=>''));
+           $displaycolumn=form_input(array('name'=>'displayname','value'=>''));
+           $displayid=form_input(array('name'=>'displayid','value'=>''));
+           $out.='<li>'.form_input(array('name'=>'tablename','value'=>'')).'</li>
+                 <li>'.form_input(array('name'=>'displayname','value'=>'')).'</li>
+                 <li>'.$displayid=form_input(array('name'=>'displayid','value'=>'')).'</li>';
+       
+           echo $out;
+       }
+       
+       
    }
 
 }

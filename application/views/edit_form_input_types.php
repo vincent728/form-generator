@@ -13,6 +13,7 @@ $checked_select_value = array();
 $checked_select_maxval = array();
 $checked_input_tips = array();
 $checked_input_label = array();
+$checked_input_orderby = array();
 
 foreach ($results->result_array() as $editvalue) {
 
@@ -21,6 +22,7 @@ foreach ($results->result_array() as $editvalue) {
     array_push($checked_input_tips, $editvalue['input_tip']);
     array_push($checked_input_label, $editvalue['form_label']);
     array_push($checked_select_maxval, $editvalue['max_no_inputs']);
+    array_push($checked_input_orderby, $editvalue['displayOrder']);
 }
 
 $allresults = $this->dataFetcher->inputTypesLoader();

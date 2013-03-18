@@ -335,7 +335,7 @@ public function subcategoryDetails($id) {
         form_tbl.sections_without_subsections=categories.subsections_id and
         input_type_tbl.input_id=form_tbl.input_type_id and
         form_tbl.category_id=categories.cat_id and
-        form_tbl.category_id='$id'
+        form_tbl.category_id='$id' order by displayOrder Asc
         ";
     $results=$this->db->query($sql);
     
@@ -494,9 +494,21 @@ public function loadareas() {
  * 
  * 
  */
-public function addFormInputsTypes($inputname,$inputtypes,$max_no_inputs) {
-    $sql="insert into input_type_tbl(input_name,input_type,max_no_inputs) values('$inputname','$inputtypes','$max_no_inputs')";
+public function addFormInputsTypes($inputname,$inputtypes,$max_no_inputs,$fieldtypename,$validation_chkboxes) {
+    ///insert validation rules in a db
+       
+    
+    $sql="insert into input_type_tbl(input_name,input_type,max_no_inputs,fieldtypename) values('$inputname','$inputtypes','$max_no_inputs','$fieldtypename')";
     $results=$this->db->query($sql);
+    $lastid=$this->db->insert_id($results);
+    if($results)
+        {
+        foreach ($validation_chkboxes as $value) {
+       $sql="insert into validation_rules_handler_tbl(input_type_id,rule_name)values('$lastid','$value')"; 
+       $results=$this->db->query($sql);
+       
+    }
+        }
     return $results;
     
 }
@@ -547,7 +559,17 @@ public function deleteInput($id) {
     
 }
 
+/**
+ * @method :load validation rules per input
+ * @param :input id
+ * @return results
+ */ 
+public function loadsValidationrules($inputid) {
+    $sql="select rule_name from validation_rules_handler_tbl where input_type_id='$inputid'";
+    $results=$this->db->query($sql);
+    return $results;
     
+}
 
 }
 
