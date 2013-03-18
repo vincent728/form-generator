@@ -53,7 +53,7 @@ echo form_fieldset();
         }
         echo form_label('form field type');
         ?>
-        <select name="formfieldtype" class="selectD">
+        <select name="formfieldtype" class="">
             
             <option value="">choose a field type</option>
             <option value="textarea">TextArea</option>
@@ -62,7 +62,7 @@ echo form_fieldset();
             <option value="checkbox">checkbox</option>
             <option value="textinput">Text input</option>
             <option value="radio">radio input</option>
-            <option value="image">image input</option>
+            <option value="repeat">repeat</option>
             <option value="file">file input</option>
             <option value="price">price input</option>
             <option value="starttime">Start time</option>

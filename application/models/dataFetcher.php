@@ -494,11 +494,22 @@ public function loadareas() {
  * 
  * 
  */
-public function addFormInputsTypes($inputname,$inputtypes,$max_no_inputs,$fieldtypename,$validation_chkboxes) {
+public function addFormInputsTypes($inputname,$formfieldtype,$max_no_inputs,$fieldtypename,$validation_chkboxes,$tablename,$tablecolumnid,$tabledisplaycolumn) {
     ///insert validation rules in a db
-       
     
-    $sql="insert into input_type_tbl(input_name,input_type,max_no_inputs,fieldtypename) values('$inputname','$inputtypes','$max_no_inputs','$fieldtypename')";
+    //check if form field type is select
+    if(strcasecmp($formfieldtype,"select")==0){
+        $columnid=$tablecolumnid;
+        $displayid=$tabledisplaycolumn;
+        $table=$tablename;
+    }else{
+        $columnid='';
+        $displayid='';
+        $table='';
+    }
+   
+    $sql="insert into input_type_tbl(input_name,input_type,max_no_inputs,fieldtypename,draws_from,column_id,display_id)
+        values('$inputname','$formfieldtype','$max_no_inputs','$fieldtypename','$table','$columnid','$displayid')";
     $results=$this->db->query($sql);
     $lastid=$this->db->insert_id($results);
     if($results)
@@ -566,6 +577,21 @@ public function deleteInput($id) {
  */ 
 public function loadsValidationrules($inputid) {
     $sql="select rule_name from validation_rules_handler_tbl where input_type_id='$inputid'";
+    $results=$this->db->query($sql);
+    return $results;
+    
+}
+
+/**
+ * 
+ * @method : select from table
+ * @param :table name
+ * @return results
+ * 
+ * 
+ */
+public function selecTfromTable($table) {
+    $sql="select * from $table";
     $results=$this->db->query($sql);
     return $results;
     

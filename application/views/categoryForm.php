@@ -185,6 +185,69 @@ if ($results->num_rows() > 0) {
 
                     break;
 
+                   //selecTfromTable($table)
+                    
+                     case"select":
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    //fetch the validation rules as set by the user
+                    $rulesin = '';
+                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    foreach ($rules_results->result_array() as $rules) {
+                        $rulesin.=$rules['rule_name'] . '|';
+                    }
+                    $val['name'] = $value['fieldtypename'];
+                    $val['display'] = $label;
+                    $val['rules'] = $rulesin;
+                    
+                    $out = '';
+                    $tabletesults = $this->dataFetcher->selecTfromTable($value['draws_from']);
+
+                    foreach ($tabletesults->result_array()as $rows) {
+
+                        $out.='<option value="' . $rows[$value['column_id']] . '">' . $rows[$value['display_id']] . '</option>';
+                    }
+                    
+                    
+
+                    $fieldTobegenerated = form_label($label) . '<select name="" class="">' . $out . '</select><div class="events_display"></div>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+                    break;
+                    
+                     case "repeat":
+
+                    if (empty($value['input_tip'])) {
+                        $tipsOnlabel = '';
+                    } else {
+                        $tipsOnlabel = $value['input_tip'];
+                    }
+                    $out = '';
+                    $repeatselectrtesults = $this->dataFetcher->getAllrepeats();
+
+                    foreach ($repeatselectrtesults->result_array()as $rows) {
+
+                        $out.='<option value="' . $rows['repeat_id'] . '">' . $rows['events'] . '</option>';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+                    $fieldTobegenerated = form_label($label) . '<select name="" class="events">' . $out . '</select><div class="events_display"></div>';
 
 
                 default:

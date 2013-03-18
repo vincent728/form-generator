@@ -506,15 +506,17 @@ class FormGenerator extends CI_Controller {
             $inputname=$this->input->post('inputname');    
             //$inputtypes=$this->input->post('inputtype');  
             $formfieldtype=$this->input->post('formfieldtype');
-                  
             $fieldtypename = str_replace(' ', '', $inputname);
-           
+            
+            $tablename=$this->input->post('tablename');
+            $tablecolumnid=$this->input->post('displaycolumnid');
+            $tabledisplaycolumn=$this->input->post('displaycolumn');
             $max_no_inputs=$this->input->post('max_no_inputs'); 
             
             $validation_chkboxes=$this->input->post('validation_chck');
                 
             
-            $results=$this->dataFetcher->addFormInputsTypes($inputname,$formfieldtype,$max_no_inputs,$fieldtypename,$validation_chkboxes);
+            $results=$this->dataFetcher->addFormInputsTypes($inputname,$formfieldtype,$max_no_inputs,$fieldtypename,$validation_chkboxes,$tablename,$tablecolumnid,$tabledisplaycolumn);
             
             if($results){
               //load the  list of tables
