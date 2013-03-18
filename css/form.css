@@ -152,7 +152,7 @@ form.myformcreator fieldset ul li select{
    }
    form.myformcreator fieldset ul li ul fieldset li input.checkbox{
        border:1px solid #4EA6EA;
-       margin-left: 10px;
+       margin-left: 5px;
        display: inline-block;
        
        margin-right:0px;

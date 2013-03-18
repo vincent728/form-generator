@@ -97,6 +97,40 @@ if ($results->num_rows() > 0) {
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
+                    
+                    
+                         case"dateinput":
+                    if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
+
+
+                    /*                     * **an array to feed the validation rules for this input* */
+                    //fetch the validation rules as set by the user
+                    $rulesin = '';
+                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    foreach ($rules_results->result_array() as $rules) {
+                        $rulesin.=$rules['rule_name'] . '|';
+                    }
+                    $val['name'] = $value['fieldtypename'];
+                    $val['display'] = $label;
+                    $val['rules'] = $rulesin;
+
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'datepicker')) . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+                    break;
+                    
+                    
+                    
+                    
 
                 case"checkbox":
                     if (!empty($value['input_tip'])) {
@@ -222,7 +256,7 @@ if ($results->num_rows() > 0) {
                     
                     
 
-                    $fieldTobegenerated = form_label($label) . '<select name="" class="">' . $out . '</select><div class="events_display"></div>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . '<select name="'.$value['fieldtypename'].'" class=""><option value="" selected>--Select an option--</option>' . $out . '</select><div class="events_display"></div>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
                     
@@ -247,9 +281,39 @@ if ($results->num_rows() > 0) {
                         $label = $value['form_label'];
                     }
 
-                    $fieldTobegenerated = form_label($label) . '<select name="" class="events">' . $out . '</select><div class="events_display"></div>';
+                    $fieldTobegenerated = form_label($label) . '<select name="" class="events"><option value="">Select</option>' . $out . '</select><div class="events_display"></div>';
+
+                   case "price":
+                        //$fieldTobegenerated='<table border="0"><tr><td></td><td></td></tr></table>';
+                        if (!empty($value['input_tip'])) {
+                        $tipsOnlabel = $value['input_tip'];
+                    } else {
+                        $tipsOnlabel = '';
+                    }
+                    /*                     * check if label has been modified */
+                    if (empty($value['form_label'])) {
+                        $label = $value['input_name'];
+                    } else {
+                        $label = $value['form_label'];
+                    }
 
 
+                    /*                     * **an array to feed the validation rules for this input* */
+                    //fetch the validation rules as set by the user
+                    $rulesin = '';
+                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    foreach ($rules_results->result_array() as $rules) {
+                        $rulesin.=$rules['rule_name'] . '|';
+                    }
+                    $val['name'] = $value['fieldtypename'];
+                    $val['display'] = $label;
+                    $val['rules'] = $rulesin;
+
+                    $fieldTobegenerated = form_label($label) .'<table border="0"><tr><td>'.form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'')) .'</td><td>'.form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'datepicker')) .'</td></tr></table>'. '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+                       break;
+                    
+                    
                 default:
                     break;
             }

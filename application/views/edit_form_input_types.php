@@ -38,9 +38,9 @@ if ($allresults && $allresults->num_rows() > 0) {
         $checked = '';
         $editno_input = '';
         $select = '';
-        $chkd='';
-        $label='';
-        $tip='';
+        $chkd = '';
+        $label = '';
+        $tip = '';
 
 ////////////the values user set last time in db
         for ($i = 0; $i < count($checked_arr); $i++) {
@@ -50,11 +50,11 @@ if ($allresults && $allresults->num_rows() > 0) {
                 $checked.= 'TRUE';
                 $label.=$checked_input_label[$i];
                 $tip.=$checked_input_tips[$i];
-                
+
                 $editno_input.=$checked_select_value[$i];
                 //check if the select input value matches if then set select selected
                 if ($value['max_no_inputs'] == $checked_select_maxval[$i]) {
-          
+
                     $chkd.=$checked_select_value[$i];
                 } else {
 
@@ -75,15 +75,12 @@ if ($allresults && $allresults->num_rows() > 0) {
             //check if the set number in the db matches is not empty
             $dropdownVal = ($a + 1);
 
-            if ($dropdownVal==$chkd) {
-                
-                 $select="selected";
-            }
-            else{
-                $select="";
-            }
+            if ($dropdownVal == $chkd) {
 
-
+                $select = "selected";
+            } else {
+                $select = "";
+            }
             $dropdowns.='<option  ' . $select . ' value="' . $dropdownVal . set_value() . '">' . $dropdownVal . '</option>';
         }
         //end of the loop 
@@ -95,8 +92,8 @@ if ($allresults && $allresults->num_rows() > 0) {
         $data = array('name' => 'field_' . $value['input_id'], 'value' => 'field_' . set_value('inputs') . $value['input_id'], 'checked' => $checked);
         $checkboxoutput.=nbs(3) . form_checkbox($data) . nbs(3) .
                 $value['input_name'] . nbs(8) . $start_select . $dropdowns . $end_select . nbs(4) .
-                form_input(array('name' => 'label_' . $value['input_id'], 'value' =>$label, 'size' => '30')).
-                form_textarea(array('name' => 'tip_' . $value['input_id'], 'cols' => '25', 'rows' => '3','value' =>$tip)).
+                form_input(array('name' => 'label_' . $value['input_id'], 'value' => $label, 'size' => '30')) .
+                form_textarea(array('name' => 'tip_' . $value['input_id'], 'cols' => '25', 'rows' => '3', 'value' => $tip)) .
                 '</br></br>';
     }
     echo $checkboxoutput;

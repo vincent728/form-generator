@@ -13,11 +13,31 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link></link>
         <script type='text/javascript' src="js/jquery-1.7.1.min.js"></script>
+        <script type='text/javascript' src="js/jquery-ui-1.8.18.custom.min.js"></script>
         <script type="text/javascript" src="js/validate.js"></script>
         <link href="css/default.css" rel="stylesheet"/>
+        <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet"/>
+        <!--...date picker trigger.-->
 
         <script type="text/javascript">
-          $(document).ready(function()
+            
+            $(function(){
+                // Datepicker
+                $('.datepicker').datepicker({
+                    inline: true
+                });
+                //hover states on the static widgets
+                $('#dialog_link, ul#icons li').hover(
+                function() { $(this).addClass('ui-state-hover'); },
+                function() { $(this).removeClass('ui-state-hover'); }
+            );
+            }); 
+            
+            
+            
+            
+            
+            $(document).ready(function()
             {
                 $(".section").change(function()
                 {
@@ -67,7 +87,7 @@
                 
                 //
                 
-                  $(".selectD").change(function()
+                $(".selectD").change(function()
                 {
                     var id=$(this).val();
                     var dataString = 'select='+ id;
@@ -112,6 +132,6 @@
             });
 
         </script>
-        
+
 
     </head>

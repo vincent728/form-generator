@@ -57,6 +57,8 @@ echo form_fieldset();
             
             <option value="">choose a field type</option>
             <option value="textarea">TextArea</option>
+            <option value="dateinput">Date picker</option>
+            
             <option value="select">select</option>
             <option value="textarea">password input</option>
             <option value="checkbox">checkbox</option>
@@ -90,9 +92,10 @@ echo form_fieldset();
         if (form_error('displaycolumnid')) {
             echo form_error('displaycolumnid');
         }
-        echo form_label('Display column id');
+        echo form_label('hidden display column id');
         
-        echo form_input(array('name' => 'displaycolumnid', 'value' => '' . set_value('displaycolumnid')));
+        echo form_input(array('name' => 'displaycolumnid', 'value' => '' . set_value('displaycolumnid'))).'</br><i><font color="#1A9B50">'.
+             form_label("Write the column ID as it is from the database", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
         ?>
 
     </li>
@@ -101,9 +104,10 @@ echo form_fieldset();
         if (form_error('displaycolumn')) {
             echo form_error('displaycolumn');
         }
-        echo form_label('Display column');
+        echo form_label('Display column name');
         
-        echo form_input(array('name' => 'displaycolumn', 'value' => '' . set_value('displaycolumn')));
+        echo form_input(array('name' => 'displaycolumn', 'value' => '' . set_value('displaycolumn'))).'</br><i><font color="#1A9B50">'.
+             form_label("Write the column name which will go to output the description as it is from the database", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
         ?>
 
     </li>
@@ -160,7 +164,8 @@ echo form_fieldset();
              <li>
               <?php
               echo form_label('Is file type');
-              echo form_input(array('name'=>'','value'=>'')).'</br><i><font color="#1A9B50">' . form_label("Type the file type extension eg jpg|pdf|docx", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+              echo form_input(array('name'=>'','value'=>'')).'</br><i><font color="#1A9B50">' .
+                   form_label("Type the file type extension eg jpg|pdf|docx", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
               ?>  
             </li>
 <!--            <li>
