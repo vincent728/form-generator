@@ -58,7 +58,7 @@ echo form_fieldset();
             <option value="">choose a field type</option>
             <option value="textarea">TextArea</option>
             <option value="dateinput">Date picker</option>
-            
+            <option value="time">Time</option>
             <option value="select">select</option>
             <option value="multiselect">Multi-select</option>
             <option value="textarea">password input</option>
@@ -121,6 +121,13 @@ echo form_fieldset();
               <?php
               echo form_label();
               echo form_checkbox(array('name'=>'validation_chck[]','checked'=>'checked','value'=>'required')).'required';
+          
+              ?>  
+            </li>  
+             <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','checked'=>'','value'=>'')).'None';
           
               ?>  
             </li>  

@@ -231,6 +231,7 @@ class FormGenerator extends CI_Controller {
             //validate form select field if the section has  been selected
 
             $this->form_validation->set_rules('section', 'section', 'required');
+            $this->form_validation->set_rules('cat', 'form category', 'required');
             $x = $this->input->post('cat');
 
             if ($this->form_validation->run() == FALSE) {

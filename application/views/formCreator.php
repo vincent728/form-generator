@@ -37,7 +37,15 @@ echo form_fieldset('');
 
     </li>
     <li>
-
+           <?php
+           
+           if (form_error('cat')) {
+            echo '<div class="error">';
+            echo form_error("cat") . form_error();
+            echo '</div>';
+        }
+                 
+           ?>
         <table class="mytable" width="" border="0">
             <tr>
 
