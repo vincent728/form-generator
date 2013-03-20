@@ -288,12 +288,18 @@ class DataFetcher extends CI_Model {
     public function categoryDetails($id) {
         $data = array();
 
-        $sql = "select * from categories,form_tbl,input_type_tbl where 
-         form_tbl.category_id=categories.cat_id and
-        input_type_tbl.input_id=form_tbl.input_type_id and
-        form_tbl.category_id='$id'";
+//        $sql =" select * from categories,form_tbl,input_type_tbl where 
+//         form_tbl.category_id=categories.cat_id and
+//        input_type_tbl.input_id=form_tbl.input_type_id and
+//        form_tbl.category_id='$id' order by displayOrder asc";
 
-        $results = $this->db->query($sql);
+        $sql = "SELECT *
+         FROM categories, form_tbl, input_type_tbl
+          WHERE form_tbl.category_id = categories.cat_id
+          AND input_type_tbl.input_id = form_tbl.input_type_id
+          AND form_tbl.category_id ='$id'
+          ORDER BY displayOrder ASC";
+         $results = $this->db->query($sql);
 
         foreach ($results->result_array() as $value) {
 
@@ -315,7 +321,7 @@ class DataFetcher extends CI_Model {
     public function subcategoryDetails($id) {
         $data = array();
         $category_name = '';
-        $sql = "select * from section_tbl,form_tbl,categories,input_type_tbl where 
+        $sql = "select* from section_tbl,form_tbl,categories,input_type_tbl where 
         section_tbl.section_id=categories.section_id and
         categories.subsections_id=form_tbl.sections_without_subsections and
         form_tbl.sections_without_subsections=categories.subsections_id and
@@ -546,11 +552,13 @@ class DataFetcher extends CI_Model {
             $sql_validationremove = "delete from validation_rules_handler_tbl where input_type_id='$id'";
             $remover_results = $this->db->query($sql_validationremove);
             if ($remover_results) {
-                $sql = "delete from input_type_tbl where input_id='$id'";
+
+                $sql = "delete from input_type_tbl where input_type_tbl.input_id='$id'";
                 $results = $this->db->query($sql);
+
                 return $results;
             } else {
-                return FALSE;  
+                return FALSE;
             }
         }
     }

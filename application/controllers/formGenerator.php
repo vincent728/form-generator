@@ -387,23 +387,9 @@ class FormGenerator extends CI_Controller {
         $sectionfilter = strtolower($this->uri->segment(3));
 
         //checking if the section or subsection
-
-        switch ($sectionfilter) {
-            case "subsec":
-
-                $data = $this->dataFetcher->subcategoryDetails($id);
+         $data = $this->dataFetcher->categoryDetails($id);
                 $this->load->view('categoryForm', $data);
 
-                break;
-            case "sec":
-
-                $data = $this->dataFetcher->categoryDetails($id);
-                $this->load->view('categoryForm', $data);
-                break;
-
-            default:
-                break;
-        }
     }
 
     /* list all the categories which already have generated forms* */

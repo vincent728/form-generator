@@ -60,8 +60,9 @@ echo form_fieldset();
             <option value="dateinput">Date picker</option>
             
             <option value="select">select</option>
+            <option value="multiselect">Multi-select</option>
             <option value="textarea">password input</option>
-            <option value="checkbox">checkbox</option>
+            <option value="checkbox">check box</option>
             <option value="textinput">Text input</option>
             <option value="radio">radio input</option>
             <option value="repeat">repeat</option>
