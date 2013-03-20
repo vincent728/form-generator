@@ -26,8 +26,11 @@ form.myform fieldset ul li{
 
     list-style:  none;
   }
+  form.myform fieldset ul li input.priceVal{
+   width: 100px;   
+  }
 form.myform fieldset ul li label{
-    width:300px;
+    width:180px;
     margin-left:5px;
 /*    margin-right: 20px;*/
     font-family:inherit;
@@ -60,8 +63,8 @@ form.myform fieldset ul li select{
 }
 form.myform fieldset ul li textArea{
 
-    width: 290px;
-    height: 300px;
+    width: 500px;
+    height: 260px;
     margin-bottom:10px;
     margin-top: 10px;
     margin-right: 10px;
@@ -83,7 +86,7 @@ form.myform fieldset ul li input.submit{
     width: 300px;
     border:1px solid #007C00;
     border-radius: 5px;
-    margin-left: 100px;
+    margin-left: 80px;
      margin-bottom:10px;
     margin-top: 10px;
     margin-right: 10px;

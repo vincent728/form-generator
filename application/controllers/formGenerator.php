@@ -340,6 +340,7 @@ class FormGenerator extends CI_Controller {
                                     $selectedCheckboxValue = $_POST['count_' . $checkboxId];
                                     $selectedLabel = $_POST['label_' . $checkboxId];
                                     $data['no_input'] = $selectedCheckboxValue;
+                                    $data['displayOrder'] = $_POST['order_'.$checkboxId];
                                     $data['input_type_id'] = $checkboxId;
                                     $data['sections_without_subsections'] = $subsection;
                                     $data['category_id'] = $category;

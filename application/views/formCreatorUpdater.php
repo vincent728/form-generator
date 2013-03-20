@@ -21,7 +21,7 @@ if (!empty($catname)) {
     $category = $catname;
 }
 
-$data = array('id' => '');
+$data = array('id' => '','class'=>'myformcreator');
 ///the section name should be displayed of here
 
 echo form_open_multipart('formGenerator/editorprocessor/', $data);

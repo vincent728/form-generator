@@ -38,7 +38,7 @@ echo form_fieldset('');
     </li>
     <li>
 
-        <table class="mytable" width="100%" border="0">
+        <table class="mytable" width="" border="0">
             <tr>
 
             <div class="categories">
