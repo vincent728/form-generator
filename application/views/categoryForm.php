@@ -299,7 +299,7 @@ if ($results->num_rows() > 0) {
                     
                     
 
-                    $fieldTobegenerated = form_label($label) . '<select name="'.$value['fieldtypename'].'" class=""><option value="" selected>--Select an option--</option>' . $out . '</select><div class="events_display"></div>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . '<select name="'.$value['fieldtypename'].'" class=""><option value="" selected>--Select an option--</option>' . $out . '</select>'.'<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
                     

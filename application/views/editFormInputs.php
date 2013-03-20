@@ -107,6 +107,45 @@ echo form_fieldset();
         
     </li>
     
+        <?php
+        $validation_results=$this->dataFetcher->loadsValidationrules($id);
+        $vald_out='';
+        
+        foreach ($validation_results->result_array() as $validation) {
+        ///check the checked values
+        switch ($validation['rule_name']) {
+            case "required":
+                  $checked="checked";
+                    
+                break;
+
+             case "valid_email":
+                  $checked="checked";
+                    
+                break;
+             case "is_natural":
+                  $checked="checked";
+                    
+                break;
+             case "integer":
+                  $checked="checked";
+                    
+                break;
+             case "numeric":
+                  $checked="checked";
+                    
+                break;
+            default:
+                break;
+        }  
+            
+        $vald_out.='<li>'.form_checkbox(array('name'=>'validation_chck[]','value'=>$validation['rule_name'],'checked'=>$checked)).$validation['rule_name'].'</li>';  
+        
+        }echo $vald_out;
+        
+        ?>
+    
+    
     
     <li>
         <?php
