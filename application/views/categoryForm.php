@@ -325,7 +325,7 @@ if ($results->num_rows() > 0) {
                     }
 
                     $fieldTobegenerated = form_label($label) . '<select name="" class="events"><option value="">Select</option>' . $out . '</select><div class="events_display"></div>';
-
+                    break;
                    case "price":
                         //$fieldTobegenerated='<table border="0"><tr><td></td><td></td></tr></table>';
                         if (!empty($value['input_tip'])) {
