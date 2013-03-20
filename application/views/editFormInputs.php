@@ -17,6 +17,7 @@ if($results->num_rows()>0){
         $input_name=$value['input_name'];
         $max_no_inputs=$value['max_no_inputs'];
         
+        
     } 
  
 ///check if form errors occured during submission
@@ -74,6 +75,39 @@ echo form_fieldset();
         ?>
         
     </li>
+
+    
+    <li>
+        <?php
+        
+        if (form_error('formfieldtype')) {
+            echo form_error('formfieldtype');
+        }
+        echo form_label('form field type');
+        ?>
+        <select name="formfieldtype" class="">
+            
+            <option value="">choose a field type</option>
+            <option value="textarea">TextArea</option>
+            <option value="dateinput">Date picker</option>
+            
+            <option value="select">select</option>
+            <option value="textarea">password input</option>
+            <option value="checkbox">checkbox</option>
+            <option value="textinput">Text input</option>
+            <option value="radio">radio input</option>
+            <option value="repeat">repeat</option>
+            <option value="file">file input</option>
+            <option value="price">price input</option>
+            <option value="starttime">Start time</option>
+            <option value="endtime">End time</option>
+            
+            
+        </select>
+        
+    </li>
+    
+    
     <li>
         <?php
         echo form_label('');

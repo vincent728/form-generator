@@ -309,7 +309,10 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) .'<table border="0"><tr><td>'.form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'')) .'</td><td>'.form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'datepicker')) .'</td></tr></table>'. '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) .'<table border="0"><tr>
+                        <td>'.form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'')) .'</td>
+                        <td>'.'<select name="price"><option value="usd">$USD</option><option value="tzs">TZS</option></select>' .'</td>
+                        </tr></table>'. '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                        break;
                     
