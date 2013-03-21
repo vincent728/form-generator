@@ -71,43 +71,53 @@ if ($results->num_rows() > 0) {
 
 
         <li>
-            <?php
-            if (form_error('formfieldtype')) {
-                echo form_error('formfieldtype');
-            }
-            echo form_label('form field type');
+        <?php
+        
             $val['name'] = 'formfieldtype';
-            $val['display'] = 'form field type ';
+            $val['display'] = 'select type for the form field';
             $val['rules'] = 'required';
             $validation_arr[] = $val;
-            ?>
-            <select name="formfieldtype" class="">
-
-                <option value="">choose a field type</option>
-                <option value="textarea">TextArea</option>
-                <option value="dateinput">Date picker</option>
-
-                <option value="select">select</option>
-                <option value="textarea">password input</option>
-                <option value="checkbox">checkbox</option>
-                <option value="textinput">Text input</option>
-                <option value="radio">radio input</option>
-                <option value="repeat">repeat</option>
-                <option value="file">file input</option>
-                <option value="price">price input</option>
-                <option value="starttime">Start time</option>
-                <option value="endtime">End time</option>
-
-
-            </select>
-
-        </li>
+        echo form_label('form field type');
+        
+        $results_to_selectField=$this->dataFetcher->loadSelectInputTypes();
+        if($results_to_selectField->num_rows()>0){
+         ?>
+         <select name="formfieldtype" class="">
+              <option value="">choose a field type</option>
+         <?php   
+            $select_out='';
+           foreach ($results_to_selectField->result_array()as $rowsTobedisplayed) {
+               $select='';
+               $results_two=$this->dataFetcher->loadSelectInputTypesByid($id);
+               
+               foreach ($results_two->result_array() as $rowTocompare) {
+                   
+               if(strcasecmp($rowsTobedisplayed['selectinputtypes'],$rowTocompare['input_type'])==0){
+                 $select="selected";
+                 }
+               else{
+                  $select=""; 
+               }
+                   
+               }
+             
+             $select_out.='<option  '.$select.' value="'.$rowsTobedisplayed['selectinputtypes'].'">'.$rowsTobedisplayed['selectinputtypes'].'</option>';   
+            } echo $select_out;
+       ?>
+         </select>
+      <?php }
+        
+        ?>
+        
+    </li>
+        
         <?php
         /*         * *****************************draws from column*************************************************************** */
 //        $val['name'] = 'validation_chck[]';
 //        $val['display'] = 'atleast one validation rule ';
 //        $val['rules'] = 'required';
 //        $validation_arr[] = $val;
+        
 
         $results_drawsfrom = $this->dataFetcher->drawsFromColumn($id);
         if ($results_drawsfrom->num_rows() > 0) {

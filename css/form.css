@@ -27,7 +27,11 @@ form.myform fieldset ul li{
     list-style:  none;
   }
   form.myform fieldset ul li input.priceVal{
-   width: 100px;   
+   width: 226px;   
+  }
+  form.myform fieldset ul li select{
+      width: 300px;
+      border:1px solid #007C00;
   }
 form.myform fieldset ul li label{
     width:180px;
@@ -191,4 +195,17 @@ form.myformcreator fieldset ul li select{
        text-indent: 10px;
       
           
+   }
+   #container{
+       margin: 0 auto;
+       width: 920px;
+   }
+   form.myform ul li table.price{
+       margin-left: 180px;
+       margin-top: -12px;
+       width: 300px;
+       display: block;
+   }
+   form.myform ul li table.price tr td select.pricetd{
+       width: 80px;
    }

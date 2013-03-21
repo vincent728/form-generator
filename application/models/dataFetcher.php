@@ -648,6 +648,31 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
+    
+    /***
+     * @method :load input to be displayed on select dropdowns
+     * @param :none
+     * @return results
+     * 
+     */
+    public function loadSelectInputTypes() {
+        $sql="select* from selectinputtypes";
+        $results=$this->db->query($sql);
+        return $results;
+        
+    }
+     /***
+     * @method :load input to be displayed on select dropdowns
+     * @param :none
+     * @return results
+     * 
+     */
+    public function loadSelectInputTypesByid($id) {
+        $sql="select* from input_type_tbl where input_id='$id'";
+        $results=$this->db->query($sql);
+        return $results;
+        
+    }
 
 }
 

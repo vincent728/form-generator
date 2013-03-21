@@ -44,7 +44,7 @@ if($results->num_rows()>0){
     
  foreach ($results->result_array() as $value) {
      $no++;
-     $edit_anchor=anchor('formGenerator/editinputs/'. $value['input_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'edit', 'class' => ''));
+     $edit_anchor=anchor('formGenerator/editinputs/'. $value['input_id'], $title =img(array('src'=>'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''));
      $cancel_anchor=anchor('formGenerator/deleteInput/'. $value['input_id'], $title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'cancel', 'class' => ''));
      $output.='<tr><td>'.$no.'</td><td>'.$value['input_name'].'</td><td>'.$value['input_type'].'</td><td>'.$value['max_no_inputs'].'</td><td>'.$edit_anchor.''.$cancel_anchor.'</td></tr>';
    

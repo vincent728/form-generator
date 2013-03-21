@@ -45,14 +45,14 @@ table.myinnertable{
 table.myinnertable thead tr th{
     
     background-color: #73BA5C;
-    border-left:1px solid #ffffff;
+    border-left:2px solid #ffffff;
     color: #ffffff;
     font-family: inherit;
     text-transform: uppercase;
     font-size: 15px;
     font-weight: normal;
     text-align: left;
-    border-radius: 5px;
+   
     margin: 15px;
     height: 25px;
     

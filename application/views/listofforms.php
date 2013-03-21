@@ -81,7 +81,7 @@ if ($results->num_rows() > 0) {
 
                     $forms_output.='<tr><td>' . $forms['cat_name'] . '</td><td>' . $name . '</td>
                        
-                    <td>' . anchor('formGenerator/editform/' . $formid . $forms['cat_id'], $title =img(array('src'=>'icons/add.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('formGenerator/generateform/' . $formid . $forms['cat_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('formGenerator/formdelete/' . $formid . $forms['cat_id'],$title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')) . '</td>
+                    <td>' . anchor('formGenerator/editform/' . $formid . $forms['cat_id'], $title =img(array('src'=>'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('formGenerator/generateform/' . $formid . $forms['cat_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('formGenerator/formdelete/' . $formid . $forms['cat_id'],$title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')) . '</td>
                        
 </tr>';
                 }

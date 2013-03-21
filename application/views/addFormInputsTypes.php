@@ -45,31 +45,25 @@ echo form_fieldset();
             echo '<div class="error">'.form_error('formfieldtype').'</div>';
         }
         echo form_label('form field type');
+        
+        $results_to_selectField=$this->dataFetcher->loadSelectInputTypes();
+        if($results_to_selectField->num_rows()>0){
+         ?>
+         <select name="formfieldtype" class="">
+              <option value="">choose a field type</option>
+         <?php   
+            $select_out='';
+           foreach ($results_to_selectField->result_array()as $rowsTobedisplayed) {
+               
+             $select_out.='<option value="'.$rowsTobedisplayed['selectinputtypes'].'">'.$rowsTobedisplayed['selectinputtypes'].'</option>';   
+            } echo $select_out;
+       ?>
+         </select>
+      <?php }
+        
         ?>
-        <select name="formfieldtype" class="">
-            
-            <option value="">choose a field type</option>
-            <option value="textarea">TextArea</option>
-            <option value="dateinput">Date picker</option>
-            <option value="time">Time</option>
-            <option value="select">select</option>
-            <option value="multiselect">Multi-select</option>
-            <option value="textarea">password input</option>
-            <option value="checkbox">check box</option>
-            <option value="textinput">Text input</option>
-            <option value="radio">radio input</option>
-            <option value="repeat">repeat</option>
-            <option value="file">file input</option>
-            <option value="price">price input</option>
-            <option value="starttime">Start time</option>
-            <option value="endtime">End time</option>
-            
-            
-        </select>
         
     </li>
-    
-    <div class="selectD"></div>
     
      <li>
         <?php
