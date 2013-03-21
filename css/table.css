@@ -64,7 +64,7 @@ table.myinnertable tr {
 }
 table.myinnertable tr:hover{
 
-    color: #1A9B50;
+    color:#F51A15;
     border-left: 1px solid  #ffffff;
 }
 table.myinnertable tr td a{

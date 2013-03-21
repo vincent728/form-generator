@@ -520,10 +520,7 @@ $array_final = preg_replace('/"([a-zA-Z]+[a-zA-Z0-9]*)":/', '$1:', $array_final)
             }
         
             error_box.innerHTML = errorString;
-            
-          
-           
-      
+     
         }
         
           

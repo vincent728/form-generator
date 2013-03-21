@@ -7,7 +7,8 @@
 $this->load->view('header');
 $this->load->view('content');
 
-
+  $validation_arr=array();
+  
 if ($results->num_rows() > 0) {
 
     foreach ($results->result_array() as $value) {
@@ -28,8 +29,10 @@ if ($results->num_rows() > 0) {
         $inputtype = $input_type;
         $maxnoinputs = $max_no_inputs;
     }
-
-    $data = array('name' => '', 'class' => 'myform');
+    
+    echo'<div class="error_box" id ="error_box"></div>';
+    
+    $data = array('name' => 'editinputs', 'class' => 'myform');
     echo form_open('formGenerator/updateInputTypesDetails/', $data);
     echo form_fieldset();
     ?>
@@ -43,19 +46,14 @@ if ($results->num_rows() > 0) {
             echo form_label('input name');
             echo form_input(array('name' => 'inputname', 'value' => '' . $inputname . set_value('inputname')));
             echo form_hidden($name='id',$id);
+                    $vl['name'] = 'inputname';
+                    $vl['display'] = 'input type name';
+                    $vl['rules'] ='required';
+                    $validation_arr[] = $vl;
             ?>
 
         </li>
-        <li>
-            <?php
-            if (form_error('inputtypes')) {
-                echo form_error('inputtypes');
-            }
-            echo form_label('input type');
-            echo form_input(array('name' => 'inputtype', 'value' => '' . $inputtype . set_value('inputtype')));
-            ?>
-
-        </li>
+  
         <li>
             <?php
             if (form_error('max_no_inputs')) {
@@ -63,6 +61,11 @@ if ($results->num_rows() > 0) {
             }
             echo form_label('Maximum number of inputs');
             echo form_input(array('name' => 'max_no_inputs', 'value' => '' . $maxnoinputs . set_value('max_no_inputs')));
+                    $val['name'] = 'max_no_inputs';
+                    $val['display'] = 'Maximum # of inputs';
+                    $val['rules'] ='required';
+                    $validation_arr[] = $val;
+            
             ?>
 
         </li>
@@ -74,6 +77,10 @@ if ($results->num_rows() > 0) {
                 echo form_error('formfieldtype');
             }
             echo form_label('form field type');
+                    $val['name'] = 'formfieldtype';
+                    $val['display'] = 'form field type ';
+                    $val['rules'] ='required';
+                    $validation_arr[] = $val;
             ?>
             <select name="formfieldtype" class="">
 
@@ -118,12 +125,12 @@ if ($results->num_rows() > 0) {
                  if(is_null($drawsfields['column_id'])||empty($drawsfields['column_id'])){
                     
                   
-                   $tablename='<li>'.  form_label('hidden display column id').form_input(array('name' => 'tablename', 'value' => '' . set_value('tablename'))).'</li>';  
+                   $tablename='<li>'.  form_label('hidden display column id').form_input(array('name' => 'displaycolumnid', 'value' => '' . set_value('displaycolumnid'))).'</li>';  
                    echo $tablename;
                    
                 }
                 else{
-                 $tablename='<li>'.form_label('hidden display column id').form_input(array('name' => 'tablename', 'value' =>$drawsfields['column_id'] . set_value('tablename'))).'</br><i><font color="#1A9B50">'.
+                 $tablename='<li>'.form_label('hidden display column id').form_input(array('name' => 'displaycolumnid', 'value' =>$drawsfields['column_id'] . set_value('displaycolumnid'))).'</br><i><font color="#1A9B50">'.
                  form_label("Write the column ID as it is from the database", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i></li>';   
                  echo $tablename;
                  
@@ -132,14 +139,14 @@ if ($results->num_rows() > 0) {
                  ///column name 
                  if(is_null($drawsfields['display_id'])||empty($drawsfields['display_id'])){
                     
-                  $tablename='<li>'.  form_label('Display column name').form_input(array('name' => 'tablename', 'value' => '' . set_value('tablename'))).'</br><i><font color="#1A9B50">'.
+                  $tablename='<li>'.  form_label('Display column name').form_input(array('name' => 'displaycolumn', 'value' => '' . set_value('displaycolumn'))).'</br><i><font color="#1A9B50">'.
                   form_label("Write the column name which will go to output the description as it is from the database", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i></li>';  
                   echo $tablename;
                   
                 }
                 else{
                  
-                   $tablename='<li>'.form_label('Display column name').form_input(array('name' => 'tablename', 'value' =>$drawsfields['display_id'] . set_value('tablename'))).'</li>';   
+                   $tablename='<li>'.form_label('Display column name').form_input(array('name' => 'displaycolumn', 'value' =>$drawsfields['display_id'] . set_value('displaycolumn'))).'</li>';   
                    echo $tablename;
                    
                 }
@@ -180,7 +187,14 @@ if ($results->num_rows() > 0) {
 
                 $outputValidation.='<li>' . form_label() . form_checkbox(array('name' => 'validation_chck[]', 'value' => $inputValidations['input_rules'], 'checked' => $checked)) . $inputValidations['input_rules'] . '</li>';
             } echo $outputValidation;
-        }
+      
+                    $val['name'] = 'validation_chck[]';
+                    $val['display'] = 'atleast one validation rule ';
+                    $val['rules'] ='required';
+                    $validation_arr[] = $val;
+            
+            
+            }
 
         /*         * ********************************************************************************* */
 
@@ -202,15 +216,39 @@ if ($results->num_rows() > 0) {
     <?php
     echo form_fieldset_close();
     echo form_close();
+    
     ?>  
 
     <?php
 } else {
     //echo form error
     echo 'error';
-}
+}?>
+<?php
+//json encoding for the form validations attributes;
 
+$array_final = json_encode($validation_arr);
+$array_final = preg_replace('/"([a-zA-Z]+[a-zA-Z0-9]*)":/', '$1:', $array_final);
+?>
+<!--.form validation script goes here.-->
+<script type="text/javascript">
+    var validator = new FormValidator('editinputs',<?php print_r($array_final); ?>, function(errors, event) {        
+        if (errors.length > 0) {
+                       
+            // Show the errors
+            var errorString = '';
+        
+            for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                errorString += errors[i].message + '<br />';
+            }       
+            error_box.innerHTML = errorString;    
+        }        
+          
+    });
+    
+ 
+</script>
 
-
+<?php
 $this->load->view('footer');
 ?>

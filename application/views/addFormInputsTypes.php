@@ -24,16 +24,7 @@ echo form_fieldset();
         ?>
 
     </li>
-<!--    <li>
-        <?php
-//        if (form_error('inputtypes')) {
-//            echo form_error('inputtypes');
-//        }
-//        echo form_label('input type');
-//        echo form_input(array('name' => 'inputtype', 'value' => '' . set_value('inputtype')));
-        ?>
 
-    </li>-->
     <li>
         <?php
         if (form_error('max_no_inputs')) {
