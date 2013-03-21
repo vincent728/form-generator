@@ -42,7 +42,7 @@ if ($results->num_rows() > 0) {
             }
             echo form_label('input name');
             echo form_input(array('name' => 'inputname', 'value' => '' . $inputname . set_value('inputname')));
-//        echo form_hidden($name='id',$id);
+            echo form_hidden($name='id',$id);
             ?>
 
         </li>

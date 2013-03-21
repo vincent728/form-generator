@@ -299,7 +299,7 @@ class DataFetcher extends CI_Model {
           AND input_type_tbl.input_id = form_tbl.input_type_id
           AND form_tbl.category_id ='$id'
           ORDER BY displayOrder ASC";
-         $results = $this->db->query($sql);
+        $results = $this->db->query($sql);
 
         foreach ($results->result_array() as $value) {
 
@@ -534,10 +534,34 @@ class DataFetcher extends CI_Model {
      * @return boolean
      * 
      */
-    public function updateInputsTypesDetails($inputname, $inputtypes, $max_no_inputs, $id) {
+    public function updateInputsTypesDetails($inputname, $formfieldtype, $max_no_inputs, $fieldtypename, $validation_chkboxes, $tablename, $tablecolumnid, $tabledisplaycolumn, $id) {
 
-        $sql = "update input_type_tbl set input_name='$inputname',input_type='$inputtypes',max_no_inputs='$max_no_inputs' where input_id='$id'";
+        if (strcasecmp($formfieldtype, "select") == 0) {
+            $columnid = $tablecolumnid;
+            $displayid = $tabledisplaycolumn;
+            $table = $tablename;
+        } else {
+            $columnid = '';
+            $displayid = '';
+            $table = '';
+        }
+
+        $sql = "update input_type_tbl set input_name='$fieldtypename',input_type='$formfieldtype',draws_from='$tablename',max_no_inputs='$max_no_inputs',fieldtypename='$fieldtypename',column_id='$tablecolumnid',display_id='$tabledisplaycolumn' where input_id='$id'";
         $results = $this->db->query($sql);
+
+        if ($results) {
+            //update the validation rules
+            ///delete then insert
+            $sql_delete = "delete from validation_rules_handler_tbl where input_type_id='$id'";
+            $results_delete = $this->db->query($sql_delete);
+
+            if ($results_delete) {
+                foreach ($validation_chkboxes as $value) {
+                    $sql = "insert into validation_rules_handler_tbl(input_type_id,rule_name)values('$id','$value')";
+                    $results = $this->db->query($sql);
+                }
+            }
+        }
         return $results;
     }
 
@@ -573,16 +597,13 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
-    
-    
-    
-    
-     /**
+
+    /**
      * @method :load validation rules per input
      * @param :input id
      * @return results
      */
-    public function loadsValidationrulesByName($inputname,$inputid) {
+    public function loadsValidationrulesByName($inputname, $inputid) {
         $sql = "select rule_name from validation_rules_handler_tbl where input_type_id='$inputid'and
                 validation_rules_handler_tbl.rule_name='$inputname'
            ";
@@ -603,7 +624,7 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
-    
+
     /**
      * @method :load validations rules
      * @param : none
@@ -611,12 +632,11 @@ class DataFetcher extends CI_Model {
      * 
      */
     public function loadInputValidations() {
-        $sql="select* from forminputvalidationrules";
-        $results=$this->db->query($sql);
+        $sql = "select* from forminputvalidationrules";
+        $results = $this->db->query($sql);
         return $results;
-        
     }
-    
+
     /**
      * @method :load the results for draw from column
      * @param : input_type id
@@ -624,10 +644,9 @@ class DataFetcher extends CI_Model {
      * 
      */
     public function drawsFromColumn($id) {
-        $sql="select draws_from,column_id,display_id from input_type_tbl where input_type_tbl.input_id='$id'";
-        $results=$this->db->query($sql);
+        $sql = "select draws_from,column_id,display_id from input_type_tbl where input_type_tbl.input_id='$id'";
+        $results = $this->db->query($sql);
         return $results;
-      
     }
 
 }

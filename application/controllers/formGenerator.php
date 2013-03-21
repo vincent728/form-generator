@@ -543,19 +543,27 @@ class FormGenerator extends CI_Controller {
        if($this->input->post('update')){
             
             $this->form_validation->set_rules('inputname','input name','required');
-            $this->form_validation->set_rules('inputtype','input types','required');
+            //$this->form_validation->set_rules('inputtype','input types','required');
+            $this->form_validation->set_rules('formfieldtype','input type','required');
+            $this->form_validation->set_rules('validation_chck[]','atleast a single validation rule ','required');
             $this->form_validation->set_rules('max_no_inputs','Maximum number of inputs','required');
             if($this->form_validation->run()==FALSE){
                 
                $this->load->view('editFormInputs');
             }
             else{
-                
-                
-             $inputname=$this->input->post('inputname');    
-            $inputtypes=$this->input->post('inputtype');  
+            $inputname=$this->input->post('inputname');    
+            $id=$this->input->post('id');
+            $this->session->set_userdata('update_id',$id);
+            $formfieldtype=$this->input->post('formfieldtype');
+            $fieldtypename = str_replace(' ', '', $inputname);
+            $tablename=$this->input->post('tablename');
+            $tablecolumnid=$this->input->post('displaycolumnid');
+            $tabledisplaycolumn=$this->input->post('displaycolumn');
             $max_no_inputs=$this->input->post('max_no_inputs'); 
-            $results=$this->dataFetcher->updateInputsTypesDetails($inputname,$inputtypes,$max_no_inputs,$this->session->userdata('update_id'));
+            $validation_chkboxes=$this->input->post('validation_chck');
+                    
+            $results=$this->dataFetcher->updateInputsTypesDetails($inputname, $formfieldtype, $max_no_inputs, $fieldtypename, $validation_chkboxes, $tablename, $tablecolumnid, $tabledisplaycolumn,$id);
             
             if($results){
               //load the  list of tables
@@ -563,7 +571,7 @@ class FormGenerator extends CI_Controller {
             
             }
             else{
-                
+                echo 'error occured during updating';  
             }
                 
             }
