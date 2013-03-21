@@ -114,87 +114,23 @@ echo form_fieldset();
     </li>
     
             <?php
-          
-            //echo form_fieldset('input validation rules');
+            $db_results=$this->dataFetcher->loadInputValidations();
+            if($db_results->num_rows()>0){
+                $outputValidation='';
+                foreach ($db_results->result_array() as $inputValidations) {
+                
+                if(strcasecmp($inputValidations['input_rules'],"required")==0){
+                   $checked="checked"; 
+                }else{
+                    $checked="";
+                }    
+                    
+                $outputValidation.='<li>'.  form_label().form_checkbox(array('name'=>'validation_chck[]','value'=>$inputValidations['input_rules'],'checked'=>$checked)).$inputValidations['input_rules'].'</li>';
+                } echo $outputValidation;
+                
+            }
           ?>
-            <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','checked'=>'checked','value'=>'required')).'required';
-          
-              ?>  
-            </li>  
-             <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','checked'=>'','value'=>'')).'None';
-          
-              ?>  
-            </li>  
-           
-            <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'valid_email')).'valid email';
-              ?>  
-            </li> 
-            <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'is_natural')).'is natural integer';
-              ?>  
-            </li> 
-            <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'decimal')).'is decimal';
-              ?>  
-            </li> 
-            <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'integer')).'is an integer';
-              ?>  
-            </li> 
-           
-            <li>
-              <?php
-              echo form_label();
-              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'numeric')).'is numeric';
-              ?>  
-            </li> 
-             <li>
-              <?php
-              echo form_label('Matches');
-              echo form_input(array('name'=>'matches','value'=>''))
-              ?>  
-            </li>
-             <li>
-              <?php
-              echo form_label('Is file type');
-              echo form_input(array('name'=>'','value'=>'')).'</br><i><font color="#1A9B50">' .
-                   form_label("Type the file type extension eg jpg|pdf|docx", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
-              ?>  
-            </li>
-<!--            <li>
-              <?php
-              //echo form_label('maximum length');
-             // echo form_input(array('name'=>'','value'=>''))
-              ?>  
-            </li> 
-            <li>
-              <?php
-              //echo form_label('minimum length');
-             // echo form_input(array('name'=>'','value'=>''))
-              ?>  
-            </li> -->
-           
-           
-              
-          <?php  
-            
-          //  echo form_fieldset_close();
-            ?>
+  
 
     <li>
         <?php

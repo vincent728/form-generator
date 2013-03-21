@@ -573,6 +573,22 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
+    
+    
+    
+    
+     /**
+     * @method :load validation rules per input
+     * @param :input id
+     * @return results
+     */
+    public function loadsValidationrulesByName($inputname,$inputid) {
+        $sql = "select rule_name from validation_rules_handler_tbl where input_type_id='$inputid'and
+                validation_rules_handler_tbl.rule_name='$inputname'
+           ";
+        $results = $this->db->query($sql);
+        return $results;
+    }
 
     /**
      * 
@@ -586,6 +602,32 @@ class DataFetcher extends CI_Model {
         $sql = "select * from $table";
         $results = $this->db->query($sql);
         return $results;
+    }
+    
+    /**
+     * @method :load validations rules
+     * @param : none
+     * @return results
+     * 
+     */
+    public function loadInputValidations() {
+        $sql="select* from forminputvalidationrules";
+        $results=$this->db->query($sql);
+        return $results;
+        
+    }
+    
+    /**
+     * @method :load the results for draw from column
+     * @param : input_type id
+     * @return results
+     * 
+     */
+    public function drawsFromColumn($id) {
+        $sql="select draws_from,column_id,display_id from input_type_tbl where input_type_tbl.input_id='$id'";
+        $results=$this->db->query($sql);
+        return $results;
+      
     }
 
 }

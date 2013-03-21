@@ -483,6 +483,7 @@ class FormGenerator extends CI_Controller {
             $this->form_validation->set_rules('inputname','input name','required');
             //$this->form_validation->set_rules('inputtype','input types','required');
             $this->form_validation->set_rules('formfieldtype','input type','required');
+            $this->form_validation->set_rules('validation_chck[]','atleast a single validation rule ','required');
             $this->form_validation->set_rules('max_no_inputs','Maximum number of inputs','required');
             if($this->form_validation->run()==FALSE){
                 
@@ -538,6 +539,7 @@ class FormGenerator extends CI_Controller {
        
    }
    public function updateInputTypesDetails() {
+       
        if($this->input->post('update')){
             
             $this->form_validation->set_rules('inputname','input name','required');

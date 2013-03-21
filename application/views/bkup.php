@@ -571,3 +571,67 @@
                     $fieldTobegenerated = form_label($label, $name = "area", $attributes = array('class' => 'area')) . '<select name="area[]" class="events" multiple>' . $out . '</select>' . '</br><i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
+                    
+                    
+                    
+                    
+                    
+                              <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','checked'=>'checked','value'=>'required')).'required';
+          
+              ?>  
+            </li>  
+             <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','checked'=>'','value'=>'')).'None';
+          
+              ?>  
+            </li>  
+           
+            <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'valid_email')).'valid email';
+              ?>  
+            </li> 
+            <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'is_natural')).'is natural integer';
+              ?>  
+            </li> 
+            <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'decimal')).'is decimal';
+              ?>  
+            </li> 
+            <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'integer')).'is an integer';
+              ?>  
+            </li> 
+           
+            <li>
+              <?php
+              echo form_label();
+              echo form_checkbox(array('name'=>'validation_chck[]','value'=>'numeric')).'is numeric';
+              ?>  
+            </li> 
+             <li>
+              <?php
+              echo form_label('Matches');
+              echo form_input(array('name'=>'matches','value'=>''))
+              ?>  
+            </li>
+             <li>
+              <?php
+              echo form_label('Is file type');
+              echo form_input(array('name'=>'','value'=>'')).'</br><i><font color="#1A9B50">' .
+                   form_label("Type the file type extension eg jpg|pdf|docx", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+              ?>  
+            </li>
