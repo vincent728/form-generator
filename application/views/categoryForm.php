@@ -93,7 +93,7 @@ if ($results->num_rows() > 0) {
                     $val['name'] = $value['fieldtypename'];
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
-
+                 
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
