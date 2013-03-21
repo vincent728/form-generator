@@ -17,7 +17,7 @@ echo form_fieldset();
     <li>
         <?php
         if (form_error('inputname')) {
-            echo form_error('inputname');
+          echo '<div class="error">'.form_error('inputname').'</div>';
         }
         echo form_label('input name');
         echo form_input(array('name' => 'inputname', 'value' => '' . set_value('inputname')));
@@ -28,10 +28,11 @@ echo form_fieldset();
     <li>
         <?php
         if (form_error('max_no_inputs')) {
-            echo form_error('max_no_inputs');
+            
+             echo '<div class="error">'.form_error('max_no_inputs').'</div>';
         }
         echo form_label('Maximum number of inputs');
-        echo form_input(array('name' => 'max_no_inputs', 'value' => ''));
+        echo form_input(array('name' => 'max_no_inputs', 'value' => ''.  set_value('max_no_inputs')));
         ?>
 
     </li>
@@ -40,7 +41,8 @@ echo form_fieldset();
         <?php
         
         if (form_error('formfieldtype')) {
-            echo form_error('formfieldtype');
+            
+            echo '<div class="error">'.form_error('formfieldtype').'</div>';
         }
         echo form_label('form field type');
         ?>
@@ -103,8 +105,13 @@ echo form_fieldset();
         ?>
 
     </li>
+         
     
             <?php
+            if (form_error('validation_chck')) {
+            
+            echo '<div class="error">'.form_error('validation_chck').'</div>';
+        }
             $db_results=$this->dataFetcher->loadInputValidations();
             if($db_results->num_rows()>0){
                 $outputValidation='';

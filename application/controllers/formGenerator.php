@@ -588,24 +588,7 @@ class FormGenerator extends CI_Controller {
            
        }
    }
-   
-   /**load the select table*/
-   public function addSelectFieldsInput() {
-       $value=$this->input->post('select');
-       $out='';
-       if(strcasecmp($value,"select")==0){
-           $Tablename=form_input(array('name'=>'tablename','value'=>''));
-           $displaycolumn=form_input(array('name'=>'displayname','value'=>''));
-           $displayid=form_input(array('name'=>'displayid','value'=>''));
-           $out.='<li>'.form_input(array('name'=>'tablename','value'=>'')).'</li>
-                 <li>'.form_input(array('name'=>'displayname','value'=>'')).'</li>
-                 <li>'.$displayid=form_input(array('name'=>'displayid','value'=>'')).'</li>';
-       
-           echo $out;
-       }
-       
-       
-   }
+
 
 }
 ?>

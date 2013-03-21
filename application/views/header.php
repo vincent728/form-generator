@@ -86,29 +86,7 @@
                 
                 
                 //
-                
-                $(".selectD").change(function()
-                {
-                    var id=$(this).val();
-                    var dataString = 'select='+ id;
-
-                    $.ajax
-                    ({
-                        type: "POST",
-                        url: "http://localhost/form-generator/index.php/formGenerator/addSelectFieldsInput/",
-                        data: dataString,
-                        cache: false,
-                        success: function(html)
-                        {
-                            $(".selectD").html(html);
-                        }
-                    });
-
-                });
-                
-                
-                
-                
+                   
                 
                 $(".events").change(function()
                 {
@@ -135,3 +113,5 @@
 
 
     </head>
+    <body>
+  

@@ -181,5 +181,14 @@ form.myformcreator fieldset ul li select{
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
    }
-   
-  /*..daniel styling.*/
+   div.error{
+       color:#F51A15;
+       font-style: italic;
+       border:1px solid #F51A15;
+       font-size: 14px;
+       width: 40%;
+       text-transform: lowercase;
+       text-indent: 10px;
+      
+          
+   }
