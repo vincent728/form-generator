@@ -6,6 +6,28 @@
         Purpose of the stylesheet follows.
 */
 
+#menu{
+    margin:10px;
+    
+    height: 35px;
+    
+}
+#menu ul {
+
+      width: 100%;
+      float: left;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+}
+#menu ul  li{
+
+  display: inline;
+}
+#menu ul li a {
+   
+}
+
 form.myform{
  font-family: Arial,Helvetica,sans-serif;
 }
@@ -196,10 +218,10 @@ form.myformcreator fieldset ul li select{
       
           
    }
-   #container{
+/*   #container{
        margin: 0 auto;
        width: 920px;
-   }
+   }*/
    form.myform ul li table.price{
        margin-left: 180px;
        margin-top: -12px;

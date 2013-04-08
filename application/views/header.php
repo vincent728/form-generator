@@ -113,5 +113,12 @@
 
 
     </head>
+    
+    <!--..navigation menu .-->
+    <div id="menu">
+        <?php
+        $this->load->view('menu');
+        ?>
+    </div>
     <body>
   

@@ -68,7 +68,6 @@ class DataFetcher extends CI_Model {
         on categories.section_id=section_tbl.section_id
         where section_tbl.section_id='$id' and
               categories.subsections_id='$subcatid'";
-
         $results = $this->db->query($sql);
         return $results;
     }
@@ -288,11 +287,6 @@ class DataFetcher extends CI_Model {
     public function categoryDetails($id) {
         $data = array();
 
-//        $sql =" select * from categories,form_tbl,input_type_tbl where 
-//         form_tbl.category_id=categories.cat_id and
-//        input_type_tbl.input_id=form_tbl.input_type_id and
-//        form_tbl.category_id='$id' order by displayOrder asc";
-
         $sql = "SELECT *
          FROM categories, form_tbl, input_type_tbl
           WHERE form_tbl.category_id = categories.cat_id
@@ -421,6 +415,7 @@ class DataFetcher extends CI_Model {
      *  
      * */
     public function getSectionSubsections($sectionid, $catid) {
+        
         $sql = "select distinct categories.section_id,subsections,cat_name,categories.cat_id,subsections.subsections_id from subsections,categories where
                 categories.section_id='$sectionid' and
                 subsections.subsections_id=categories.subsections_id and    
@@ -444,13 +439,14 @@ class DataFetcher extends CI_Model {
     }
 
     /**
-     * @method : load section from for forms created
+     * @method : load section from for  created
      * @param none
      * @return results
      * 
      */
     public function formsCreatedSections() {
-        $sql = "select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,form_tbl,categories
+        
+        $sql ="select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,form_tbl,categories
         where 
         categories.cat_id=form_tbl.category_id and
         categories.section_id=section_tbl.section_id";

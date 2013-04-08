@@ -8,6 +8,7 @@
 
 $this->load->view('header');
 $this->load->view('content');
+
 $results = $this->dataFetcher->formsCreatedSections();
 
 if ($results->num_rows() > 0) {
@@ -38,6 +39,7 @@ if ($results->num_rows() > 0) {
             foreach ($results->result_array() as $value) {
                 $sn++;
                 //check if subsections detected 
+                
                 $result_categories = $this->dataFetcher->sectionCategory($value['section_id']);
 
                 $forms_output = '';
@@ -49,11 +51,13 @@ if ($results->num_rows() > 0) {
                     if (!empty($forms['sections_without_subsections'])) {
 
                         //get the subsection name 
+                        
                         $results_subsections = $this->dataFetcher->getSectionSubsections($value['section_id'], $forms['cat_id']);
 
                         $subs_name = '';
                         ///
                         //if category is  not empty means  section with subsections
+                        
                         $sectionwithoutsubsectionsresults = $this->dataFetcher->loadsection($forms['sections_without_subsections']);
                         foreach ($sectionwithoutsubsectionsresults->result_array() as $rows) {
                             $formid = 'subsec/';
@@ -62,12 +66,13 @@ if ($results->num_rows() > 0) {
 
                         /////
                         foreach ($results_subsections->result_array() as $subsectionsname) {
+                            
                             $subs_name.=$subsectionsname['subsections'];
                         }
 
                         $name = $subs_name;
                     } else {
-
+                 
 
                         $sectionswithsubsectionsresults = $this->dataFetcher->loadSubsection($forms['cat_id']);
                         foreach ($sectionswithsubsectionsresults->result_array() as $rowsvalue) {
@@ -79,7 +84,7 @@ if ($results->num_rows() > 0) {
                     }
 
 
-                    $forms_output.='<tr><td>' . $forms['cat_name'] . '</td><td>' . $name . '</td>
+                    $forms_output.='<tr><td>' . $name . '</td><td>' . $forms['cat_name'] . '</td>
                        
                     <td>' . anchor('formGenerator/editform/' . $formid . $forms['cat_id'], $title =img(array('src'=>'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('formGenerator/generateform/' . $formid . $forms['cat_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('formGenerator/formdelete/' . $formid . $forms['cat_id'],$title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')) . '</td>
                        

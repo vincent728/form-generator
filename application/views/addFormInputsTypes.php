@@ -4,9 +4,6 @@
  * @Email  :vincentdaudi@gmail.com
  * @Skype id :vincentdaudi
  */
-$this->load->view('header');
-$this->load->view('content');
-
 
 $data = array('name' => '', 'class' => 'myform');
 echo form_open('formGenerator/addInputsTypes/', $data);

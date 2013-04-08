@@ -13,7 +13,6 @@ class FormGenerator extends CI_Controller {
 
         $this->load->view('formCreator');
     }
-   
 
     /*     * controller function to load the subsections */
 
@@ -22,9 +21,7 @@ class FormGenerator extends CI_Controller {
         $results = $this->dataFetcher->subsectionLoader($this->input->post('id'));
 
         if ($results) {
-
-
-            //check if the returned results is greater than one
+       //check if the returned results is greater than one
 
             if ($results->num_rows() > 0) {
                 //load subsections and their repective categories
@@ -390,6 +387,7 @@ class FormGenerator extends CI_Controller {
 
         //checking if the section or subsection
          $data = $this->dataFetcher->categoryDetails($id);
+       //$data = $this->dataFetcher->subcategoryDetails($id);
                 $this->load->view('categoryForm', $data);
 
     }
@@ -407,6 +405,7 @@ class FormGenerator extends CI_Controller {
         $subchekfilter = $this->uri->segment(3);
         $id = $this->uri->segment(4);
         $results = $this->dataFetcher->loadsectionFromcategory($id);
+        
         foreach ($results->result_array() as $value) {
             $section_id = $value['section_id'];
             $section_name = $value['section_name'];
@@ -425,6 +424,7 @@ class FormGenerator extends CI_Controller {
 
 
                 $results = $this->dataFetcher->subcategoryDetails($id);
+                
                 $data['result'] = $results['results'];
                 $subsec_results = $this->dataFetcher->getSectionSubsections($section_id, $id);
                 //fetching the subsection selected id
