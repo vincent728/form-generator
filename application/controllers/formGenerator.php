@@ -29,7 +29,7 @@ class FormGenerator extends CI_Controller {
                 $checkboxoutput = '';
                 foreach ($results->result_array() as $value) {
                     $checkboxoutput.='<option value="' . $value['subsections_id'] . '">' . $value['subsections'] . '</option>';
-                }echo form_label('sub-section(s)'). '<select name="subcat" class="autoloadcat" >' . $checkboxoutput . '</select>' . '</br></br>';
+                }echo form_label('sub-section(s)'). '<select name="subcat" class="autoloadcat" ><option value="" selected>--select an option--</option>' . $checkboxoutput . '</select>' . '</br></br>';
             } else {
                 ////////////
                 //for sections with no subsections
@@ -41,7 +41,7 @@ class FormGenerator extends CI_Controller {
                     foreach ($resultwithnosubsections->result_array() as $subsectionscategorires) {
                         $checkboxoutput.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
                     }
-                    echo form_label('Categorie(s)') . '<select name="cat[]" class="autoloadcat" multiple="multiple" size="4" >' . $checkboxoutput . '</select>' . '</br></br>';
+                    echo form_label('Categorie(s)') . '<select name="cat[]" class="autoloadcat" multiple="multiple" size="4" ><option value="" selected >--select an option--</option>' . $checkboxoutput . '</select>' . '</br></br>';
                     //load sections which does not have some categories
                 }
                 /////////////
@@ -64,7 +64,7 @@ class FormGenerator extends CI_Controller {
                 foreach ($results->result_array() as $value) {
                     $concatenator.='<option value="' . $value['cat_id'] . '">' . $value['cat_name'] . '</option>';
                 }
-                echo form_label('categories') . '<select name="cat[]" multiple="multiple" size="4">' . $concatenator . '</select>' . '</br></br>';
+                echo form_label('categories') . '<select name="cat[]" multiple="multiple" size="4"><option value="">--select an option--</option>' . $concatenator . '</select>' . '</br></br>';
             }
         }
     }

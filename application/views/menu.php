@@ -9,6 +9,11 @@
         echo anchor('formGenerator/listOfCreatedForms/',$title=img(array('src'=>'icons/forms.png','title'=>'forms')));
         ?>
     </li>
+       <li>
+        <?php
+        echo anchor('mastersearch/index/',$title=img(array('src'=>'icons/gnome-search.png','title'=>'search forms')));
+        ?>
+    </li>
      <li>
         <?php
         echo anchor('formGenerator/loadInputs/',$title=img(array('src'=>'icons/cog.png','title'=>'inputs manager')));

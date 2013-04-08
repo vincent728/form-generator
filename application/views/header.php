@@ -106,6 +106,58 @@
                     });
 
                 });
+                
+                //searching algorithm goes here
+                $(".searchsection").change(function()
+                {
+                    var id=$(this).val();
+                    var dataString = 'id='+ id;
+
+                    $.ajax
+                    ({
+                        type: "POST",
+                        url: "http://localhost/form-generator/index.php/mastersearch/searchfilter/",
+                        data: dataString,
+                        cache: false,
+                        success: function(html)
+                        {
+                            $(".searchcategory").html(html);
+                            
+                            ///function to autoload the categories from subsection
+                            $(".autoload").change(function()
+                            {
+                                var id=$(this).val();
+                                var dataString = 'catid='+ id;
+
+                                ///if the subsection categories present load the categories
+                                $.ajax
+                                ({
+                                    type: "POST",
+                                    url: "http://localhost/form-generator/index.php/mastersearch/selectCategory/",
+                                    data: dataString,
+                                    cache: false,
+                                    success: function(html)
+                                    {
+                                        $(".subcategories").html(html);
+                                        ///function to autoload the categories from subsection
+                                     
+                                        dataType:html;
+                                    }
+                                });
+
+                            });
+                            
+                            
+                            
+                        }
+                    });
+
+                });
+                
+                
+                
+                
+                
               
             });
 
@@ -113,7 +165,7 @@
 
 
     </head>
-    
+
     <!--..navigation menu .-->
     <div id="menu">
         <?php
@@ -121,4 +173,3 @@
         ?>
     </div>
     <body>
-  

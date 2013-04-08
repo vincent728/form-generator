@@ -207,6 +207,7 @@ form.myformcreator fieldset ul li select{
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
    }
+   
    div.error{
        color:#F51A15;
        font-style: italic;
@@ -231,3 +232,5 @@ form.myformcreator fieldset ul li select{
    form.myform ul li table.price tr td select.pricetd{
        width: 80px;
    }
+   
+   

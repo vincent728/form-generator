@@ -19,8 +19,12 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
+    
+    
 
-    /**
+
+
+       /**
      * @method :select specific subsection if existing
      * @param: section id
      * @return subsection
@@ -669,6 +673,109 @@ class DataFetcher extends CI_Model {
         return $results;
         
     }
+    
+    
+   //////////////////////////////////// 08-04-2013 
+    
+       /**
+    * @method :load section names
+    * @param id
+    * @return results
+    */  
+   public function sectionNames($id) {
+       $sql="select distinct section_name from section_tbl";
+       $results=$this->db->query($sql);
+       $data=array();
+       foreach ($results->result_array()as $val) {
+           $name=$val['section_name'];
+       }
+       $data['name']=$name;
+       $data['results']=$results;
+       return $data;
+       
+   }
+  
+   /**
+    * @method load search form
+    * @param none
+    * @return results
+    */
+   public function loadofsearchformscreatedsections() {
+       $sql="select distinct section_name,section_tbl.section_id from search_forms,categories,section_tbl where
+             search_forms.category_id=categories.cat_id and
+             section_tbl.section_id=categories.section_id
+             ";
+       $results=$this->db->query($sql);
+       return $results;
+   }
+   
+   /**
+    * @method :load section for the created section forms
+    * @param section id
+    * @return results
+    */
+   public function searchforms($parentSectionId) {
+       $sql="select distinct cat_name,search_forms.category_id,search_forms.sectionwithsubsection_id,categories.cat_id from search_forms,categories,section_tbl where
+             categories.cat_id=search_forms.category_id and
+             section_tbl.section_id='$parentSectionId' and
+             section_tbl.section_id=categories.section_id    
+        ";
+       $results=$this->db->query($sql);
+       return $results;
+   }
+   
+   /**
+    * @method check if subsection exists
+    * @param :category id
+    * @return results
+    * 
+    */
+   public function checkforsearchformssubsection($categoryId) {
+       $sql="select distinct subsections from categories,search_forms where 
+             search_forms.category_id=categories.cat_id and
+             search_forms.category_id='$categoryId'";
+       $results=$this->db->query($sql);
+       return $results;
+   }
+   /**
+    * @method load subsections for the selected searched forms
+    * @param :category id
+    * @return results
+    */
+   public function loadsubsectionsearchforms($categoryId) {
+       $sql="select*from subsections,section_tbl,search_forms,categories
+           where subsections.section_id=section_tbl.section_id and
+           categories.section_id=section_tbl.section_id and
+           search_forms.category_id=categories.cat_id and
+           search_forms.category_id='$categoryId'";
+       $results=$this->db->query($sql);
+       
+       return $results;
+   }
+   
+    public function searchform($id) {
+        $data = array();
+
+        $sql = "SELECT *
+         FROM categories, search_forms, input_type_tbl
+          WHERE search_forms.category_id = categories.cat_id
+          AND input_type_tbl.input_id = search_forms.input_type
+          AND search_forms.category_id ='$id'
+          ORDER BY displayOrder ASC";
+        $results = $this->db->query($sql);
+
+        foreach ($results->result_array() as $value) {
+
+            $category_name = $value['cat_name'];
+            $category_id = $value['cat_id'];
+        }
+        $data['results'] = $results;
+        $data['catid'] = $category_id;
+        $data['category'] = $category_name;
+        return $data;
+    }
+   
+    
 
 }
 
