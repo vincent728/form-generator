@@ -11,7 +11,17 @@
     </li>
        <li>
         <?php
-        echo anchor('mastersearch/index/',$title=img(array('src'=>'icons/gnome-search.png','title'=>'search forms')));
+        echo anchor('mastersearch/index/',$title=img(array('src'=>'icons/gnome-search.png','title'=>'create search forms')));
+        ?>
+    </li>
+    <li>
+        <?php
+        echo anchor('mastersearch/listofcreatedsearchforms/',$title=img(array('src'=>'icons/search.png','title'=>'list of search forms')));
+        ?>
+    </li>
+    <li>
+        <?php
+        echo anchor('mastersearch/loadsearchbox/',$title=img(array('src'=>'icons/search-1.png','title'=>'search')));
         ?>
     </li>
      <li>

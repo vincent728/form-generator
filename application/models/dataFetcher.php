@@ -675,7 +675,7 @@ class DataFetcher extends CI_Model {
     }
     
     
-   //////////////////////////////////// 08-04-2013 
+   //////////////////////////////////// 08-04-2013 ///////////////////////////////////////////////////////////////////////
     
        /**
     * @method :load section names
@@ -775,6 +775,19 @@ class DataFetcher extends CI_Model {
         return $data;
     }
    
+    /**
+     * @method: delete search forms created
+     * @param id
+     * @return results
+     * 
+     */
+    public function deletesearchforms($id) {
+       $sql="delete from search_forms where search_forms.category_id='$id'"; 
+       $results=$this->db->query($sql);
+       return $results;
+    }
+    
+  
     
 
 }

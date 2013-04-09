@@ -50,9 +50,9 @@ if ($results->num_rows() > 0) {
                       $subsectionname=$val['subsections'];
                     }
                     
-                    $options=anchor('formGenerator/editform/'.$rows['category_id'], $title =img(array('src'=>'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor('mastersearch/generateform/' .$rows['category_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('formGenerator/formdelete/'.$rows['category_id'],$title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')) ;
+                    $options=anchor_popup('mastersearch/generateform/' .$rows['category_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('mastersearch/deletesearchform/'.$rows['category_id'],$title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')) ;
                     
-                    $form_output .= '<tr><td>' . $no . '</td><td>' . $rows['cat_name'] . '</td><td>'.$subsectionname.'</td>'.
+                    $form_output .= '<tr><td>' . $no .  nbs(3). ')'.  nbs(3).'</td><td>' . $rows['cat_name'] . '</td><td>'.$subsectionname.'</td>'.
                            '<td>' .$options. '</td>'   
                        . '</tr>';
                 }
