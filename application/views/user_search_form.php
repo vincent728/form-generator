@@ -65,9 +65,6 @@ echo form_fieldset('');
 
         </table>
 
-
-
-
     </li>
 
 
