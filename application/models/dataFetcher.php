@@ -767,20 +767,7 @@ class DataFetcher extends CI_Model {
        $results=$this->db->query($sql);
        return $results;
     }
-    
-    //**/
-    
-   public function loadsectionfromcategory_test($cat_id,$table) {
 
-        $sql = "select distinct section_tbl.section_id,section_name from $table,section_tbl,categories
-          where 
-          section_tbl.section_id=categories.section_id and
-          $table.category_id=categories.cat_id and
-          $table.category_id='$cat_id' 
-          ";
-        $results = $this->db->query($sql);
-        return $results;
-    }
     
 
 }

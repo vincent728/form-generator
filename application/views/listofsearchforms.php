@@ -35,11 +35,11 @@ if ($results->num_rows() > 0) {
                 ///load search forms by category
                 $forms_output = '';
                 $no = 0;
-               
+              
                 foreach ($result_categories->result_array() as $forms) {
 
                     ///load subsection if present
-                     $formid = '';
+                      $formid='';
                     if (!empty($forms['sections_without_subsections'])) {
 
                         //get the subsection name 
@@ -69,7 +69,7 @@ if ($results->num_rows() > 0) {
                         $sectionswithsubsectionsresults = $this->dataFetcher->loadSubsection($forms['cat_id']);
                         foreach ($sectionswithsubsectionsresults->result_array() as $rowsvalue) {
 
-                            $formid = 'sec/';
+                            $formid ='sec/';
                         }
 
                         $name = '-------';
