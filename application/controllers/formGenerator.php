@@ -386,7 +386,7 @@ class FormGenerator extends CI_Controller {
         $sectionfilter = strtolower($this->uri->segment(3));
 
         //checking if the section or subsection
-         $data = $this->dataFetcher->categoryDetails($id);
+         $data = $this->dataFetcher->categoryDetails($id,$table="form_tbl");
        //$data = $this->dataFetcher->subcategoryDetails($id);
                 $this->load->view('categoryForm', $data);
 
@@ -445,6 +445,7 @@ class FormGenerator extends CI_Controller {
                 $data['catid'] = $catid;
                 $data['category'] = $catname;
                 $data['subsectionname'] = $subsectionname;
+                $data['controller']='formGenerator/editorprocessor';
                 //$data['category']=$catname;
 
                 $this->load->view('formCreatorUpdater', $data);
@@ -453,12 +454,13 @@ class FormGenerator extends CI_Controller {
             case "sec":
 
 
-                $results = $this->dataFetcher->categoryDetails($id);
+                $results = $this->dataFetcher->categoryDetails($id,$table="form_tbl");
                 $data['catid'] = $results['catid'];
                 $data['subsection_id'] = '';
                 $data['subsectionname'] = '';
                 $data['category'] = $results['category'];
                 $data['result'] = $results['results'];
+                $data['controller']='formGenerator/editorprocessor';
                 $this->load->view('formCreatorUpdater', $data);
                 break;
 

@@ -266,7 +266,7 @@ class Mastersearch extends CI_Controller {
                 $data['catid'] = $catid;
                 $data['category'] = $catname;
                 $data['subsectionname'] = $subsectionname;
-                //$data['category']=$catname;
+                $data['controller']='mastersearch/editorprocessor';
 
                 $this->load->view('formCreatorUpdater', $data);
 
@@ -332,7 +332,7 @@ class Mastersearch extends CI_Controller {
                     if ($results) {
                         $this->listofcreatedsearchforms();
                     } else {
-                        $this->load->view('formCreator');
+                        $this->load->view('search_form');
                     }
                 }
                 //end the proccessing   

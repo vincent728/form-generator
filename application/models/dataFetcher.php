@@ -288,14 +288,14 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function categoryDetails($id) {
+    public function categoryDetails($id,$table) {
         $data = array();
 
         $sql = "SELECT *
-         FROM categories, form_tbl, input_type_tbl
-          WHERE form_tbl.category_id = categories.cat_id
-          AND input_type_tbl.input_id = form_tbl.input_type_id
-          AND form_tbl.category_id ='$id'
+         FROM categories,$table, input_type_tbl
+          WHERE $table.category_id = categories.cat_id
+          AND input_type_tbl.input_id = $table.input_type_id
+          AND $table.category_id ='$id'
           ORDER BY displayOrder ASC";
         $results = $this->db->query($sql);
 
