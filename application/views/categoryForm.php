@@ -99,7 +99,7 @@ if ($results->num_rows() > 0) {
                     break;
                     
                     
-                         case"dateinput":
+                         case"date":
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -185,7 +185,7 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) .form_input(array('name' => 'minprice', 'value' => '','class'=>'')) .'-'.form_input(array('name' => 'maxprice', 'value' => '','class'=>'')). '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) .form_input(array('name' => 'minprice', 'value' => '','class'=>'')).'-'.form_input(array('name' => 'maxprice', 'value' => '','class'=>'')). '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
                     

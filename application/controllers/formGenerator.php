@@ -423,7 +423,7 @@ class FormGenerator extends CI_Controller {
 
 
 
-                $results = $this->dataFetcher->subcategoryDetails($id);
+                $results = $this->dataFetcher->subcategoryDetails($id,'form_tbl');
                 
                 $data['result'] = $results['results'];
                 $subsec_results = $this->dataFetcher->getSectionSubsections($section_id, $id);

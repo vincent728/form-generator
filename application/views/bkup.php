@@ -635,3 +635,27 @@
                    form_label("Type the file type extension eg jpg|pdf|docx", $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
               ?>  
             </li>
+/////////////////////////////////////////////backup April 10th 2013///////////////////////////////////////////////////////
+
+  foreach ($category_search_forms->result_array() as $rows) {
+                    $no++;
+                    
+                    //check if the cat has subsection or not
+                    if(empty($rows['sections_without_subsections'])){
+                     ///no subsetion on this category  
+                       $subsectionname='-----'; 
+                    }else{
+                      $subsection_rslt=$this->dataFetcher->loadsubsectionsearchforms($rows['category_id']); 
+                      
+                      foreach ($subsection_rslt->result_array() as $val) {
+                          
+                      }
+                      $subsectionname=$val['subsections'];
+                    }
+                    
+                    $options=anchor_popup('mastersearch/generateform/' .$rows['category_id'], $title =img(array('src'=>'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('mastersearch/deletesearchform/'.$rows['category_id'],$title =img(array('src'=>'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')) ;
+                    
+                    $form_output .= '<tr><td>' . $no .  nbs(3). ')'.  nbs(3).'</td><td>' . $rows['cat_name'] . '</td><td>'.$subsectionname.'</td>'.
+                           '<td>' .$options. '</td>'   
+                       . '</tr>';
+                }

@@ -312,20 +312,20 @@ class DataFetcher extends CI_Model {
 
     /**
      * @method: get specific form category information
-     * @param:  category id
+     * @param:  category id,table name
      * @return results
      * 
      */
-    public function subcategoryDetails($id) {
+    public function subcategoryDetails($id,$table) {
         $data = array();
         $category_name = '';
-        $sql = "select* from section_tbl,form_tbl,categories,input_type_tbl where 
+        $sql = "select* from section_tbl,$table,categories,input_type_tbl where 
         section_tbl.section_id=categories.section_id and
-        categories.subsections_id=form_tbl.sections_without_subsections and
-        form_tbl.sections_without_subsections=categories.subsections_id and
-        input_type_tbl.input_id=form_tbl.input_type_id and
-        form_tbl.category_id=categories.cat_id and
-        form_tbl.category_id='$id' order by displayOrder Asc
+        categories.subsections_id=$table.sections_without_subsections and
+        $table.sections_without_subsections=categories.subsections_id and
+        input_type_tbl.input_id=$table.input_type_id and
+        $table.category_id=categories.cat_id and
+        $table.category_id='$id' order by displayOrder Asc
         ";
         $results = $this->db->query($sql);
 
@@ -676,26 +676,7 @@ class DataFetcher extends CI_Model {
     
     
    //////////////////////////////////// 08-04-2013 ///////////////////////////////////////////////////////////////////////
-    
-       /**
-    * @method :load section names
-    * @param id
-    * @return results
-    */  
-   public function sectionNames($id) {
-       $sql="select distinct section_name from section_tbl";
-       $results=$this->db->query($sql);
-       $data=array();
-       foreach ($results->result_array()as $val) {
-           $name=$val['section_name'];
-       }
-       $data['name']=$name;
-       $data['results']=$results;
-       return $data;
-       
-   }
-  
-   /**
+     /**
     * @method load search form
     * @param none
     * @return results
@@ -715,7 +696,7 @@ class DataFetcher extends CI_Model {
     * @return results
     */
    public function searchforms($parentSectionId) {
-       $sql="select distinct cat_name,search_forms.category_id,search_forms.sectionwithsubsection_id,categories.cat_id from search_forms,categories,section_tbl where
+       $sql="select distinct cat_name,search_forms.category_id,search_forms.sections_without_subsections,categories.cat_id from search_forms,categories,section_tbl where
              categories.cat_id=search_forms.category_id and
              section_tbl.section_id='$parentSectionId' and
              section_tbl.section_id=categories.section_id    
@@ -753,14 +734,14 @@ class DataFetcher extends CI_Model {
        return $results;
    }
    
-    public function searchform($id) {
+    public function searchform($id,$table='search_forms') {
         $data = array();
 
         $sql = "SELECT *
-         FROM categories, search_forms, input_type_tbl
-          WHERE search_forms.category_id = categories.cat_id
-          AND input_type_tbl.input_id = search_forms.input_type
-          AND search_forms.category_id ='$id'
+         FROM categories,$table, input_type_tbl
+          WHERE $table.category_id = categories.cat_id
+          AND input_type_tbl.input_id =$table.input_type_id
+          AND $table.category_id ='$id'
           ORDER BY displayOrder ASC";
         $results = $this->db->query($sql);
 
@@ -781,13 +762,25 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function deletesearchforms($id) {
-       $sql="delete from search_forms where search_forms.category_id='$id'"; 
+    public function deletesearchforms($id,$table) {
+       $sql="delete from $table where $table.category_id='$id'"; 
        $results=$this->db->query($sql);
        return $results;
     }
     
-  
+    //**/
+    
+   public function loadsectionfromcategory_test($cat_id,$table) {
+
+        $sql = "select distinct section_tbl.section_id,section_name from $table,section_tbl,categories
+          where 
+          section_tbl.section_id=categories.section_id and
+          $table.category_id=categories.cat_id and
+          $table.category_id='$cat_id' 
+          ";
+        $results = $this->db->query($sql);
+        return $results;
+    }
     
 
 }
