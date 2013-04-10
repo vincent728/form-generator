@@ -404,7 +404,7 @@ class FormGenerator extends CI_Controller {
 
         $subchekfilter = $this->uri->segment(3);
         $id = $this->uri->segment(4);
-        $results = $this->dataFetcher->loadsectionFromcategory($id);
+        $results = $this->dataFetcher->loadsectionFromcategory($id,$table="form_tbl");
         
         foreach ($results->result_array() as $value) {
             $section_id = $value['section_id'];

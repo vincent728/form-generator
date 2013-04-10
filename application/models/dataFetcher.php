@@ -399,13 +399,13 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function loadsectionFromcategory($cat_id) {
+    public function loadsectionFromcategory($cat_id,$table) {
 
-        $sql = "select distinct section_tbl.section_id,section_name from form_tbl,section_tbl,categories
+        $sql = "select distinct section_tbl.section_id,section_name from $table,section_tbl,categories
           where 
           section_tbl.section_id=categories.section_id and
-          form_tbl.category_id=categories.cat_id and
-          form_tbl.category_id='$cat_id' 
+          $table.category_id=categories.cat_id and
+          $table.category_id='$cat_id' 
           ";
         $results = $this->db->query($sql);
         return $results;

@@ -35,10 +35,11 @@ if ($results->num_rows() > 0) {
                 ///load search forms by category
                 $forms_output = '';
                 $no = 0;
+               
                 foreach ($result_categories->result_array() as $forms) {
 
                     ///load subsection if present
-                    $formid = '';
+                     $formid = '';
                     if (!empty($forms['sections_without_subsections'])) {
 
                         //get the subsection name 
@@ -84,7 +85,7 @@ if ($results->num_rows() > 0) {
 
 
                 $sn++;
-                $table_output .= '<tr><td>' . $sn . '</td><td>' . $value['section_name'] . '</td><td><table border="0">' . $forms_output . '</table></td></tr>';
+                $table_output .= '<tr><td>' . $sn . '</td><td>' . $value['section_name'] . '</td><td><table width="100%" border="0" class="myinnertable">' . $forms_output . '</table></td></tr>';
             }
             echo $table_output;
             ?>

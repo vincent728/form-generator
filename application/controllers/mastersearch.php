@@ -35,7 +35,7 @@ class Mastersearch extends CI_Controller {
                     foreach ($resultwithnosubsections->result_array() as $subsectionscategorires) {
                         $checkboxoutput.='<option value="' . $subsectionscategorires['cat_id'] . '">' . $subsectionscategorires['cat_name'] . '</option>';
                     }
-                    echo form_label('Categorie(s)') . '<select name="cat[]" class="autoload" ><option value="">--select an option--</option>' . $checkboxoutput . '</select>' . '</br></br>';
+                    echo form_label('Categorie(s)') . '<select name="cat[]" class="autoload" multiple="multiple" size="4"><option value="">--select an option--</option>' . $checkboxoutput . '</select>' . '</br></br>';
                     //load sections which does not have some categories
                 }
                 /////////////
@@ -61,7 +61,7 @@ class Mastersearch extends CI_Controller {
                 foreach ($results->result_array() as $value) {
                     $concatenator.='<option value="' . $value['cat_id'] . '">' . $value['cat_name'] . '</option>';
                 }
-                echo form_label('categories') . '<select name="cat[]"   class="form-category"><option value="">--select an option--</option>' . $concatenator . '</select>' . '</br></br>';
+                echo form_label('categories') . '<select name="cat[]"   class="form-category" multiple="multiple" size="4"><option value="">--select an option--</option>' . $concatenator . '</select>' . '</br></br>';
             }
         }
     }
@@ -227,7 +227,7 @@ class Mastersearch extends CI_Controller {
         $subchekfilter = $this->uri->segment(3);
         $id = $this->uri->segment(3);
         /* set $table ="search_forms"*/
-        $results = $this->dataFetcher->loadsectionfromcategory_test($id,$table='search_forms');
+        $results = $this->dataFetcher->loadsectionFromcategory($id,$table="search_forms");
         
         foreach ($results->result_array() as $value) {
             $section_id = $value['section_id'];
