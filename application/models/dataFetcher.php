@@ -19,12 +19,8 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
-    
-    
 
-
-
-       /**
+    /**
      * @method :select specific subsection if existing
      * @param: section id
      * @return subsection
@@ -288,7 +284,7 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function categoryDetails($id,$table) {
+    public function categoryDetails($id, $table) {
         $data = array();
 
         $sql = "SELECT *
@@ -299,15 +295,20 @@ class DataFetcher extends CI_Model {
           ORDER BY displayOrder ASC";
         $results = $this->db->query($sql);
 
-        foreach ($results->result_array() as $value) {
+        if ($results->num_rows() > 0) {
 
-            $category_name = $value['cat_name'];
-            $category_id = $value['cat_id'];
+            foreach ($results->result_array() as $value) {
+
+                $category_name = $value['cat_name'];
+                $category_id = $value['cat_id'];
+            }
+            $data['results'] = $results;
+            $data['catid'] = $category_id;
+            $data['category'] = $category_name;
+            return $data;
+        } else {
+            return $data['results']=FALSE;
         }
-        $data['results'] = $results;
-        $data['catid'] = $category_id;
-        $data['category'] = $category_name;
-        return $data;
     }
 
     /**
@@ -316,7 +317,7 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function subcategoryDetails($id,$table) {
+    public function subcategoryDetails($id, $table) {
         $data = array();
         $category_name = '';
         $sql = "select* from section_tbl,$table,categories,input_type_tbl where 
@@ -380,7 +381,7 @@ class DataFetcher extends CI_Model {
      * 
      * 
      */
-    public function sectionCategory($sectionid,$table) {
+    public function sectionCategory($sectionid, $table) {
 
         $sql_new = "select distinct sections_without_subsections,cat_name,category_id,cat_id from categories,$table
               where 
@@ -399,7 +400,7 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function loadsectionFromcategory($cat_id,$table) {
+    public function loadsectionFromcategory($cat_id, $table) {
 
         $sql = "select distinct section_tbl.section_id,section_name from $table,section_tbl,categories
           where 
@@ -419,7 +420,7 @@ class DataFetcher extends CI_Model {
      *  
      * */
     public function getSectionSubsections($sectionid, $catid) {
-        
+
         $sql = "select distinct categories.section_id,subsections,cat_name,categories.cat_id,subsections.subsections_id from subsections,categories where
                 categories.section_id='$sectionid' and
                 subsections.subsections_id=categories.subsections_id and    
@@ -449,8 +450,8 @@ class DataFetcher extends CI_Model {
      * 
      */
     public function formsCreatedSections($table) {
-        
-        $sql ="select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,$table,categories
+
+        $sql = "select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,$table,categories
         where 
         categories.cat_id=$table.category_id and
         categories.section_id=section_tbl.section_id";
@@ -648,93 +649,94 @@ class DataFetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
-    
-    /***
+
+    /*     * *
      * @method :load input to be displayed on select dropdowns
      * @param :none
      * @return results
      * 
      */
+
     public function loadSelectInputTypes() {
-        $sql="select* from selectinputtypes";
-        $results=$this->db->query($sql);
+        $sql = "select* from selectinputtypes";
+        $results = $this->db->query($sql);
         return $results;
-        
     }
-     /***
+
+    /*     * *
      * @method :load input to be displayed on select dropdowns
      * @param :none
      * @return results
      * 
      */
+
     public function loadSelectInputTypesByid($id) {
-        $sql="select* from input_type_tbl where input_id='$id'";
-        $results=$this->db->query($sql);
+        $sql = "select* from input_type_tbl where input_id='$id'";
+        $results = $this->db->query($sql);
         return $results;
-        
     }
-    
-    
-   //////////////////////////////////// 08-04-2013 ///////////////////////////////////////////////////////////////////////
-     /**
-    * @method load search form
-    * @param none
-    * @return results
-    */
-   public function loadofsearchformscreatedsections() {
-       $sql="select distinct section_name,section_tbl.section_id from search_forms,categories,section_tbl where
+
+    //////////////////////////////////// 08-04-2013 ///////////////////////////////////////////////////////////////////////
+    /**
+     * @method load search form
+     * @param none
+     * @return results
+     */
+    public function loadofsearchformscreatedsections() {
+        $sql = "select distinct section_name,section_tbl.section_id from search_forms,categories,section_tbl where
              search_forms.category_id=categories.cat_id and
              section_tbl.section_id=categories.section_id
              ";
-       $results=$this->db->query($sql);
-       return $results;
-   }
-   
-   /**
-    * @method :load section for the created section forms
-    * @param section id
-    * @return results
-    */
-   public function searchforms($parentSectionId) {
-       $sql="select distinct cat_name,search_forms.category_id,search_forms.sections_without_subsections,categories.cat_id from search_forms,categories,section_tbl where
+        $results = $this->db->query($sql);
+        return $results;
+    }
+
+    /**
+     * @method :load section for the created section forms
+     * @param section id
+     * @return results
+     */
+    public function searchforms($parentSectionId) {
+        $sql = "select distinct cat_name,search_forms.category_id,search_forms.sections_without_subsections,categories.cat_id from search_forms,categories,section_tbl where
              categories.cat_id=search_forms.category_id and
              section_tbl.section_id='$parentSectionId' and
              section_tbl.section_id=categories.section_id    
         ";
-       $results=$this->db->query($sql);
-       return $results;
-   }
-   
-   /**
-    * @method check if subsection exists
-    * @param :category id
-    * @return results
-    * 
-    */
-   public function checkforsearchformssubsection($categoryId) {
-       $sql="select distinct subsections from categories,search_forms where 
+        $results = $this->db->query($sql);
+        return $results;
+    }
+
+    /**
+     * @method check if subsection exists
+     * @param :category id
+     * @return results
+     * 
+     */
+    public function checkforsearchformssubsection($categoryId) {
+        $sql = "select distinct subsections from categories,search_forms where 
              search_forms.category_id=categories.cat_id and
              search_forms.category_id='$categoryId'";
-       $results=$this->db->query($sql);
-       return $results;
-   }
-   /**
-    * @method load subsections for the selected searched forms
-    * @param :category id
-    * @return results
-    */
-   public function loadsubsectionsearchforms($categoryId) {
-       $sql="select*from subsections,section_tbl,search_forms,categories
+        $results = $this->db->query($sql);
+        return $results;
+    }
+
+    /**
+     * @method load subsections for the selected searched forms
+     * @param :category id
+     * @return results
+     */
+    public function loadsubsectionsearchforms($categoryId) {
+        $sql = "select*from subsections,section_tbl,search_forms,categories
            where subsections.section_id=section_tbl.section_id and
            categories.section_id=section_tbl.section_id and
            search_forms.category_id=categories.cat_id and
            search_forms.category_id='$categoryId'";
-       $results=$this->db->query($sql);
-       
-       return $results;
-   }
-   
-    public function searchform($id,$table='search_forms') {
+        $results = $this->db->query($sql);
+
+        return $results;
+    }
+
+    public function searchform($id, $table = 'search_forms') {
         $data = array();
 
         $sql = "SELECT *
@@ -755,18 +757,19 @@ class DataFetcher extends CI_Model {
         $data['category'] = $category_name;
         return $data;
     }
-   
+
     /**
      * @method: delete search forms created
      * @param id
      * @return results
      * 
      */
-    public function deletesearchforms($id,$table) {
-       $sql="delete from $table where $table.category_id='$id'"; 
-       $results=$this->db->query($sql);
-       return $results;
+    public function deletesearchforms($id, $table) {
+        $sql = "delete from $table where $table.category_id='$id'";
+        $results = $this->db->query($sql);
+        return $results;
     }
+
     /**
      * @method : insert inputs to be appeared on a select dropdown
      * @param none
@@ -774,43 +777,45 @@ class DataFetcher extends CI_Model {
      * 
      */
     public function insertinputsforselect($param) {
-      $sql="insert into selectinputtypes (selectinputtypes) values('$param')"; 
-      $results=$this->db->query($sql);
-      return $results;
+        $sql = "insert into selectinputtypes (selectinputtypes) values('$param')";
+        $results = $this->db->query($sql);
+        return $results;
     }
+
     /**
-     *@method : update input type to appear on select dropdown
-     *@param id ,input type name 
+     * @method : update input type to appear on select dropdown
+     * @param id ,input type name 
      * @return results
      * 
      *  
-    **/
-  public function updateinputtypetoappearonselect($id,$name) {
-      $sql="update  selectinputtypes set selectinputtypes='$name' where selectinputtypes.selectinputtypes_id='$id'";
-      $results=$this->db->query($sql);
-      return $results;
-  }
-  /**
-   * @method delete the input type to appear on select
-   */
-  public function deleteinputtypeforselect($id) {
-      $sql="delete from selectinputtypes where selectinputtypes_id='$id'";
-      $results=$this->db->query($sql);
-      return $results;
-  }
-  /**
-   * @method "select details for the select input 
-   * @param id
-   * @return results
-   */
-  public function selectsdetails($id) {
-      $sql="select * from selectinputtypes where selectinputtypes.selectinputtypes_id='$id'";
-      $results=$this->db->query($sql);
-      return $results;
-  }
-//
-    
+     * */
+    public function updateinputtypetoappearonselect($id, $name) {
+        $sql = "update  selectinputtypes set selectinputtypes='$name' where selectinputtypes.selectinputtypes_id='$id'";
+        $results = $this->db->query($sql);
+        return $results;
+    }
 
+    /**
+     * @method delete the input type to appear on select
+     */
+    public function deleteinputtypeforselect($id) {
+        $sql = "delete from selectinputtypes where selectinputtypes_id='$id'";
+        $results = $this->db->query($sql);
+        return $results;
+    }
+
+    /**
+     * @method "select details for the select input 
+     * @param id
+     * @return results
+     */
+    public function selectsdetails($id) {
+        $sql = "select * from selectinputtypes where selectinputtypes.selectinputtypes_id='$id'";
+        $results = $this->db->query($sql);
+        return $results;
+    }
+
+//
 }
 
 ?>

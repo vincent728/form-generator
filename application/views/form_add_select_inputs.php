@@ -4,8 +4,6 @@
  * @Email  :vincentdaudi@gmail.com
  * @Skype id :vincentdaudi
  */
-$this->load->view('header');
-$this->load->view('content');
 
 $data = array('name' => '', 'class' => 'myform');
 echo form_open('formGenerator/addinputforselectfieldprocessor/', $data);
@@ -41,5 +39,4 @@ echo form_fieldset();
 echo form_fieldset_close();
 echo form_close();
 
-$this->load->view('footer');
 ?>
