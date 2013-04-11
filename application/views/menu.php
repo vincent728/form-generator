@@ -1,12 +1,12 @@
 <ul>
     <li>
         <?php
-        echo anchor('formGenerator/index/',$title=img(array('src'=>'icons/form_add.png','title'=>'create form')));
+        echo anchor('formgenerator/index/',$title=img(array('src'=>'icons/form_add.png','title'=>'create form')));
         ?>
     </li>
     <li>
         <?php
-        echo anchor('formGenerator/listOfCreatedForms/',$title=img(array('src'=>'icons/forms.png','title'=>'forms')));
+        echo anchor('formgenerator/listOfCreatedForms/',$title=img(array('src'=>'icons/forms.png','title'=>'forms')));
         ?>
     </li>
        <li>
@@ -26,12 +26,12 @@
     </li>
      <li>
         <?php
-        echo anchor('formGenerator/loadInputs/',$title=img(array('src'=>'icons/cog.png','title'=>'inputs manager')));
+        echo anchor('formgenerator/loadInputs/',$title=img(array('src'=>'icons/cog.png','title'=>'inputs manager')));
         ?>
     </li>
     <li>
         <?php
-       echo anchor('formGenerator/inputscreatorselects/',$title=img(array('src'=>'icons/dropdown.png','title'=>'selects for inputs creator')));
+       echo anchor('formgenerator/inputscreatorselects/',$title=img(array('src'=>'icons/dropdown.png','title'=>'selects for inputs creator')));
         ?>
     </li>
     

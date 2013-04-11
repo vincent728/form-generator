@@ -23,7 +23,7 @@ echo form_fieldset('');
 
             <option  value="" selected="">--Select location--</option>
             <?php
-            $results = $this->dataFetcher->sectionsLoader();
+            $results = $this->datafetcher->sectionsLoader();
             $results=$this->db->get('area_tbl');
             $out = '';
             foreach ($results->result_array() as $section) {

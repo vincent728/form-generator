@@ -6,7 +6,7 @@
  * @Skype id :vincentdaudi
  */
 
-class FormGenerator extends CI_Controller {
+class Formgenerator extends CI_Controller {
 
     public function index() {
         //load the first phase form generator
@@ -18,7 +18,7 @@ class FormGenerator extends CI_Controller {
 
     public function setSectionId() {
 
-        $results = $this->dataFetcher->subsectionLoader($this->input->post('id'));
+        $results = $this->datafetcher->subsectionLoader($this->input->post('id'));
 
         if ($results) {
        //check if the returned results is greater than one
@@ -34,7 +34,7 @@ class FormGenerator extends CI_Controller {
                 ////////////
                 //for sections with no subsections
                 $checkboxoutput = '';
-                $resultwithnosubsections = $this->dataFetcher->categoriesLoaderwithoutsubsections($this->input->post('id'));
+                $resultwithnosubsections = $this->datafetcher->categoriesLoaderwithoutsubsections($this->input->post('id'));
                 if ($resultwithnosubsections->num_rows() > 0) {
 
                     $selectopt_sub = '';
@@ -55,7 +55,7 @@ class FormGenerator extends CI_Controller {
 
     public function selectCategory() {
 
-        $results = $this->dataFetcher->categoriesautoLoader($this->input->post('catid'));
+        $results = $this->datafetcher->categoriesautoLoader($this->input->post('catid'));
 
         if ($results) {
 
@@ -73,7 +73,7 @@ class FormGenerator extends CI_Controller {
     public function selectEventsRepeat() {
 
 
-        $results = $this->dataFetcher->getrepeats($this->input->post('e_id'));
+        $results = $this->datafetcher->getrepeats($this->input->post('e_id'));
         if ($results) {
 
             $checkboxoutput = '';
@@ -312,7 +312,7 @@ class FormGenerator extends CI_Controller {
                 $category = $this->input->post('cat');
                 $subsectionid = $this->input->post('subsection_id');
 
-                $deleteresults = $this->dataFetcher->deletecateggory($category[0]);
+                $deleteresults = $this->datafetcher->deletecateggory($category[0]);
 
                 if ($deleteresults) {
 
@@ -368,7 +368,7 @@ class FormGenerator extends CI_Controller {
     public function formdelete() {
 
         $id = $this->uri->segment(4);
-        $deleteresults = $this->dataFetcher->deletecateggory($id);
+        $deleteresults = $this->datafetcher->deletecateggory($id);
         //check if category has been deleted
         if ($deleteresults) {
 
@@ -386,8 +386,8 @@ class FormGenerator extends CI_Controller {
         $sectionfilter = strtolower($this->uri->segment(3));
 
         //checking if the section or subsection
-         $data = $this->dataFetcher->categoryDetails($id,$table="form_tbl");
-       //$data = $this->dataFetcher->subcategoryDetails($id);
+         $data = $this->datafetcher->categoryDetails($id,$table="form_tbl");
+       //$data = $this->datafetcher->subcategoryDetails($id);
                 $this->load->view('categoryForm', $data);
 
     }
@@ -404,13 +404,13 @@ class FormGenerator extends CI_Controller {
 
         $subchekfilter = $this->uri->segment(3);
         $id = $this->uri->segment(4);
-        $results = $this->dataFetcher->loadsectionFromcategory($id,$table="form_tbl");
+        $results = $this->datafetcher->loadsectionFromcategory($id,$table="form_tbl");
         
         foreach ($results->result_array() as $value) {
             $section_id = $value['section_id'];
             $section_name = $value['section_name'];
         }
-        // $data['subsection_chek']=$this->dataFetcher->getSectionSubsections($data['section_id']);
+        // $data['subsection_chek']=$this->datafetcher->getSectionSubsections($data['section_id']);
         $data['section_id'] = $section_id;
         $data['sectionname'] = $section_name;
         //store section session 
@@ -423,10 +423,10 @@ class FormGenerator extends CI_Controller {
 
 
 
-                $results = $this->dataFetcher->subcategoryDetails($id,'form_tbl');
+                $results = $this->datafetcher->subcategoryDetails($id,'form_tbl');
                 
                 $data['result'] = $results['results'];
-                $subsec_results = $this->dataFetcher->getSectionSubsections($section_id, $id);
+                $subsec_results = $this->datafetcher->getSectionSubsections($section_id, $id);
                 //fetching the subsection selected id
                 foreach ($subsec_results->result_array() as $rows) {
                     $subsectionid = $rows['subsections_id'];
@@ -445,7 +445,7 @@ class FormGenerator extends CI_Controller {
                 $data['catid'] = $catid;
                 $data['category'] = $catname;
                 $data['subsectionname'] = $subsectionname;
-                $data['controller']='formGenerator/editorprocessor';
+                $data['controller']='formgenerator/editorprocessor';
                 //$data['category']=$catname;
 
                 $this->load->view('formCreatorUpdater', $data);
@@ -454,13 +454,13 @@ class FormGenerator extends CI_Controller {
             case "sec":
 
 
-                $results = $this->dataFetcher->categoryDetails($id,$table="form_tbl");
+                $results = $this->datafetcher->categoryDetails($id,$table="form_tbl");
                 $data['catid'] = $results['catid'];
                 $data['subsection_id'] = '';
                 $data['subsectionname'] = '';
                 $data['category'] = $results['category'];
                 $data['result'] = $results['results'];
-                $data['controller']='formGenerator/editorprocessor';
+                $data['controller']='formgenerator/editorprocessor';
                 $this->load->view('formCreatorUpdater', $data);
                 break;
 
@@ -507,7 +507,7 @@ class FormGenerator extends CI_Controller {
             $validation_chkboxes=$this->input->post('validation_chck');
                 
             
-            $results=$this->dataFetcher->addFormInputsTypes($inputname,$formfieldtype,$max_no_inputs,$fieldtypename,$validation_chkboxes,$tablename,$tablecolumnid,$tabledisplaycolumn);
+            $results=$this->datafetcher->addFormInputsTypes($inputname,$formfieldtype,$max_no_inputs,$fieldtypename,$validation_chkboxes,$tablename,$tablecolumnid,$tabledisplaycolumn);
             
             if($results){
               //load the  list of tables
@@ -528,7 +528,7 @@ class FormGenerator extends CI_Controller {
     /*
      * controller function to list all input types  from the db**/
    public function loadInputs() {
-       $data['results']=$this->dataFetcher->listAllInputstypes();
+       $data['results']=$this->datafetcher->listAllInputstypes();
        $this->load->view('listOfinputs',$data);
        
    }
@@ -536,7 +536,7 @@ class FormGenerator extends CI_Controller {
    public function editinputs() {
        $id=$this->uri->segment(3);
        $this->session->set_userdata('update_id',$id);
-       $data['results']=$this->dataFetcher->loadInputTypesDetails($id);
+       $data['results']=$this->datafetcher->loadInputTypesDetails($id);
        $this->load->view('editFormInputs',$data);
        
    }
@@ -565,7 +565,7 @@ class FormGenerator extends CI_Controller {
             $max_no_inputs=$this->input->post('max_no_inputs'); 
             $validation_chkboxes=$this->input->post('validation_chck');
                     
-            $results=$this->dataFetcher->updateInputsTypesDetails($inputname, $formfieldtype, $max_no_inputs, $fieldtypename, $validation_chkboxes, $tablename, $tablecolumnid, $tabledisplaycolumn,$id);
+            $results=$this->datafetcher->updateInputsTypesDetails($inputname, $formfieldtype, $max_no_inputs, $fieldtypename, $validation_chkboxes, $tablename, $tablecolumnid, $tabledisplaycolumn,$id);
             
             if($results){
               //load the  list of tables
@@ -584,7 +584,7 @@ class FormGenerator extends CI_Controller {
    }
    /**delete input type*/
    public function deleteInput() {
-       $results=$this->dataFetcher->deleteInput($this->uri->segment(3));
+       $results=$this->datafetcher->deleteInput($this->uri->segment(3));
        if($results){
          $this->loadInputs();  
            
@@ -599,7 +599,7 @@ class FormGenerator extends CI_Controller {
                $this->load->view('form_add_select_inputs');
            }else{
               //get the posted data
-               $results=$this->dataFetcher->insertinputsforselect($this->input->post('inputname'));
+               $results=$this->datafetcher->insertinputsforselect($this->input->post('inputname'));
                if($results){
                    //load the list of inputs
                    $this->inputscreatorselects();
@@ -613,7 +613,7 @@ class FormGenerator extends CI_Controller {
    }
    /*list of inputs to be appeared on input creator form**/
    public function inputscreatorselects() {
-       $data['results']=$this->dataFetcher->loadSelectInputTypes();
+       $data['results']=$this->datafetcher->loadSelectInputTypes();
        $this->load->view('listofinputs_for_select_in_inputscreator',$data);
    }
    /**processor for the select input types in inputs creator form*/
@@ -624,7 +624,7 @@ class FormGenerator extends CI_Controller {
                $this->load->view('form_add_select_inputs');
            }else{
               //get the posted data
-               $results=$this->dataFetcher->updateinputtypetoappearonselect($id=$this->session->userdata('select_id'),$this->input->post('inputname'));
+               $results=$this->datafetcher->updateinputtypetoappearonselect($id=$this->session->userdata('select_id'),$this->input->post('inputname'));
                if($results){
                    //load the list of inputs
                    $this->inputscreatorselects();
@@ -639,7 +639,7 @@ class FormGenerator extends CI_Controller {
    /**delete select for the input form creator*/
    public function deleteinputforselect() {
        $id=$this->uri->segment('3');
-       $results=$this->dataFetcher->deleteinputtypeforselect($id);
+       $results=$this->datafetcher->deleteinputtypeforselect($id);
        
        if($results){          
        $this->inputscreatorselects();    
@@ -650,7 +650,7 @@ class FormGenerator extends CI_Controller {
    /**load details per selected link*/
    public function laodselectdetails() {
        $id=$this->uri->segment('3');
-       $data['results']=$this->dataFetcher->selectsdetails($id);
+       $data['results']=$this->datafetcher->selectsdetails($id);
        $this->load->view('edit_select_input',$data);
    }
 

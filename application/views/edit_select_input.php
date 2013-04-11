@@ -20,7 +20,7 @@ $this->load->view('content');
    
      ///forms goes here
      $data = array('name' => '', 'class' => 'myform');
-echo form_open('formGenerator/editinputforselectfieldprocessor/', $data);
+echo form_open('formgenerator/editinputforselectfieldprocessor/', $data);
 echo form_fieldset();
 ?>
 <ul>

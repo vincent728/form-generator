@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-class DataFetcher extends CI_Model {
+class Datafetcher extends CI_Model {
 
     /**
      * @method :method to load all existed sections

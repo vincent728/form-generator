@@ -6,7 +6,7 @@
  */
 
 $data = array('name' => '', 'class' => 'myform');
-echo form_open('formGenerator/addinputforselectfieldprocessor/', $data);
+echo form_open('formgenerator/addinputforselectfieldprocessor/', $data);
 echo form_fieldset();
 ?>
 <ul>

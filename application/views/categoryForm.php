@@ -58,7 +58,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -86,7 +86,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -116,7 +116,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -147,7 +147,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -177,7 +177,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -208,7 +208,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -237,7 +237,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -266,7 +266,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -299,7 +299,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -308,7 +308,7 @@ if ($results->num_rows() > 0) {
                     $val['rules'] = $rulesin;
                     
                     $out = '';
-                    $tabletesults = $this->dataFetcher->selecTfromTable($value['draws_from']);
+                    $tabletesults = $this->datafetcher->selecTfromTable($value['draws_from']);
 
                     foreach ($tabletesults->result_array()as $rows) {
 
@@ -340,7 +340,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -349,7 +349,7 @@ if ($results->num_rows() > 0) {
                     $val['rules'] = $rulesin;
                     
                     $out = '';
-                    $tabletesults = $this->dataFetcher->selecTfromTable($value['draws_from']);
+                    $tabletesults = $this->datafetcher->selecTfromTable($value['draws_from']);
 
                     foreach ($tabletesults->result_array()as $rows) {
 
@@ -370,7 +370,7 @@ if ($results->num_rows() > 0) {
                         $tipsOnlabel = $value['input_tip'];
                     }
                     $out = '';
-                    $repeatselectrtesults = $this->dataFetcher->getAllrepeats();
+                    $repeatselectrtesults = $this->datafetcher->getAllrepeats();
 
                     foreach ($repeatselectrtesults->result_array()as $rows) {
 
@@ -403,7 +403,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
@@ -435,7 +435,7 @@ if ($results->num_rows() > 0) {
                     /*                     * **an array to feed the validation rules for this input* */
                     //fetch the validation rules as set by the user
                     $rulesin = '';
-                    $rules_results = $this->dataFetcher->loadsValidationrules($value['input_id']);
+                    $rules_results = $this->datafetcher->loadsValidationrules($value['input_id']);
                     foreach ($rules_results->result_array() as $rules) {
                         $rulesin.=$rules['rule_name'] . '|';
                     }
