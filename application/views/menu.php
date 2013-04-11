@@ -29,5 +29,10 @@
         echo anchor('formGenerator/loadInputs/',$title=img(array('src'=>'icons/cog.png','title'=>'inputs manager')));
         ?>
     </li>
+    <li>
+        <?php
+       echo anchor('formGenerator/inputscreatorselects/',$title=img(array('src'=>'icons/dropdown.png','title'=>'selects for inputs creator')));
+        ?>
+    </li>
     
 </ul>

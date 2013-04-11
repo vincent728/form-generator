@@ -798,7 +798,17 @@ class DataFetcher extends CI_Model {
       $results=$this->db->query($sql);
       return $results;
   }
-
+  /**
+   * @method "select details for the select input 
+   * @param id
+   * @return results
+   */
+  public function selectsdetails($id) {
+      $sql="select * from selectinputtypes where selectinputtypes.selectinputtypes_id='$id'";
+      $results=$this->db->query($sql);
+      return $results;
+  }
+//
     
 
 }
