@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "FormGenerator";
+$route['default_controller'] = "formgenerator";
 $route['404_override'] = '';
 
 

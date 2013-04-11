@@ -2,7 +2,7 @@
 $this->load->view('header');
 $this->load->view('content');
 
-$results = $this->dataFetcher-> formsCreatedSections($table="search_forms");
+$results = $this->datafetcher-> formsCreatedSections($table="search_forms");
 
 if ($results->num_rows() > 0) {
     ?>
@@ -31,7 +31,7 @@ if ($results->num_rows() > 0) {
             $sn = 0;
             foreach ($results->result_array() as $value) {
 
-                $result_categories = $this->dataFetcher->sectionCategory($value['section_id'],$table="search_forms");
+                $result_categories = $this->datafetcher->sectionCategory($value['section_id'],$table="search_forms");
                 ///load search forms by category
                 $forms_output = '';
                 $no = 0;
@@ -44,13 +44,13 @@ if ($results->num_rows() > 0) {
 
                         //get the subsection name 
                         
-                        $results_subsections = $this->dataFetcher->getSectionSubsections($value['section_id'], $forms['cat_id']);
+                        $results_subsections = $this->datafetcher->getSectionSubsections($value['section_id'], $forms['cat_id']);
 
                         $subs_name = '';
                         ///
                         //if category is  not empty means  section with subsections
                         
-                        $sectionwithoutsubsectionsresults = $this->dataFetcher->loadsection($forms['sections_without_subsections']);
+                        $sectionwithoutsubsectionsresults = $this->datafetcher->loadsection($forms['sections_without_subsections']);
                         foreach ($sectionwithoutsubsectionsresults->result_array() as $rows) {
                             $formid = 'subsec/';
                         }
@@ -66,7 +66,7 @@ if ($results->num_rows() > 0) {
                     } else {
                  
 
-                        $sectionswithsubsectionsresults = $this->dataFetcher->loadSubsection($forms['cat_id']);
+                        $sectionswithsubsectionsresults = $this->datafetcher->loadSubsection($forms['cat_id']);
                         foreach ($sectionswithsubsectionsresults->result_array() as $rowsvalue) {
 
                             $formid ='sec/';

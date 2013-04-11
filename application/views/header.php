@@ -47,7 +47,7 @@
                     $.ajax
                     ({
                         type: "POST",
-                        url: "<?php echo base_url();?>/index.php/formgenerator/setSectionId/",
+                        url: "<?php echo base_url();?>index.php/formgenerator/setSectionId/",
                         data: dataString,
                         cache: false,
                         success: function(html)
@@ -64,7 +64,7 @@
                                 $.ajax
                                 ({
                                     type: "POST",
-                                    url: "<?php echo base_url();?>/index.php/formgenerator/selectCategory/",
+                                    url: "<?php echo base_url();?>index.php/formgenerator/selectCategory/",
                                     data: dataString,
                                     cache: false,
                                     success: function(html)
@@ -96,7 +96,7 @@
                     $.ajax
                     ({
                         type: "POST",
-                        url: "<?php echo base_url();?>/index.php/formgenerator/selectEventsRepeat/",
+                        url: "<?php echo base_url();?>index.php/formgenerator/selectEventsRepeat/",
                         data: dataString,
                         cache: false,
                         success: function(html)
@@ -116,7 +116,7 @@
                     $.ajax
                     ({
                         type: "POST",
-                        url: "<?php echo base_url();?>/index.php/mastersearch/searchfilter/",
+                        url: "<?php echo base_url();?>index.php/mastersearch/searchfilter/",
                         data: dataString,
                         cache: false,
                         success: function(html)
@@ -133,7 +133,7 @@
                                 $.ajax
                                 ({
                                     type: "POST",
-                                    url: "<?php echo base_url();?>/index.php/mastersearch/selectCategory/",
+                                    url: "<?php echo base_url();?>index.php/mastersearch/selectCategory/",
                                     data: dataString,
                                     cache: false,
                                     success: function(html)
