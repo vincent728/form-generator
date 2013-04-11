@@ -147,7 +147,7 @@ class Mastersearch extends CI_Controller {
 
     public function generateform() {
         $id = $this->uri->segment(3);
-        $data = $this->dataFetcher->searchform($id, $table = "search_forms");
+        $data = $this->dataFetcher->categoryDetails($id, $table = "search_forms");
         $this->load->view('categoryForm', $data);
     }
 
@@ -164,13 +164,14 @@ class Mastersearch extends CI_Controller {
     /*     * load search form */
 
     public function loadsearchbox() {
+
         if ($this->input->post('submit')) {
 
             $this->form_validation->set_rules('section', 'section', 'required');
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('user_search_form');
             } else {
-                $section = $this->input->post('section');
+              
                 $subsection = $this->input->post('subcat');
                 $category = $this->input->post('cat');
 
@@ -180,8 +181,11 @@ class Mastersearch extends CI_Controller {
                 } else {
                     $searchform_category = $category;
                 }
-                $data = $this->dataFetcher->searchform($searchform_category);
-                if ($data['results']->num_rows() > 0) {
+
+                $data= $this->dataFetcher->categoryDetails($searchform_category, $table = "search_forms");
+                $results=$data['results'];
+                
+                if ($results) {
 
                     $this->load->view('categoryForm', $data);
                 } else {
@@ -241,8 +245,6 @@ class Mastersearch extends CI_Controller {
             $catname = $rows['cat_name'];
             $catid = $rows['cat_id'];
         }
-
-
         $data['subsection_id'] = $subsectionid;
         //store id into session in case an error occure then we would get advantage of session to retrieve id
         // $this->session->set_userdata('subsectionid', $subsectionid);
