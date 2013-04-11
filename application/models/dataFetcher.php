@@ -380,11 +380,11 @@ class DataFetcher extends CI_Model {
      * 
      * 
      */
-    public function sectionCategory($sectionid) {
+    public function sectionCategory($sectionid,$table) {
 
-        $sql_new = "select distinct sections_without_subsections,cat_name,category_id,cat_id from categories,form_tbl 
+        $sql_new = "select distinct sections_without_subsections,cat_name,category_id,cat_id from categories,$table
               where 
-              categories.cat_id=form_tbl.category_id and
+              categories.cat_id=$table.category_id and
               categories.section_id='$sectionid'
               ";
         $results = $this->db->query($sql_new);
@@ -448,11 +448,11 @@ class DataFetcher extends CI_Model {
      * @return results
      * 
      */
-    public function formsCreatedSections() {
+    public function formsCreatedSections($table) {
         
-        $sql ="select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,form_tbl,categories
+        $sql ="select distinct section_tbl.section_name,section_tbl.section_id from section_tbl,$table,categories
         where 
-        categories.cat_id=form_tbl.category_id and
+        categories.cat_id=$table.category_id and
         categories.section_id=section_tbl.section_id";
         $results = $this->db->query($sql);
         return $results;
@@ -767,6 +767,37 @@ class DataFetcher extends CI_Model {
        $results=$this->db->query($sql);
        return $results;
     }
+    /**
+     * @method : insert inputs to be appeared on a select dropdown
+     * @param none
+     * @return results
+     * 
+     */
+    public function insertinputsforselect($param) {
+      $sql="insert into selectinputtypes (selectinputtypes) values('$param')"; 
+      $results=$this->db->query($sql);
+      return $results;
+    }
+    /**
+     *@method : update input type to appear on select dropdown
+     *@param id ,input type name 
+     * @return results
+     * 
+     *  
+    **/
+  public function updateinputtypetoappearonselect($id,$name) {
+      $sql="update  selectinputtypes set selectinputtypes='$name' where selectinputtypes.selectinputtypes_id='$id'";
+      $results=$this->db->query($sql);
+      return $results;
+  }
+  /**
+   * @method delete the input type to appear on select
+   */
+  public function deleteinputtypeforselect($id) {
+      $sql="delete from selectinputtypes where selectinputtypes_id='$id'";
+      $results=$this->db->query($sql);
+      return $results;
+  }
 
     
 

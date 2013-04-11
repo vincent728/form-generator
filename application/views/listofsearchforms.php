@@ -2,7 +2,7 @@
 $this->load->view('header');
 $this->load->view('content');
 
-$results = $this->dataFetcher->loadofsearchformscreatedsections();
+$results = $this->dataFetcher-> formsCreatedSections($table="search_forms");
 
 if ($results->num_rows() > 0) {
     ?>
@@ -31,7 +31,7 @@ if ($results->num_rows() > 0) {
             $sn = 0;
             foreach ($results->result_array() as $value) {
 
-                $result_categories = $this->dataFetcher->searchforms($value['section_id']);
+                $result_categories = $this->dataFetcher->sectionCategory($value['section_id'],$table="search_forms");
                 ///load search forms by category
                 $forms_output = '';
                 $no = 0;

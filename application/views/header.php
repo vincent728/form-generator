@@ -116,7 +116,7 @@
                     $.ajax
                     ({
                         type: "POST",
-                        url: "http://localhost/form-generator/index.php/mastersearch/searchfilter/",
+                        url: "<?php echo base_url();?>/index.php/mastersearch/searchfilter/",
                         data: dataString,
                         cache: false,
                         success: function(html)

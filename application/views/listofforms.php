@@ -9,7 +9,7 @@
 $this->load->view('header');
 $this->load->view('content');
 
-$results = $this->dataFetcher->formsCreatedSections();
+$results = $this->dataFetcher-> formsCreatedSections($table="form_tbl");
 
 if ($results->num_rows() > 0) {
     ?>
@@ -40,7 +40,7 @@ if ($results->num_rows() > 0) {
                 $sn++;
                 //check if subsections detected 
                 
-                $result_categories = $this->dataFetcher->sectionCategory($value['section_id']);
+                $result_categories = $this->dataFetcher->sectionCategory($value['section_id'],$table="form_tbl");
 
                 $forms_output = '';
                 
