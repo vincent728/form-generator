@@ -590,7 +590,69 @@ class FormGenerator extends CI_Controller {
            
        }
    }
-
+   
+   /**add inputs to be appeared on select dropdown menu in inputs creator form*/
+   public function addinputforselectfieldprocessor() {
+       if($this->input->post('submit')){
+           $this->form_validation->set_rules('inputname','input name','required|alpha');
+           if($this->form_validation->run()==FALSE){
+               $this->load->view('form_add_select_inputs');
+           }else{
+              //get the posted data
+               $results=$this->dataFetcher->insertinputsforselect($this->input->post('inputname'));
+               if($results){
+                   //load the list of inputs
+                   $this->inputscreatorselects();
+               }else{
+                  $this->load->view('form_add_select_inputs');   
+               }
+           }
+       }else{
+         $this->load->view('form_add_select_inputs');  
+       }
+   }
+   /*list of inputs to be appeared on input creator form**/
+   public function inputscreatorselects() {
+       $data['results']=$this->dataFetcher->loadSelectInputTypes();
+       $this->load->view('listofinputs_for_select_in_inputscreator',$data);
+   }
+   /**processor for the select input types in inputs creator form*/
+ public function editinputforselectfieldprocessor() {
+       if($this->input->post('submit')){
+           $this->form_validation->set_rules('inputname','input name','required|alpha');
+           if($this->form_validation->run()==FALSE){
+               $this->load->view('form_add_select_inputs');
+           }else{
+              //get the posted data
+               $results=$this->dataFetcher->updateinputtypetoappearonselect($id=$this->session->userdata('select_id'),$this->input->post('inputname'));
+               if($results){
+                   //load the list of inputs
+                   $this->inputscreatorselects();
+               }else{
+                  $this->load->view('form_add_select_inputs');   
+               }
+           }
+       }else{
+         $this->load->view('form_add_select_inputs');  
+       }
+   }
+   /**delete select for the input form creator*/
+   public function deleteinputforselect() {
+       $id=$this->uri->segment('3');
+       $results=$this->dataFetcher->deleteinputtypeforselect($id);
+       
+       if($results){          
+       $this->inputscreatorselects();    
+       }else{
+           
+       }
+   }
+   /**load details per selected link*/
+   public function laodselectdetails() {
+       $id=$this->uri->segment('3');
+       $data['results']=$this->dataFetcher->selectsdetails($id);
+       $this->load->view('edit_select_input',$data);
+   }
 
 }
 ?>
