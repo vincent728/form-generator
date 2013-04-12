@@ -171,7 +171,7 @@ class Mastersearch extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('user_search_form');
             } else {
-              
+
                 $subsection = $this->input->post('subcat');
                 $category = $this->input->post('cat');
 
@@ -182,9 +182,9 @@ class Mastersearch extends CI_Controller {
                     $searchform_category = $category;
                 }
 
-                $data= $this->datafetcher->categoryDetails($searchform_category, $table = "search_forms");
-                $results=$data['results'];
-                
+                $data = $this->datafetcher->categoryDetails($searchform_category, $table = "search_forms");
+                $results = $data['results'];
+
                 if ($results) {
 
                     $this->load->view('categoryForm', $data);
@@ -233,6 +233,60 @@ class Mastersearch extends CI_Controller {
 
         $data['section_id'] = $section_id;
         $data['sectionname'] = $section_name;
+
+        ///////////////////////////////////////////////////////////
+
+//        switch ($subchekfilter) {
+//            case "subsec":
+//
+//
+//
+//                $results = $this->datafetcher->subcategoryDetails($id, 'search_forms');
+//
+//                $data['result'] = $results['results'];
+//                $subsec_results = $this->datafetcher->getSectionSubsections($section_id, $id);
+//                //fetching the subsection selected id
+//                foreach ($subsec_results->result_array() as $rows) {
+//                    $subsectionid = $rows['subsections_id'];
+//                    $subsectionname = $rows['subsections'];
+//                    $catname = $rows['cat_name'];
+//                    $catid = $rows['cat_id'];
+//                }
+//
+//
+//                $data['subsection_id'] = $subsectionid;
+//                //store id into session in case an error occure then we would get advantage of session to retrieve id
+//                // $this->session->set_userdata('subsectionid', $subsectionid);
+//                $this->session->set_userdata('subsectionname', $subsectionname);
+//                $this->session->set_userdata('categoryname', $catname);
+//                $this->session->set_userdata('categoryid', $id);
+//                $data['catid'] = $catid;
+//                $data['category'] = $catname;
+//                $data['subsectionname'] = $subsectionname;
+//                $data['controller'] = 'mastersearch/editorprocessor';
+//
+//                $this->load->view('formCreatorUpdater', $data);
+//
+//                break;
+//            case "sec":
+//
+//
+//                $results = $this->datafetcher->categoryDetails($id, 'search_forms');
+//                $data['catid'] = $results['catid'];
+//                $data['subsection_id'] = '';
+//                $data['subsectionname'] = '';
+//                $data['category'] = $results['category'];
+//                $data['result'] = $results['results'];
+//                $data['controller'] = 'mastersearch/editorprocessor';
+//
+//                $this->load->view('formCreatorUpdater', $data);
+//                break;
+//
+//            default:
+//                break;
+//        }
+
+        ///////////////////////////////////////////////////////////
 
         $results = $this->datafetcher->subcategoryDetails($id, 'search_forms');
 
