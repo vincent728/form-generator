@@ -44,14 +44,14 @@ if ($results->num_rows() > 0) {
                     if (!empty($forms['sections_without_subsections'])) {
 
                         //get the subsection name 
- echo $forms['sections_without_subsections'];
+ 
                         $results_subsections = $this->datafetcher->getSectionSubsections($value['section_id'], $forms['cat_id']);
 
                         $subs_name = '';
                         ///
                         //if category is  not empty means  section with subsections
 
-                        $sectionwithoutsubsectionsresults = $this->datafetcher->loadsection($forms['sections_without_subsections']);
+                        $sectionwithoutsubsectionsresults = $this->datafetcher->loadsection($forms['sections_without_subsections'],$table="search_forms");
                         foreach ($sectionwithoutsubsectionsresults->result_array() as $rows) {
                             $formid = 'subsec/';
                         }
@@ -67,7 +67,7 @@ if ($results->num_rows() > 0) {
                     } else {
 
 
-                        $sectionswithsubsectionsresults = $this->datafetcher->loadSubsection($forms['cat_id']);
+                        $sectionswithsubsectionsresults = $this->datafetcher->loadSubsection($forms['cat_id'],$table="search_forms");
                         foreach ($sectionswithsubsectionsresults->result_array() as $rowsvalue) {
 
                             $formid = 'sec/';
@@ -94,7 +94,7 @@ if ($results->num_rows() > 0) {
     </table>
     <?php
 } else {
-    echo 'not search form created';
+    echo 'no search form created yet';
 }
 $this->load->view('footer');
 ?>

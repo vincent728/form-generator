@@ -146,7 +146,7 @@ class Mastersearch extends CI_Controller {
     /*     * controller function for the pop up form anchor */
 
     public function generateform() {
-        $id = $this->uri->segment(3);
+        $id = $this->uri->segment(4);
         $data = $this->datafetcher->categoryDetails($id, $table = "search_forms");
         $this->load->view('categoryForm', $data);
     }
@@ -154,7 +154,7 @@ class Mastersearch extends CI_Controller {
     /* delete search forms */
 
     public function deletesearchform() {
-        $id = $this->uri->segment(3);
+        $id = $this->uri->segment(4);
         $results = $this->datafetcher->deletesearchforms($id, $table = "search_forms");
         if ($results) {
             $this->listofcreatedsearchforms();
@@ -222,7 +222,7 @@ class Mastersearch extends CI_Controller {
 
 
         $subchekfilter = $this->uri->segment(3);
-        $id = $this->uri->segment(3);
+        $id = $this->uri->segment(4);
         /* set $table ="search_forms" */
         $results = $this->datafetcher->loadsectionFromcategory($id, $table = "search_forms");
 
@@ -236,81 +236,59 @@ class Mastersearch extends CI_Controller {
 
         ///////////////////////////////////////////////////////////
 
-//        switch ($subchekfilter) {
-//            case "subsec":
-//
-//
-//
-//                $results = $this->datafetcher->subcategoryDetails($id, 'search_forms');
-//
-//                $data['result'] = $results['results'];
-//                $subsec_results = $this->datafetcher->getSectionSubsections($section_id, $id);
-//                //fetching the subsection selected id
-//                foreach ($subsec_results->result_array() as $rows) {
-//                    $subsectionid = $rows['subsections_id'];
-//                    $subsectionname = $rows['subsections'];
-//                    $catname = $rows['cat_name'];
-//                    $catid = $rows['cat_id'];
-//                }
-//
-//
-//                $data['subsection_id'] = $subsectionid;
-//                //store id into session in case an error occure then we would get advantage of session to retrieve id
-//                // $this->session->set_userdata('subsectionid', $subsectionid);
-//                $this->session->set_userdata('subsectionname', $subsectionname);
-//                $this->session->set_userdata('categoryname', $catname);
-//                $this->session->set_userdata('categoryid', $id);
-//                $data['catid'] = $catid;
-//                $data['category'] = $catname;
-//                $data['subsectionname'] = $subsectionname;
-//                $data['controller'] = 'mastersearch/editorprocessor';
-//
-//                $this->load->view('formCreatorUpdater', $data);
-//
-//                break;
-//            case "sec":
-//
-//
-//                $results = $this->datafetcher->categoryDetails($id, 'search_forms');
-//                $data['catid'] = $results['catid'];
-//                $data['subsection_id'] = '';
-//                $data['subsectionname'] = '';
-//                $data['category'] = $results['category'];
-//                $data['result'] = $results['results'];
-//                $data['controller'] = 'mastersearch/editorprocessor';
-//
-//                $this->load->view('formCreatorUpdater', $data);
-//                break;
-//
-//            default:
-//                break;
-//        }
+        switch ($subchekfilter) {
+            case "subsec":
+
+
+
+                $results = $this->datafetcher->subcategoryDetails($id, 'search_forms');
+
+                $data['result'] = $results['results'];
+                $subsec_results = $this->datafetcher->getSectionSubsections($section_id, $id);
+                //fetching the subsection selected id
+                foreach ($subsec_results->result_array() as $rows) {
+                    $subsectionid = $rows['subsections_id'];
+                    $subsectionname = $rows['subsections'];
+                    $catname = $rows['cat_name'];
+                    $catid = $rows['cat_id'];
+                }
+
+
+                $data['subsection_id'] = $subsectionid;
+                //store id into session in case an error occure then we would get advantage of session to retrieve id
+                // $this->session->set_userdata('subsectionid', $subsectionid);
+                $this->session->set_userdata('subsectionname', $subsectionname);
+                $this->session->set_userdata('categoryname', $catname);
+                $this->session->set_userdata('categoryid', $id);
+                $data['catid'] = $catid;
+                $data['category'] = $catname;
+                $data['subsectionname'] = $subsectionname;
+                $data['controller'] = 'mastersearch/editorprocessor';
+
+                $this->load->view('formCreatorUpdater', $data);
+
+                break;
+            case "sec":
+
+
+                $results = $this->datafetcher->categoryDetails($id, 'search_forms');
+                $data['catid'] = $results['catid'];
+                $data['subsection_id'] = '';
+                $data['subsectionname'] = '';
+                $data['category'] = $results['category'];
+                $data['result'] = $results['results'];
+                $data['controller'] = 'mastersearch/editorprocessor';
+
+                $this->load->view('formCreatorUpdater', $data);
+                break;
+
+            default:
+                break;
+        }
 
         ///////////////////////////////////////////////////////////
 
-        $results = $this->datafetcher->subcategoryDetails($id, 'search_forms');
-
-        $data['result'] = $results['results'];
-        $subsec_results = $this->datafetcher->getSectionSubsections($section_id, $id);
-        //fetching the subsection selected id
-        foreach ($subsec_results->result_array() as $rows) {
-            $subsectionid = $rows['subsections_id'];
-            $subsectionname = $rows['subsections'];
-            $catname = $rows['cat_name'];
-            $catid = $rows['cat_id'];
-        }
-        $data['subsection_id'] = $subsectionid;
-        //store id into session in case an error occure then we would get advantage of session to retrieve id
-        // $this->session->set_userdata('subsectionid', $subsectionid);
-        $this->session->set_userdata('subsectionname', $subsectionname);
-        $this->session->set_userdata('categoryname', $catname);
-        $this->session->set_userdata('categoryid', $id);
-        $data['catid'] = $catid;
-        $data['category'] = $catname;
-        $data['subsectionname'] = $subsectionname;
-        $data['controller'] = 'mastersearch/editorprocessor';
-
-        $this->load->view('formCreatorUpdater', $data);
+       
     }
 
     /*     * ** form update processor */
