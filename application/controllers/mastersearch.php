@@ -187,7 +187,7 @@ class Mastersearch extends CI_Controller {
                 $results = $data['results'];
 
                 if ($results) {
-
+                    $data['heading']=" ";
                     $this->load->view('categoryForm', $data);
                 } else {
                     $this->load->view('location_search_form');
