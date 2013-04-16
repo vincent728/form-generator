@@ -37,15 +37,13 @@ echo form_fieldset('');
 
     </li>
     <li>
-           <?php
-           
-           if (form_error('cat')) {
+        <?php
+        if (form_error('cat')) {
             echo '<div class="error">';
             echo form_error("cat") . form_error();
             echo '</div>';
         }
-                 
-           ?>
+        ?>
         <table class="mytable" width="" border="0">
             <tr>
 
@@ -71,6 +69,18 @@ echo form_fieldset('');
 
 
 
+
+    </li>
+    <li>
+        <?php
+        if (form_error('search_level')) {
+            echo form_error('search_level');      
+        }
+        echo form_label('search level:');
+        ?>
+        <input type="radio" name="search_level" value="section" />Section Level
+        <input type="radio" name="search_level" value="subsection" />Subsection Level
+        <input type="radio" name="search_level" value="category" />Category Level
 
     </li>
 
@@ -101,6 +111,7 @@ echo form_fieldset('');
     </li>
 
     <li>
+
         <?php
         $data = array('name' => 'submit', 'value' => 'submit', 'class' => 'submit');
         echo form_submit($data);

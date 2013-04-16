@@ -75,67 +75,152 @@ class Mastersearch extends CI_Controller {
 
             $this->form_validation->set_rules('section', 'section', 'required');
             $this->form_validation->set_rules('cat', 'form category', 'required', 'callback_checkdata_callback');
+            $this->form_validation->set_rules('search_level', 'search level', 'required');
+            //filter to chek if search level selected
+            $search_level = $this->input->post('search_level');
+
             $x = $this->input->post('cat');
+            $section = $this->input->post('section');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('formCreator');
             } else {
 
-                //form processing goes here
-                $datas = array();
-                foreach ($_POST as $key => $value) {
+                switch ($search_level) {
 
-                    ///strip the selected values from dropdown
-                    if (strstr($key, "field_")) {
+                    case "section":
 
-                        ///check if the sections has subsections
+                        $this->datatodbinjector($category_id = '', $section, $subsectionId = '');
+
+                        break;
+                    case "subsection":
+
+                        if (!empty($_POST['subcat'])) {
+                            $subsection = $_POST['subcat'];
+                        } else {
+                            $subsection = '';
+                        }
+                        $this->datatodbinjector($category_id = '', $section, $subsection);
+                        break;
+                    case "category":
 
                         if (!empty($_POST['cat']) && count($_POST['cat'])) {
-
                             foreach ($_POST['cat'] as $category) {
-                                //check if the submitted data has subsection
                                 if (!empty($_POST['subcat'])) {
                                     $subsection = $_POST['subcat'];
                                 } else {
                                     $subsection = '';
                                 }
-
-
-                                $arr = explode('_', $key);
-                                $checkboxId = $arr[1];
-                                $selectedCheckboxValue = $_POST['count_' . $checkboxId];
-                                $selectedLabel = $_POST['label_' . $checkboxId];
-                                $data['no_input'] = $selectedCheckboxValue;
-                                $data['displayorder'] = $_POST['order_' . $checkboxId];
-                                $data['input_type_id'] = $checkboxId;
-                                $data['sections_without_subsections'] = $subsection;
-                                $data['category_id'] = $category;
-                                $data['form_label'] = $selectedLabel;
-                                $data['input_tip'] = $_POST['tip_' . $checkboxId];
-
-                                $datas[] = $data;
+                                //call the function here
+                                $this->datatodbinjector($category, $parentsecId = '', $subsection);
                             }
                         }
-                        //end
-                    }
+
+                        break;
+
+                    default:
+                        break;
                 }
 
 
 
-                $results = $this->db->insert_batch('search_forms', $datas);
-                if ($results) {
-                    $this->listofcreatedsearchforms();
-                } else {
-                    $this->load->view('searchform');
-                }
 
 
+
+//
+//
+//                //form processing goes here
+//                $datas = array();
+//                foreach ($_POST as $key => $value) {
+//
+//                    ///strip the selected values from dropdown
+//                    if (strstr($key, "field_")) {
+//
+//                        ///check if the sections has subsections
+//
+//                        if (!empty($_POST['cat']) && count($_POST['cat'])) {
+//
+//                            foreach ($_POST['cat'] as $category) {
+//                                //check if the submitted data has subsection
+//                                if (!empty($_POST['subcat'])) {
+//                                    $subsection = $_POST['subcat'];
+//                                } else {
+//                                    $subsection = '';
+//                                }
+//
+//
+//                                $arr = explode('_', $key);
+//                                $checkboxId = $arr[1];
+//                                $selectedCheckboxValue = $_POST['count_' . $checkboxId];
+//                                $selectedLabel = $_POST['label_' . $checkboxId];
+//                                $data['no_input'] = $selectedCheckboxValue;
+//                                $data['displayorder'] = $_POST['order_' . $checkboxId];
+//                                $data['input_type_id'] = $checkboxId;
+//                                $data['sections_without_subsections'] = $subsection;
+//                                $data['category_id'] = $category;
+//                                $data['form_label'] = $selectedLabel;
+//                                $data['input_tip'] = $_POST['tip_' . $checkboxId];
+//
+//                                $datas[] = $data;
+//                            }
+//                        }
+//                        //end
+//                    }
+//                }
+//
+//
+//
+//                $results = $this->db->insert_batch('search_forms', $datas);
+//                if ($results) {
+//                    $this->listofcreatedsearchforms();
+//                } else {
+//                    $this->load->view('searchform');
+//                }
                 //end the proccessing   
             }
         } else {
 
             $this->load->view('searchform');
         }
+    }
+
+    public function datatodbinjector($category_id, $parentsecId, $subsectionId) {
+        //form processing goes here
+        $datas = array();
+        foreach ($_POST as $key => $value) {
+
+            ///strip the selected values from dropdown
+            if (strstr($key, "field_")) {
+                $arr = explode('_', $key);
+                $checkboxId = $arr[1];
+                $selectedCheckboxValue = $_POST['count_' . $checkboxId];
+                $selectedLabel = $_POST['label_' . $checkboxId];
+                $data['no_input'] = $selectedCheckboxValue;
+                $data['displayorder'] = $_POST['order_' . $checkboxId];
+                $data['input_type_id'] = $checkboxId;
+                $data['sections_without_subsections'] = $subsectionId;
+                $data['category_id'] = $category_id;
+                $data['parentsectionid'] = $parentsecId;
+                $data['subsectionid'] = $subsectionId;
+                $data['categoryid'] = $category_id;
+                $data['form_label'] = $selectedLabel;
+                $data['input_tip'] = $_POST['tip_' . $checkboxId];
+
+                $datas[] = $data;
+                // }
+                // }
+                //end
+            }
+        }
+
+        $results = $this->db->insert_batch('search_forms', $datas);
+
+        if ($results) {
+            $this->listofcreatedsearchforms();
+        } else {
+            $this->load->view('searchform');
+        }
+        //end the proccessing  
     }
 
     //list of created search forms
@@ -148,7 +233,7 @@ class Mastersearch extends CI_Controller {
     public function generateform() {
         $id = $this->uri->segment(4);
         $data = $this->datafetcher->categoryDetails($id, $table = "search_forms");
-        $data['heading']="Search  for ";
+        $data['heading'] = "Search  for ";
         $this->load->view('categoryForm', $data);
     }
 
@@ -187,7 +272,7 @@ class Mastersearch extends CI_Controller {
                 $results = $data['results'];
 
                 if ($results) {
-                    $data['heading']=" ";
+                    $data['heading'] = " ";
                     $this->load->view('categoryForm', $data);
                 } else {
                     $this->load->view('location_search_form');
@@ -288,8 +373,6 @@ class Mastersearch extends CI_Controller {
         }
 
         ///////////////////////////////////////////////////////////
-
-       
     }
 
     /*     * ** form update processor */
