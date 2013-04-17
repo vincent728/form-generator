@@ -68,22 +68,8 @@ echo form_fieldset('');
         </table>
 
 
-
-
-    </li>
-    <li>
-        <?php
-        if (form_error('search_level')) {
-            echo form_error('search_level');      
-        }
-        echo form_label('search level:');
-        ?>
-        <input type="radio" name="search_level" value="section" />Section Level
-        <input type="radio" name="search_level" value="subsection" />Subsection Level
-        <input type="radio" name="search_level" value="category" />Category Level
-
-    </li>
-
+   </li>
+  
     <li>
 
         <?php

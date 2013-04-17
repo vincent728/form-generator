@@ -255,7 +255,7 @@ class Datafetcher extends CI_Model {
      * @return results
      * 
      */
-    public function loadSubsection($id,$table) {
+    public function loadSubsection($id, $table) {
 
         $sql_new = "select distinct cat_name,cat_id,category_id from $table,categories
         where categories.cat_id=$table.category_id and
@@ -266,7 +266,7 @@ class Datafetcher extends CI_Model {
 
     /*     * load section name and id for sections with no subsections */
 
-    public function loadsection($id,$table) {
+    public function loadsection($id, $table) {
 
         $sql = "select distinct cat_name,cat_id from $table,categories where
           $table.sections_without_subsections=categories.subsections_id and
@@ -307,7 +307,7 @@ class Datafetcher extends CI_Model {
             $data['category'] = $category_name;
             return $data;
         } else {
-            return $data['results']=FALSE;
+            return $data['results'] = FALSE;
         }
     }
 
@@ -813,6 +813,50 @@ class Datafetcher extends CI_Model {
         $sql = "select * from selectinputtypes where selectinputtypes.selectinputtypes_id='$id'";
         $results = $this->db->query($sql);
         return $results;
+    }
+
+    /*     * *
+     * @method
+     * @param :
+     * @return results
+     * 
+     */
+
+    public function formscreated() {
+        $sql = "select * from search_forms ";
+        $result = $this->db->query($sql);
+        return $result;
+        
+       
+    }
+
+    /**
+     * @method :load a specific section
+     * @param :Parent section Id
+     * @return results 
+     * */
+    public function loadsectionById($id) {
+        $sql = "select distinct section_name from section_tbl where section_id='$id'";
+        $results = $this->db->query($sql);
+        if ($results) {
+            foreach ($results->result_array() as $value) {
+                
+            }
+            return $value['section_name'];
+        } else {
+            return FALSE;
+        }
+
+    }
+    
+    
+    //load section from  category
+    public function loadcatsec($catid) {
+        $sql="select distinct section_name from section_tbl,search_forms,categories
+            where 
+            search_forms.category_id='$catid' and
+            categories.section_id=section_tbl.section_id and
+            categories.cat_id=search_forms.category_id";
     }
 
 //

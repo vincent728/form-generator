@@ -659,3 +659,47 @@
                            '<td>' .$options. '</td>'   
                        . '</tr>';
                 }
+                
+                
+                /////////////////////////////////////////////////////////////////////////////////////
+                       switch ($search_level) {
+
+                     ///if the radio selection is a section level
+
+                    case "section":
+
+                        $this->datatodbinjector($category_id = '', $section, $subsectionId = '');
+
+                        break;
+                         ///if the radio selection is a subsection level
+
+                    case "subsection":
+
+                        if (!empty($_POST['subcat'])) {
+                            $subsection = $_POST['subcat'];
+                        } else {
+                            $subsection = '';
+                        }
+                        $this->datatodbinjector($category_id = '', $section, $subsection);
+                        break;
+                        
+                        ///if the radio selection is a category level
+                    case "category":
+
+                        if (!empty($_POST['cat']) && count($_POST['cat'])) {
+                            foreach ($_POST['cat'] as $category) {
+                                if (!empty($_POST['subcat'])) {
+                                    $subsection = $_POST['subcat'];
+                                } else {
+                                    $subsection = '';
+                                }
+                                //call the function here
+                                $this->datatodbinjector($category, $parentsecId = '', $subsection);
+                            }
+                        }
+
+                        break;
+
+                    default:
+                        break;
+                }
