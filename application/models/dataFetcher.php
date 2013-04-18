@@ -851,12 +851,94 @@ class Datafetcher extends CI_Model {
     
     
     //load section from  category
-    public function loadcatsec($catid) {
-        $sql="select distinct section_name from section_tbl,search_forms,categories
-            where 
-            search_forms.category_id='$catid' and
-            categories.section_id=section_tbl.section_id and
-            categories.cat_id=search_forms.category_id";
+    public function loadparentsectioninsearchforms() {
+        $sql="select distinct parentsectionid,section_name from search_forms,section_tbl
+            where
+            category_id='' and
+            subsectionid='' and
+            parentsectionid !='' and
+            section_tbl.section_id=search_forms.parentsectionid";
+        $results=$this->db->query($sql);  
+        return $results;
+    }
+    /**
+     * @method  :load section if category is empty and subsection is not empty
+     * @param 
+     * @return results 
+     */
+    public function loadparentsectionandsubection() {
+         $sql="select distinct parentsectionid,subsectionid,subsections,section_name from subsections,section_tbl,search_forms 
+            where
+            subsectionid !=''and
+            category_id ='' and
+            parentsectionid !='' and
+            subsections.subsections_id=search_forms.subsectionid and
+            section_tbl.section_id=search_forms.parentsectionid";
+        $results=$this->db->query($sql);  
+        return $results;
+    }
+    
+    /**
+     * @method load parent section from empty subsection and empty category
+     * @param none
+     * @return results 
+     * 
+     */
+    public function selectsearchforms($table,$id) {
+        
+          $data = array();
+
+        $sql = "SELECT *
+         FROM $table, input_type_tbl
+          WHERE input_type_tbl.input_id = $table.input_type_id
+          AND $table.parentsectionid ='$id'
+          ORDER BY displayOrder ASC";
+         $results = $this->db->query($sql);
+
+        if ($results->num_rows() > 0) {
+
+           $data['results'] = $results;
+           
+            return $data;
+        } else {
+            return $data['results'] = FALSE;
+        }
+    }
+    ////////////////////////////////////////////////
+     public function selectsearchformswithsectionandsubsec($table,$parentsecid,$subsecid) {
+        
+          $data = array();
+
+        $sql = "SELECT *
+         FROM $table, input_type_tbl
+          WHERE input_type_tbl.input_id = $table.input_type_id
+          AND $table.parentsectionid ='$parentsecid' and
+           $table.subsectionid='$subsecid' 
+          ORDER BY displayOrder ASC";
+
+         $results = $this->db->query($sql);
+
+        if ($results->num_rows() > 0) {
+            return $results;
+        } else {
+            return $data['results'] = FALSE;
+        }
+    }
+    
+    
+    
+    
+    //////////////////////////////////////////
+    
+    public function subsectionsforsearchform($sectionid) {
+        $sql = "select distinct categories.section_id,subsections,cat_name,categories.cat_id,subsections.subsections_id from subsections,search_forms,categories where
+                categories.section_id='$sectionid' and
+                 search_forms.category_id ='' and   
+                 
+                subsections.subsections_id=categories.subsections_id 
+          ";
+        $results = $this->db->query($sql);
+        return $results;
     }
 
 //

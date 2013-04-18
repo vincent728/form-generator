@@ -171,9 +171,31 @@ class Mastersearch extends CI_Controller {
 
     public function generateform() {
         $id = $this->uri->segment(4);
-        $data = $this->datafetcher->categoryDetails($id, $table = "search_forms");
-        $data['heading'] = "Search  for ";
-        $this->load->view('categoryForm', $data);
+        $checker = $this->uri->segment(3);
+
+        switch ($checker) {
+
+            case "sectiononly":
+                $data = $this->datafetcher->selectsearchforms($table = "search_forms", $id);
+                $data['heading'] = "Search  for ";
+                $this->load->view('categoryForm', $data);
+
+                break;
+
+            case "sectionsubsection":
+
+                $data['results'] = $this->datafetcher->selectsearchformswithsectionandsubsec("search_forms", $id, $subsecid = $this->uri->segment(5));
+                $data['heading'] = "Search  for ";
+                $this->load->view('categoryForm', $data);
+
+                break;
+
+            default:
+                $data = $this->datafetcher->categoryDetails($id, $table = "search_forms");
+                $data['heading'] = "Search  for ";
+                $this->load->view('categoryForm', $data);
+                break;
+        }
     }
 
     /* delete search forms */
@@ -249,15 +271,23 @@ class Mastersearch extends CI_Controller {
         $subchekfilter = $this->uri->segment(3);
         $id = $this->uri->segment(4);
         /* set $table ="search_forms" */
-        $results = $this->datafetcher->loadsectionFromcategory($id, $table = "search_forms");
 
-        foreach ($results->result_array() as $value) {
-            $section_id = $value['section_id'];
-            $section_name = $value['section_name'];
+
+        if (strcasecmp($subchekfilter, "sectiononly") == 0 || strcasecmp($subchekfilter, "sectionsubsection") == 0) {
+            
+        } else {
+
+            $results = $this->datafetcher->loadsectionFromcategory($id, $table = "search_forms");
+            foreach ($results->result_array() as $value) {
+                $section_id = $value['section_id'];
+                $section_name = $value['section_name'];
+            }
+
+            $data['section_id'] = $section_id;
+            $data['sectionname'] = $section_name;
         }
 
-        $data['section_id'] = $section_id;
-        $data['sectionname'] = $section_name;
+
 
         ///////////////////////////////////////////////////////////
 
@@ -305,6 +335,26 @@ class Mastersearch extends CI_Controller {
                 $data['controller'] = 'mastersearch/editorprocessor';
 
                 $this->load->view('formCreatorUpdater', $data);
+                break;
+
+
+            case "sectiononly":
+                $results = $this->datafetcher->selectsearchforms($table = "search_forms", $id);
+                $data['results'] = $results['results'];
+                $data['subsection_id'] = '';
+                $data['subsectionname'] = '';
+                $data['category'] = '';
+                $data['catid'] = '';
+                $data['sectionname'] = $this->datafetcher->loadsectionById($id);
+                $data['section_id'] = $id;
+                $data['result'] = $results['results'];
+                $data['controller'] = 'mastersearch/editorprocessor';
+                $this->load->view('formCreatorUpdater', $data);
+                break;
+
+
+            case "sectionsubsection":
+
                 break;
 
             default:
