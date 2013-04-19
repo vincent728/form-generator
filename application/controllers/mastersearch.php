@@ -121,6 +121,7 @@ class Mastersearch extends CI_Controller {
 
             $this->load->view('searchform');
         }
+        /////////////////////
     }
 
     public function datatodbinjector($category_id, $parentsecId, $subsectionId) {
@@ -201,10 +202,36 @@ class Mastersearch extends CI_Controller {
     /* delete search forms */
 
     public function deletesearchform() {
+
         $id = $this->uri->segment(4);
-        $results = $this->datafetcher->deletesearchforms($id, $table = "search_forms");
-        if ($results) {
-            $this->listofcreatedsearchforms();
+        $checker = $this->uri->segment(3);
+        /**   check to see whether it has been created in section-wise,category wise or subsection wise */
+        switch (strtolower($checker)) {
+            case "sectiononly":
+
+                $delete = $this->datafetcher->deletesearchformswithsectiononly($id = $id, $table = "search_forms");
+                if ($delete) {
+                    $this->listofcreatedsearchforms();
+                }
+                break;
+                
+            case "sectionsubsection":
+                $subsectionid = $this->uri->segment(5);
+                $delete = $this->datafetcher->deletesearchformswithsectionsubsection($id, 'search_forms', $subsectionid);
+                if ($delete) {
+                    $this->listofcreatedsearchforms();
+                }
+
+
+                break;
+
+            default:
+
+                $results = $this->datafetcher->deletesearchforms($id, $table = "search_forms");
+                if ($results) {
+                    $this->listofcreatedsearchforms();
+                }
+                break;
         }
     }
 
@@ -342,8 +369,8 @@ class Mastersearch extends CI_Controller {
                 $results = $this->datafetcher->selectsearchforms($table = "search_forms", $id);
                 $data['results'] = $results['results'];
                 $data['subsection_id'] = '';
-                $data['subsectionname'] = '';
-                $data['category'] = '';
+                $data['subsectionname'] = 'All';
+                $data['category'] = 'All';
                 $data['catid'] = '';
                 $data['sectionname'] = $this->datafetcher->loadsectionById($id);
                 $data['section_id'] = $id;
@@ -355,6 +382,25 @@ class Mastersearch extends CI_Controller {
 
             case "sectionsubsection":
 
+                $results2 = $this->datafetcher->selectsearchformswithsectionandsubsec("search_forms", $id, $this->uri->segment(5));
+                $data['results'] = $results2;
+                // $x=$results2['results'];
+                //fetching the subsection selected id
+
+                foreach ($results2->result_array() as $value) {
+                    $subsectionname = $value['subsections'];
+                    $subsectionid = $value['subsectionid'];
+                }
+
+                $data['subsection_id'] = $subsectionid;
+                $data['subsectionname'] = $subsectionname;
+                $data['category'] = 'All';
+                $data['catid'] = '';
+                $data['sectionname'] = $this->datafetcher->loadsectionById($id);
+                $data['section_id'] = $id;
+                $data['result'] = $results2;
+                $data['controller'] = 'mastersearch/editorprocessor';
+                $this->load->view('formCreatorUpdater', $data);
                 break;
 
             default:
@@ -368,69 +414,78 @@ class Mastersearch extends CI_Controller {
 
     public function editorprocessor() {
 
+        /////////////////////////////////////////////////////////////////////////
         if ($this->input->post('edit')) {
 
-            $this->form_validation->set_rules('cat', 'input types', 'required');
+
+            //validate form select field if the section has  been selected
+
+            $this->form_validation->set_rules('section_id', 'section', 'required');
+            $section = $this->input->post('section_id');
+            $category = $this->input->post('cat');
+
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('formCreatorUpdater');
             } else {
-                //update the database information
-                //form processing goes here
-                $datas = array();
-
-//                $subsectionsession = $this->session->userdata('subsectionid');
-//                $catid = $this->session->userdata('cat');
-
-                $category = $this->input->post('cat');
-                $subsectionid = $this->input->post('subsection_id');
-                $deleteresults = $this->datafetcher->deletesearchforms($category[0], $table = 'search_forms');
-
-                if ($deleteresults) {
 
 
-                    foreach ($_POST as $key => $value) {
 
-                        ///strip the selected values from dropdown
-                        if (strstr($key, "field_")) {
-                            ///check if the sections has subsections
-                            if (!empty($_POST['cat'])) {
+                //here gooes the data manipulation   
 
-                                foreach ($_POST['cat'] as $category) {
-                                    //check if the submitted data has subsection
-                                    if (!empty($subsectionid)) {
-//                                        $subsection = $this->session->userdata('subsectionid');
-                                        $subsection = $_POST['subsection_id'];
-                                    } else {
-                                        $subsection = '';
-                                    }
+                if ($this->input->post('section_id') && count($this->input->post('cat')) > 0 && !empty($category[0])) {
 
-                                    $arr = explode('_', $key);
-                                    $checkboxId = $arr[1];
-                                    $selectedCheckboxValue = $_POST['count_' . $checkboxId];
-                                    $selectedLabel = $_POST['label_' . $checkboxId];
-                                    $data['no_input'] = $selectedCheckboxValue;
-                                    $data['displayOrder'] = $_POST['order_' . $checkboxId];
-                                    $data['input_type_id'] = $checkboxId;
-                                    $data['sections_without_subsections'] = $subsection;
-                                    $data['category_id'] = $category;
-                                    $data['form_label'] = $selectedLabel;
-                                    $data['input_tip'] = $_POST['tip_' . $checkboxId];
-                                    $datas[] = $data;
+                    ///if the radio selection is a subsection level
+                    $deleteresults = $this->datafetcher->deletesearchforms($category[0], $table = 'search_forms');
+
+                    if ($deleteresults) {
+
+                        if (!empty($_POST['cat']) && count($_POST['cat'])) {
+                            foreach ($_POST['cat'] as $category) {
+                                if (!empty($_POST['subsection_id'])) {
+                                    $subsection = $_POST['subsection_id'];
+                                } else {
+                                    $subsection = '';
                                 }
+                                //call the function here
+                                $this->datatodbinjector($category, $parentsecId = '', $subsection);
                             }
-                            //end
                         }
-                    } $results = $this->db->insert_batch('search_forms', $datas);
-                    if ($results) {
-                        $this->listofcreatedsearchforms();
+                    }
+                } else {
+
+                    if ($this->input->post('section_id') && $this->input->post('subsection_id')) {
+                        ///if the radio selection is a subsection level
+
+                        $delete = $this->datafetcher->deletesearchformswithsectionsubsection($section, 'search_forms', $_POST['subsection_id']);
+                        if ($delete) {
+                            if ($this->input->post('section_id') && $this->input->post('subsection_id')) {
+
+                                if (!empty($_POST['subsection_id'])) {
+                                    $subsection = $_POST['subsection_id'];
+                                } else {
+                                    $subsection = '';
+                                }
+                                $this->datatodbinjector($category_id = '', $section, $subsection);
+                            }
+                        }
                     } else {
-                        $this->load->view('search_form');
+                        ///delete then insert
+
+                        $delete = $this->datafetcher->deletesearchformswithsectiononly($id = $section, $table = "search_forms");
+                        if ($delete) {
+
+                            $this->datatodbinjector($category_id = '', $section, $subsectionId = '');
+                        }
                     }
                 }
-                //end the proccessing   
-                ///////
             }
+        } else {
+
+            $this->load->view('searchform');
         }
+
+
+        ////////////////////////////--end---////////////////////////////////////////////
     }
 
     //testing func

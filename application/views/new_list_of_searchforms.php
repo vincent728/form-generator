@@ -6,7 +6,7 @@ $results=$this->datafetcher->loadparentsectioninsearchforms();
 $results2=$this->datafetcher->loadparentsectionandsubection();
 $results3 =$this->datafetcher->formsCreatedSections($table = "search_forms");
 
- if ($results->num_rows()>0) {
+ if ($results3->num_rows()>0 ||$results->num_rows()>0||$results2->num_rows()>0) {
      ?>
            <table width="100%" border="0" class="mytable">
 
@@ -24,27 +24,8 @@ $results3 =$this->datafetcher->formsCreatedSections($table = "search_forms");
             </tr>
         <tbody> 
      <?php
-            $output = '';
-            $sn=0;
-            foreach ($results->result_array() as $value) {
-              $sn++; 
-              $checker= '<td>'.anchor('mastersearch/editform/' .'sectiononly/' . $value['parentsectionid'], $title = img(array('src' => 'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('mastersearch/generateform/'.'sectiononly/' . $value['parentsectionid'], $title = img(array('src' => 'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('mastersearch/deletesearchform/'.'sectiononly/' . $value['parentsectionid'], $title = img(array('src' => 'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')).'</td>';
-              $output.='<tr><td>'.$value['section_name'].'</td><td><table width="100%" border="0" class="myinnertable"><tr><td>'.'--All--'.'</td><td>'.'--All--'.'</td><td>'.$checker.'</td></tr></table></td>';
+     
         
-                
-            } echo $output;
-            ///////////////////////////////////////////
-            $output2='';
-            ////  the one with subsection and section
-            
-            foreach ($results2->result_array() as $value2) {
-              
-              $checker2= '<td>'.anchor('mastersearch/editform/' .'sectionsubsection/' . $value2['parentsectionid'].'/'.$value2['subsectionid'], $title = img(array('src' => 'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('mastersearch/generateform/'.'sectionsubsection/' . $value2['parentsectionid'].'/'.$value2['subsectionid'], $title = img(array('src' => 'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('mastersearch/deletesearchform/'.'sectionsubsection/' . $value2['parentsectionid'].'/'.$value2['subsectionid'], $title = img(array('src' => 'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')).'</td>';
-              $output2.='<tr><td>'.$value2['section_name'].'</td><td><table width="100%" border="0" class="myinnertable"><td>'.$value2['subsections'].'</td><td>'.'--all--'.'</td><td>'.$checker2.'</td></tr></table></td>';
-        
-                
-            } echo $output2;
-            
             $output3='';
                    $table_output = '';
             $sn = 0;
@@ -108,6 +89,28 @@ $results3 =$this->datafetcher->formsCreatedSections($table = "search_forms");
                 $table_output .= '<tr><td>' . $val['section_name'] . '</td><td><table width="100%" border="0" class="myinnertable">' . $forms_output . '</table></td></tr>';
             }
             echo $table_output; 
+     
+            $output = '';
+            $sn=0;
+            foreach ($results->result_array() as $value) {
+              $sn++; 
+              $checker= '<td>'.anchor('mastersearch/editform/' .'sectiononly/' . $value['parentsectionid'], $title = img(array('src' => 'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('mastersearch/generateform/'.'sectiononly/' . $value['parentsectionid'], $title = img(array('src' => 'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('mastersearch/deletesearchform/'.'sectiononly/' . $value['parentsectionid'], $title = img(array('src' => 'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')).'</td>';
+              $output.='<tr><td>'.$value['section_name'].'</td><td><table width="100%" border="0" class="myinnertable"><tr><td>'.'--All--'.'</td><td>'.'--All--'.'</td><td>'.$checker.'</td></tr></table></td>';
+        
+                
+            } echo $output;
+            ///////////////////////////////////////////
+            $output2='';
+            ////  the one with subsection and section
+            
+            foreach ($results2->result_array() as $value2) {
+              
+              $checker2= '<td>'.anchor('mastersearch/editform/' .'sectionsubsection/' . $value2['parentsectionid'].'/'.$value2['subsectionid'], $title = img(array('src' => 'icons/edit.png')), $attrib = array('title' => 'edit', 'class' => ''), $attrib = array('title' => 'edit', 'class' => '')) . nbs(3) . anchor_popup('mastersearch/generateform/'.'sectionsubsection/' . $value2['parentsectionid'].'/'.$value2['subsectionid'], $title = img(array('src' => 'icons/accept.png')), $attrib = array('title' => 'view', 'class' => '')) . nbs(3) . anchor('mastersearch/deletesearchform/'.'sectionsubsection/' . $value2['parentsectionid'].'/'.$value2['subsectionid'], $title = img(array('src' => 'icons/cancel.png')), $attrib = array('title' => 'delete', 'class' => ''), $attrib = array('title' => 'delete', 'class' => '')).'</td>';
+              $output2.='<tr><td>'.$value2['section_name'].'</td><td><table width="100%" border="0" class="myinnertable"><td>'.$value2['subsections'].'</td><td>'.'--all--'.'</td><td>'.$checker2.'</td></tr></table></td>';
+        
+                
+            } echo $output2;
+         
             
            ///////////////////////////////////////////////  
        ?>

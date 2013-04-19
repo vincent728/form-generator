@@ -703,3 +703,72 @@
                     default:
                         break;
                 }
+                
+                
+                ////////////////////////////////
+                
+                    
+
+        if ($this->input->post('edit')) {
+
+            $this->form_validation->set_rules('cat', 'input types', 'required');
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('formCreatorUpdater');
+            } else {
+                //update the database information
+                //form processing goes here
+                $datas = array();
+
+//                $subsectionsession = $this->session->userdata('subsectionid');
+//                $catid = $this->session->userdata('cat');
+
+                $category = $this->input->post('cat');
+                $subsectionid = $this->input->post('subsection_id');
+                $deleteresults = $this->datafetcher->deletesearchforms($category[0], $table = 'search_forms');
+
+                if ($deleteresults) {
+
+
+                    foreach ($_POST as $key => $value) {
+
+                        ///strip the selected values from dropdown
+                        if (strstr($key, "field_")) {
+                            ///check if the sections has subsections
+                            if (!empty($_POST['cat'])) {
+
+                                foreach ($_POST['cat'] as $category) {
+                                    //check if the submitted data has subsection
+                                    if (!empty($subsectionid)) {
+//                                        $subsection = $this->session->userdata('subsectionid');
+                                        $subsection = $_POST['subsection_id'];
+                                    } else {
+                                        $subsection = '';
+                                    }
+
+                                    $arr = explode('_', $key);
+                                    $checkboxId = $arr[1];
+                                    $selectedCheckboxValue = $_POST['count_' . $checkboxId];
+                                    $selectedLabel = $_POST['label_' . $checkboxId];
+                                    $data['no_input'] = $selectedCheckboxValue;
+                                    $data['displayOrder'] = $_POST['order_' . $checkboxId];
+                                    $data['input_type_id'] = $checkboxId;
+                                    $data['sections_without_subsections'] = $subsection;
+                                    $data['category_id'] = $category;
+                                    $data['form_label'] = $selectedLabel;
+                                    $data['input_tip'] = $_POST['tip_' . $checkboxId];
+                                    $datas[] = $data;
+                                }
+                            }
+                            //end
+                        }
+                    } $results = $this->db->insert_batch('search_forms', $datas);
+                    if ($results) {
+                        $this->listofcreatedsearchforms();
+                    } else {
+                        $this->load->view('search_form');
+                    }
+                }
+                //end the proccessing   
+                ///////
+            }
+        }

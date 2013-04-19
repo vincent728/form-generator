@@ -769,6 +769,33 @@ class Datafetcher extends CI_Model {
         $results = $this->db->query($sql);
         return $results;
     }
+    
+       /**
+     * @method: delete search forms created with section only as an attribute
+     * @param id
+     * @return results
+     * 
+     */
+    public function deletesearchformswithsectiononly($id, $table) {
+        $sql = "delete from $table where $table.parentsectionid='$id' and
+                $table.category_id='' and
+                $table.subsectionid=''";
+        $results = $this->db->query($sql);
+        return $results;
+    }
+    
+      /**
+     * @method: delete search forms created with section only as an attribute
+     * @param id
+     * @return results
+     * 
+     */
+    public function deletesearchformswithsectionsubsection($parentsectionid, $table,$subsection) {
+        $sql = "delete from $table where $table.parentsectionid='$parentsectionid'AND 
+                  $table.subsectionid='$subsection'";
+        $results = $this->db->query($sql);
+        return $results;
+    }
 
     /**
      * @method : insert inputs to be appeared on a select dropdown
@@ -910,19 +937,16 @@ class Datafetcher extends CI_Model {
           $data = array();
 
         $sql = "SELECT *
-         FROM $table, input_type_tbl
+         FROM $table, input_type_tbl,subsections
           WHERE input_type_tbl.input_id = $table.input_type_id
           AND $table.parentsectionid ='$parentsecid' and
+           $table.subsectionid=subsections.subsections_id and   
            $table.subsectionid='$subsecid' 
           ORDER BY displayOrder ASC";
 
          $results = $this->db->query($sql);
-
-        if ($results->num_rows() > 0) {
-            return $results;
-        } else {
-            return $data['results'] = FALSE;
-        }
+         return $results;
+       
     }
     
     
@@ -941,7 +965,38 @@ class Datafetcher extends CI_Model {
         return $results;
     }
 
+///////////////////////////////////////////////////
+      /**
+     * @method load parent section from empty subsection and empty category
+     * @param none
+     * @return results 
+     * 
+     */
+    public function selectsearchformswithsectionandsubsection($table,$parentid,$subsectionid) {
+        
+        $data = array();
+
+        $sql = "SELECT *
+         FROM $table, input_type_tbl
+          WHERE input_type_tbl.input_id = $table.input_type_id
+          AND $table.parentsectionid ='$parentid' AND
+           $table.subsectionid='$subsectionid'
+          ORDER BY displayOrder ASC";
+         $results = $this->db->query($sql);
+         return $results;
+
+//        if ($results->num_rows() > 0) {
 //
+//           $data['results'] = $results;
+//           return $data;
+//           
+//        } else {
+//            return $data['results'] = FALSE;
+//        }
+    }
+    
+    
+/////////////////////////////////////////////////////    
 }
 
 ?>
