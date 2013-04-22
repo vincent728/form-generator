@@ -796,9 +796,8 @@ class Datafetcher extends CI_Model {
             category_id ='' and
             search_forms.parentsectionid !='' and
             sections.ParentSectionID=search_forms.parentsectionid and
-            search_forms.subsectionid=
-            select sections.Title as subsections from sections where sections.SectionID=search_forms.subsectionid
-            sections.SectionID=search_forms.subsectionid";
+            search_forms.subsectionid=select sections.Title as subsections from sections,search_forms where sections.SectionID=search_forms.subsectionid
+            ";
         $results=$this->db->query($sql);  
         return $results;
     }
