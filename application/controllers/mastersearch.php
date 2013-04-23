@@ -171,7 +171,7 @@ class Mastersearch extends CI_Controller {
     /* delete search forms */
 
     public function deletesearchform() {
-        $id = $this->uri->segment(3);
+        $id = $this->uri->segment(4);
         $checker = $this->uri->segment(3);
         /**   check to see whether it has been created in section-wise,category wise or subsection wise */
         switch (strtolower($checker)) {
@@ -179,7 +179,7 @@ class Mastersearch extends CI_Controller {
 
                 $delete = $this->datafetcher->deletesearchformswithsectiononly($id = $id, $table = "search_forms");
                 if ($delete) {
-                    $this->listofcreatedsearchforms();
+                    $this->searchformsmasterlisting();
                 }
                 break;
 
@@ -187,7 +187,7 @@ class Mastersearch extends CI_Controller {
                 $subsectionid = $this->uri->segment(5);
                 $delete = $this->datafetcher->deletesearchformswithsectionsubsection($id, 'search_forms', $subsectionid);
                 if ($delete) {
-                    $this->listofcreatedsearchforms();
+                    $this->searchformsmasterlisting();
                 }
 
 
@@ -197,7 +197,7 @@ class Mastersearch extends CI_Controller {
 
                 $results = $this->datafetcher->deletesearchforms($id, $table = "search_forms");
                 if ($results) {
-                    $this->listofcreatedsearchforms();
+                    $this->searchformsmasterlisting();
                 }
                 break;
         }
@@ -352,7 +352,7 @@ class Mastersearch extends CI_Controller {
                     //fetching the subsection selected id
 
                     foreach ($results2->result_array() as $value) {
-                        $subsectionname = $value['subsections'];
+                        $subsectionname = $value['Title'];
                         $subsectionid = $value['subsectionid'];
                     }
 

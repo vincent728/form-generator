@@ -15,8 +15,8 @@
          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <script type='text/javascript' src="js/jquery-ui-1.8.18.custom.min.js"></script>
         <script type="text/javascript" src="js/validate.js"></script>
-        <link href="styles/default.css" rel="stylesheet"/>
-        <link href="styles/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet"/>
+        <link href="css/default.css" rel="stylesheet"/>
+        <link href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet"/>
         <!--...date picker trigger.-->
 
         <script type="text/javascript">
