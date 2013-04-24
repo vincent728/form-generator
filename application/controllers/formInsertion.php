@@ -12,26 +12,41 @@ class FormInsertion extends CI_Controller {
 
         if ($this->input->post('submit')) {
 
-            
-            echo 'hahah';
-            exit;
+
+
             //load all the input names as per db
             $results = $this->datafetcher->listAllInputstypes();
             $fields_name = array();
-            foreach ($results as $value) {
-                array_push($fields_name, $value->input_name);
+            $x = 0;
+            foreach ($results->result_array() as $value) {
+                $x++;
+                array_push($fields_name, $value['input_name']);
+                //////////////////////////////
+     
             }
-            //check submitted fields matches the posted fields
-           // $fieldtypename = str_replace(' ', '', $inputname)
-          
-           foreach ($_POST as $value) {
-               
-             
-               
-           }
-           echo var_dump($_POST);
+       
+            echo count($fields_name);
+            
+            for($a=0;$a<count($fields_name); $a++){
+                
+                $data_to_db='';
+                
+                foreach ($_POST as $rows) {
+                    
+                if(isset($_POST[$fields_name[$a]])&&!empty($_POST[$fields_name[$a]])){
+                   
+                    $data_to_db.=$fields_name[$a].'hahaha'.'<br>';
+                }
+                
+            }echo $data_to_db;
+            }
             
             
+            
+            
+            
+            // echo $data_out;
+            //echo $_POST['searchbyjobcategory'];
         } else {
             
         }
