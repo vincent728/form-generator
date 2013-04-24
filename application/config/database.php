@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = '';
-$db['default']['database'] = 'zoomtanzania';
+$db['default']['hostname'] = '192.168.1.128';
+$db['default']['username'] = 'vincent';
+$db['default']['password'] = 'pinky';
+$db['default']['database'] = 'ZoomTanzania';
 $db['default']['dbdriver'] = 'mysql';
 
 $db['default']['dbprefix'] = '';

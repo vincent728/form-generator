@@ -146,54 +146,7 @@ class Datafetcher extends CI_Model {
         return $id;
     }
 
-    ////////////////////////////////////////the discarded algorithm//////////////////////////////////////////////////////////////
-    /**
-     * @method :Insertion of pre-generated form settings
-     * @param: variables
-     * @return boolean
-     * 
-     */
-    public function insertFormSettings($selections, $section, $categories_selected) {
-
-        $count = 0;
-
-        $last_inserted_ids = array();
-        $data = array();
-
-
-        foreach ($categories_selected as $key => $value) {
-            $sectionId = $section;
-            $categoryId = $value;
-            $form_id = $this->insertFormsTitle($sectionId);
-            //getting selected check box and their corresponding values
-
-            array_push($last_inserted_ids, $form_id);
-
-            foreach ($selections as $key => $value) {
-                if (!empty($value)) {
-                    $checkBoxIndex = $key;
-                    $checkBoxSelectedValue = $value;
-
-
-                    $sql = "INSERT INTO form_tbl(form_id,category_id,section_id,no_input,input_type_id)
-              VALUES('$form_id',$categoryId,'$sectionId',$checkBoxSelectedValue,$checkBoxIndex)";
-
-                    $results = $this->db->query($sql);
-
-                    if ($results) {
-                        $count++;
-                    }
-                }
-            }
-        }
-
-
-        $data['last_inserted_ids'] = $last_inserted_ids;
-        $data['results'] = $count;
-
-        return $data;
-    }
-
+  
     /////////////////////////////////////////end////////////////////////////////////////////// 
     /**
      * @method :get last inserted form
@@ -552,19 +505,48 @@ class Datafetcher extends CI_Model {
      * @return boolean
      * 
      */
-    public function updateInputsTypesDetails($inputname, $formfieldtype, $max_no_inputs, $fieldtypename, $validation_chkboxes, $tablename, $tablecolumnid, $tabledisplaycolumn, $id) {
+    public function updateInputsTypesDetails($inputname, $formfieldtype, $max_no_inputs, $fieldtypename, $validation_chkboxes, $tablename, $tablecolumnid, $tabledisplaycolumn, $id,$tabletwo,$tablecolumnid_two,$section,$referenceid) {
 
         if (strcasecmp($formfieldtype, "select") == 0) {
             $columnid = $tablecolumnid;
             $displayid = $tabledisplaycolumn;
             $table = $tablename;
+            
+               ///check if it is a join select 
+            if(!empty($tabletwo)&& !empty($tablecolumnid_two)){
+                
+                $table_2=$tabletwo;
+                $column_2=$tablecolumnid_two;
+                $secid=$section;
+                $reference=$referenceid;
+                
+            }else{
+                $table_2='';
+                $column_2='';
+                $secid='';
+                $reference='';
+            }
+            
+            ////---------end------------
+            
         } else {
             $columnid = '';
             $displayid = '';
             $table = '';
         }
 
-        $sql = "update input_type_tbl set input_name='$fieldtypename',input_type='$formfieldtype',draws_from='$tablename',max_no_inputs='$max_no_inputs',fieldtypename='$fieldtypename',column_id='$tablecolumnid',display_id='$tabledisplaycolumn' where input_id='$id'";
+        $sql = "update input_type_tbl set input_name='$fieldtypename',
+                                      input_type='$formfieldtype',
+                                      draws_from='$tablename',
+                                      max_no_inputs='$max_no_inputs',
+                                      fieldtypename='$fieldtypename',
+                                      column_id='$tablecolumnid',
+                                      display_id='$tabledisplaycolumn' 
+                                      draws_from_table_two='$table_2',
+                                      column_id_two='$column_2',
+                                      section='$secid',
+                                      referenceid='$reference',
+                                      where input_id='$id'";
         $results = $this->db->query($sql);
 
         if ($results) {
@@ -964,6 +946,20 @@ class Datafetcher extends CI_Model {
                   $table.subsectionid='$subsection'";
         $results = $this->db->query($sql);
         return $results;
+    }
+    
+    
+    /**
+     * 
+     * @method load the section id for input form
+     * @param :section id
+     * @return results
+     * 
+     */
+    public function sectioninfosbyid($id) {
+          $sql = "select * from sections where ParentSectionID is null and SectionID='$id'";
+          $results = $this->db->query($sql);
+          return $results;
     }
 
 /////////////////////////////////////////////////////--ends here///////////////////

@@ -16,6 +16,7 @@ if ($results->num_rows() > 0) {
         $input_type = $value['input_type'];
         $input_name = $value['input_name'];
         $max_no_inputs = $value['max_no_inputs'];
+        $section_id=$value['section'];
     }
 
 ///check if form errors occured during submission
@@ -24,10 +25,12 @@ if ($results->num_rows() > 0) {
         $inputname = '';
         $inputtype = '';
         $maxnoinputs = '';
+        $sectionid=$section_id;
     } else {
         $inputname = $input_name;
         $inputtype = $input_type;
         $maxnoinputs = $max_no_inputs;
+        $sectionid='';
     }
 
     echo'<div class="error_box" id ="error_box"></div>';
@@ -118,6 +121,7 @@ if ($results->num_rows() > 0) {
 
             $results_drawsfrom = $this->datafetcher->drawsFromColumn($id);
             if ($results_drawsfrom->num_rows() > 0) {
+                
                 foreach ($results_drawsfrom->result_array() as $drawsfields) {
 
                     //check  if the table exists and columns too
@@ -202,7 +206,48 @@ if ($results->num_rows() > 0) {
 
             /*             * *****************************end*************************************************************** */
             ?>
+    <!--..-->
+    
+        <li>
 
+        <?php
+//error checking
+        if (form_error('section')) {
+            echo '<div class="error">';
+            echo form_error("section") . form_error();
+            echo '</div>';
+        }
+
+        echo form_label('reference from section');
+        ?>
+        <select name="section" class="section">
+
+            <option  value="" selected="">--Select section--</option>
+            <?php
+            
+            $out = '';
+            $results=$this->datafetcher->sectionsLoader();
+            
+            foreach ($results->result_array() as $section) {
+                
+                $results_secid=$this->datafetcher->sectioninfosbyid($sectionid);
+                
+                foreach ($results_secid->result_array() as $value) {
+                    
+                      if (strcasecmp($section['SectionID'], $value['section']) == 0) {
+                                $select = "selected";
+                            } else {
+                                $select = "";
+                            }
+                }
+
+                $out.='<option value="' .$select. $section['SectionID'] . set_value('section') . '">' . $section['Title'] . '</option>';
+            } echo $out;
+            ?>
+        </select> 
+
+
+    </li>
 
 
         <?php
