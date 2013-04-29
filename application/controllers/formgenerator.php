@@ -498,8 +498,23 @@ class Formgenerator extends CI_Controller {
 
                 $inputname = $this->input->post('inputname');
                 //$inputtypes=$this->input->post('inputtype');  
-                $formfieldtype = $this->input->post('formfieldtype');
+                $formfieldtypename = $this->input->post('formfieldtype');
                 $fieldtypename = str_replace(' ', '', $inputname);
+                
+                ///filter to clean a name for the fieldtypename
+                if($formfieldtypename){
+                    
+                    $whitespace=str_replace(' ', '', $inputname);
+                    
+                    if($whitespace){
+                        
+                      $formfieldtype=str_replace('*','', $inputname);  
+                    }
+                }
+                
+                
+                
+                
 
                 $tablename = $this->input->post('tablename');
                 $tabletwo = $this->input->post('tabletwo');
@@ -565,9 +580,11 @@ class Formgenerator extends CI_Controller {
                 $this->session->set_userdata('update_id', $id);
                 $formfieldtype = $this->input->post('formfieldtype');
                 $fieldtypename = str_replace(' ', '', $inputname);
+                
+                
 
                 $tablename = $this->input->post('tablename');
-                $tabletwo = $this->input->post('tabletwo');
+                $tabletwo = $this->input->post('table_two');
 
                 $tablecolumnid = $this->input->post('displaycolumnid');
                 $tablecolumnid_two = $this->input->post('displaycolumnid_two');
