@@ -449,19 +449,19 @@ class Datafetcher extends CI_Model {
                 $secid = $section;
                 $reference = $referenceid;
             } else {
-                $table_2 = '';
-                $column_2 = '';
-                $secid = '';
-                $reference = '';
+                $table_2 =NULL;
+                $column_2 =NULL;
+                $secid = NULL;
+                $reference =NULL;
             }
         } else {
-            $columnid = '';
-            $displayid = '';
-            $table = '';
-            $table_2 = '';
-            $column_2 = '';
-            $secid = '';
-            $reference = '';
+            $columnid =NULL;
+            $displayid =NULL;
+            $table = NULL;
+            $table_2 = NULL;
+            $column_2 =NULL;
+            $secid = NULL;
+            $reference = NULL;
         }
 
         $sql = "insert into input_type_tbl(input_name,input_type,max_no_inputs,fieldtypename,draws_from,column_id,display_id,draws_from_table_two,column_id_two,section,referenceid)
@@ -521,21 +521,21 @@ class Datafetcher extends CI_Model {
                 $secid = $section;
                 $reference = $referenceid;
             } else {
-                $table_2 = '';
-                $column_2 = '';
-                $secid = '';
-                $reference = '';
+                $table_2 = NULL;
+                $column_2 =NULL;
+                $secid =NULL;
+                $reference =NULL;
             }
-
+      
             ////---------end------------
         } else {
-            $columnid = '';
-            $displayid = '';
-            $table = '';
-            $table_2 = '';
-            $column_2 = '';
-            $secid = '';
-            $reference = '';
+            $columnid =NULL;
+            $displayid =NULL;
+            $table = NULL;
+            $table_2 =NULL;
+            $column_2 =NULL;
+            $secid =NULL;
+            $reference = NULL;
         }
 
         $sql = "update input_type_tbl set input_name='$inputname',
@@ -624,7 +624,8 @@ class Datafetcher extends CI_Model {
      */
     public function selecTfromTable($table, $table_two, $column_id_one, $column_id_two, $section, $reference, $Title) {
         //------start--------------
-        if (!empty($table_two) || !is_null($table_two)) {
+
+        if (!empty($table_two)&&!is_null($table_two)) {
 
             $sqltable = ',' . $table_two;
             $distinctchecker = "distinct $table.$Title, $table.$column_id_one";
@@ -639,8 +640,7 @@ class Datafetcher extends CI_Model {
         }
         //-----end---------
         $sql = "select $distinctchecker from $table $sqltable $append";
-  
-           $results = $this->db->query($sql);
+        $results = $this->db->query($sql);
         return $results;
     }
 
