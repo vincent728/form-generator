@@ -93,13 +93,13 @@ if ($results->num_rows() > 0) {
                     $val['name'] = $value['fieldtypename'];
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
-                 
+
                     $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                    
-                         case"dateinput":
+
+
+                case"dateinput":
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -124,12 +124,12 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'datepicker')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '', 'class' => 'datepicker')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                      
-                         case"date":
+
+
+                case"date":
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -154,13 +154,13 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'datepicker')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => $value['fieldtypename'], 'value' => '', 'class' => 'datepicker')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                    
-                    case "daterange":
-                        
+
+
+                case "daterange":
+
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -185,12 +185,12 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) .form_input(array('name' => 'startdate', 'value' => '','class'=>'datepicker')) .'-'.form_input(array('name' => 'enddate', 'value' => '','class'=>'datepicker')). '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'startdate', 'value' => '', 'class' => 'datepicker')) . '-' . form_input(array('name' => 'enddate', 'value' => '', 'class' => 'datepicker')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                     case "yearrange":
-                        
+
+                case "yearrange":
+
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -215,12 +215,12 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                     $fieldTobegenerated = form_label($label) .form_input(array('name' => 'startdate', 'value' => '','class'=>'datepickeryear')) .'-'.form_input(array('name' => 'enddate', 'value' => '','class'=>'datepickeryear')). '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'startdate', 'value' => '', 'class' => 'datepickeryear')) . '-' . form_input(array('name' => 'enddate', 'value' => '', 'class' => 'datepickeryear')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                      case "pricerange":
-                        
+
+                case "pricerange":
+
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -245,13 +245,13 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) .form_input(array('name' => 'minprice', 'value' => '','class'=>'')).'-'.form_input(array('name' => 'maxprice', 'value' => '','class'=>'')). '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . form_input(array('name' => 'minprice', 'value' => '', 'class' => '')) . '-' . form_input(array('name' => 'maxprice', 'value' => '', 'class' => '')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                    
-                    
-                    
+
+
+
+
 
                 case"checkbox":
                     if (!empty($value['input_tip'])) {
@@ -310,8 +310,8 @@ if ($results->num_rows() > 0) {
                     $fieldTobegenerated = form_label($label) . '<input type="file" name="' . $value['fieldtypename'] . '[]" class="images"/>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                    case"password":
+
+                case"password":
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -339,12 +339,12 @@ if ($results->num_rows() > 0) {
                     $fieldTobegenerated = form_label($label) . form_password(array('name' => $value['fieldtypename'], 'value' => '')) . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                    
-                    
-                    
-                      
-                     case"multiselect":
+
+
+
+
+
+                case"multiselect":
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -368,24 +368,25 @@ if ($results->num_rows() > 0) {
                     $val['name'] = $value['fieldtypename'];
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
-                    
+
                     $out = '';
-                    $tabletesults = $this->datafetcher->selecTfromTable($value['draws_from']);
+                    $tabletesults = $this->datafetcher->selecTfromTable($table = $value['draws_from'], $table_two = $value['draws_from_table_two'], $column_id_one = $value['column_id'], $column_id_two = $value['column_id_two'], $sec = $value['section'], $reference = $value['referenceid'], $title = $value['display_id']);
+
 
                     foreach ($tabletesults->result_array()as $rows) {
 
                         $out.='<option value="' . $rows[$value['column_id']] . '">' . $rows[$value['display_id']] . '</option>';
                     }
-                    
-                    
 
-                    $fieldTobegenerated = form_label($label) . '<select  name="'.$value['fieldtypename'].'[]" class="" multiple="multiple" size="4"><option value="" selected>--Select an option--</option>' . $out . '</select>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+
+                    $fieldTobegenerated = form_label($label) . '<select  name="' . $value['fieldtypename'] . '[]" class="" multiple="multiple" size="4"><option value="" selected>--Select an option--</option>' . $out . '</select>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
 
-                   //selecTfromTable($table)
-                    
-                     case"select":
+                //selecTfromTable($table)
+
+                case"select":
                     if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
@@ -409,22 +410,22 @@ if ($results->num_rows() > 0) {
                     $val['name'] = $value['fieldtypename'];
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
-                    
+
                     $out = '';
-                    $tabletesults = $this->datafetcher->selecTfromTable($table=$value['draws_from'], $table_two=$value['draws_from_table_two'], $column_id_one=$value['column_id'], $column_id_two=$value['column_id_two'],$sec=$value['section'],$reference=$value['referenceid'],$title=$value['display_id']);
+                    $tabletesults = $this->datafetcher->selecTfromTable($table = $value['draws_from'], $table_two = $value['draws_from_table_two'], $column_id_one = $value['column_id'], $column_id_two = $value['column_id_two'], $sec = $value['section'], $reference = $value['referenceid'], $title = $value['display_id']);
 
                     foreach ($tabletesults->result_array()as $rows) {
 
                         $out.='<option value="' . $rows[$value['column_id']] . '">' . $rows[$value['display_id']] . '</option>';
                     }
-                    
-                    
 
-                    $fieldTobegenerated = form_label($label) . '<select name="'.$value['fieldtypename'].'" class=""><option value="" selected>--Select an option--</option>' . $out . '</select>'.'<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+
+                    $fieldTobegenerated = form_label($label) . '<select name="' . $value['fieldtypename'] . '" class=""><option value="" selected>--Select an option--</option>' . $out . '</select>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
                     break;
-                    
-                     case "repeat":
+
+                case "repeat":
 
                     if (empty($value['input_tip'])) {
                         $tipsOnlabel = '';
@@ -447,9 +448,9 @@ if ($results->num_rows() > 0) {
 
                     $fieldTobegenerated = form_label($label) . '<select name="" class="events"><option value="">Select</option>' . $out . '</select><div class="events_display"></div>';
                     break;
-                   case "price":
-                        //$fieldTobegenerated='<table border="0"><tr><td></td><td></td></tr></table>';
-                        if (!empty($value['input_tip'])) {
+                case "price":
+                    //$fieldTobegenerated='<table border="0"><tr><td></td><td></td></tr></table>';
+                    if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
                         $tipsOnlabel = '';
@@ -473,15 +474,15 @@ if ($results->num_rows() > 0) {
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
 
-                    $fieldTobegenerated = form_label($label) .'<table border="0" class="price"><tr>
-                        <td>'.form_input(array('name' => $value['fieldtypename'], 'value' => '','class'=>'priceVal')) .'</td>
-                        <td>'.'<select name="price" class="pricetd"><option value="usd">$USD</option><option value="tzs">TZS</option></select>' .'</td>
-                        </tr></table>'. '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+                    $fieldTobegenerated = form_label($label) . '<table border="0" class="price"><tr>
+                        <td>' . form_input(array('name' => $value['fieldtypename'], 'value' => '', 'class' => 'priceVal')) . '</td>
+                        <td>' . '<select name="price" class="pricetd"><option value="usd">$USD</option><option value="tzs">TZS</option></select>' . '</td>
+                        </tr></table>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
-                       break;
-                       
-                       case"time";
-                                     if (!empty($value['input_tip'])) {
+                    break;
+
+                case"time";
+                    if (!empty($value['input_tip'])) {
                         $tipsOnlabel = $value['input_tip'];
                     } else {
                         $tipsOnlabel = '';
@@ -504,9 +505,9 @@ if ($results->num_rows() > 0) {
                     $val['name'] = $value['fieldtypename'];
                     $val['display'] = $label;
                     $val['rules'] = $rulesin;
-           
-                                     
-                    $out='<option value="12.00 AM">'.'12.00 AM'.'</option>
+
+
+                    $out = '<option value="12.00 AM">' . '12.00 AM' . '</option>
                           <option value="12.30 AM"> 12.30 AM </option>
                           <option value="1.00 AM"> 1.00 AM </option>
                           <option value="1.30 AM"> 1.30 AM </option>
@@ -556,8 +557,8 @@ if ($results->num_rows() > 0) {
                           <option value="11.30 PM"> 11.30 PM </option>
                           
                            ';
-                    
-                   
+
+
 //                    $time = strtotime('12:00');
 //                    
 //                    
@@ -585,12 +586,12 @@ if ($results->num_rows() > 0) {
 //                        //for the first 24hours /a day session
 //                                               
 //                    } echo $timeout.'</br></br></br>';
-                  
-                   $fieldTobegenerated = form_label($label) . '<select name="'.$value['fieldtypename'].'" class=""><option value="" selected>--Select an option--</option>' . $out . '</select>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
 
-                           break;
-                    
-                    
+                    $fieldTobegenerated = form_label($label) . '<select name="' . $value['fieldtypename'] . '" class=""><option value="" selected>--Select an option--</option>' . $out . '</select>' . '<i><font color="#1A9B50">' . form_label($tipsOnlabel, $name = "tips", $attributes = array('class' => 'tips')) . '</font></i>';
+
+                    break;
+
+
                 default:
                     break;
             }
@@ -612,15 +613,15 @@ if ($results->num_rows() > 0) {
 
         $validation_arr[] = $val;
     }
-     if(isset($heading)&& isset($category)){
-      $heading=$heading;  
-      $category=$category;
-    }else{
-        $heading='';
-        $category='';
+    if (isset($heading) && isset($category)) {
+        $heading = $heading;
+        $category = $category;
+    } else {
+        $heading = '';
+        $category = '';
     }
-    echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('name' => 'myForm', 'id' => 'myform', 'class' => 'myform', 'onsubmit' => "")) . '<h1>' .$heading. $category . '</h1>' . '<!--.javascript form validation.-->
-<div class="error_box" id ="error_box"></div><div id="success_box"></div>' . form_fieldset() . '<ul>' . form_hidden($name = "cat", $id ='') . $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li></ul>' . form_fieldset_close() . form_close();
+    echo form_open_multipart('formInsertion/formsdataprocessor/', $data = array('name' => 'myForm', 'id' => 'myform', 'class' => 'myform', 'onsubmit' => "")) . '<h1>' . $heading . $category . '</h1>' . '<!--.javascript form validation.-->
+<div class="error_box" id ="error_box"></div><div id="success_box"></div>' . form_fieldset() . '<ul>' . form_hidden($name = "cat", $id = '') . $input_output . '<li>' . form_label() . form_submit(array('name' => 'submit', 'value' => 'submit', 'class' => 'submit')) . '</li></ul>' . form_fieldset_close() . form_close();
 } else {
     
 }
